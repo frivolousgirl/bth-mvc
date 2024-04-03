@@ -1,0 +1,8 @@
+{# templates/lucky_number.html.twig #} {% extends "base.html.twig" %} {% block
+title %}Magic number{% endblock %} {% block body %}
+<h1>Magic number</h1>
+<img src="{{ asset('img/winning.jpg') }}" alt="Dog with a lot of money" />
+<p style="text-align: center;">
+    Today's Winning Lottery numbers: {{ number }} Lucky Stars: {{ starnumbers }}
+</p>
+{% endblock %}

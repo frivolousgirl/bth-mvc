@@ -1,0 +1,41 @@
+/* Main content container */
+.container {
+    max-width: 900px; /* Set maximum width */
+    margin: 0 auto; /* Center the container */
+    padding: 0 20px; /* Add some padding */
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow flex items to wrap to next line */
+}
+
+/* Left column */
+.left-column {
+    flex: 1; /* Take up remaining space */
+    padding-right: 20px; /* Add some space between columns */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Right column */
+.right-column {
+    flex: 1; /* Take up remaining space */
+    padding-left: 20px; /* Add some space between columns */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Clearfix for clearing floats */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Change to single column layout on small screens */
+    }
+    .left-column, .right-column {
+        flex: none; /* Reset flex property to prevent columns from taking up equal space */
+        width: 100%; /* Set width to 100% on small screens */
+        padding: 0; /* Remove padding on small screens */
+    }
+}

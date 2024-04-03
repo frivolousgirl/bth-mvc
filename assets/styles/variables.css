@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+/* 
+font-family: 'Gabarito', sans-serif;
+font-family: 'Space Mono', monospace;
+*/
+/* Variables */
+
+/* Colors */
+:root {
+    --primary-color: #E74F34; /* Primary color */
+    --secondary-color: #ECEAE4; /* Secondary color */
+    --success-color: #35E85F; /* Success color */
+    --danger-color: #E04D33; /* Danger color */
+    --warning-color: #35E89C; /* Warning color */
+    --info-color: #17a2b8; /* Info color */
+    --light-color: #f8f9fa; /* Light color */
+    --dark-color: #333333; /* Dark color */
+    --site-backround-color: #ECEAE4;
+}
+
+/* Typography */
+:root {
+    --font-family-sans: 'Gabarito', sans-serif; /* Default font family */
+    --font-family: 'Space Mono', monospace; /* Default font family */
+    --font-size-base: 16px; /* Base font size */
+    --line-height-base: 1.5; /* Base line height */
+}
+
+/* Spacing */
+:root {
+    --spacing-unit: 1rem; /* Base spacing unit */
+}
+
+/* Border radius */
+:root {
+    --border-radius: 0.25rem; /* Default border radius */
+}
+
+/* Box shadow */
+:root {
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Default box shadow */
+}
+
+/* Breakpoints */
+:root {
+    --breakpoint-xs: 0; /* Extra small devices (phones) */
+    --breakpoint-sm: 576px; /* Small devices (landscape phones) */
+    --breakpoint-md: 768px; /* Medium devices (tablets) */
+    --breakpoint-lg: 992px; /* Large devices (desktops) */
+    --breakpoint-xl: 1200px; /* Extra large devices (large desktops) */
+}

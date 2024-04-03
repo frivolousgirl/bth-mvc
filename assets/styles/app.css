@@ -1,0 +1,88 @@
+@import url("navbar.css");
+@import url("variables.css");
+@import url("two-column.css");
+@import url("footer.css");
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 0px;
+}
+
+body {
+    margin: 0px auto;
+    padding: 0;
+    background-color: var(--site-backround-color);
+    font-family: var(--font-family);
+}
+
+main {
+    margin: 0 auto;
+    padding: 0 25px;
+    max-width: 900px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-family);
+}
+
+h1 {
+    font-size: 2.4rem;
+    margin-bottom: 2.8rem;
+    border-bottom: 4px dashed var(--primary-color);
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1.4rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h4 {
+    font-size: 1.4rem;
+    margin-bottom: 0;
+}
+
+p {
+    margin-bottom: 1.4rem;
+    font-size: 1rem;
+    font-family: var(--font-family-sans);
+}
+
+img {
+    display: block; /* Ensures images are displayed as block-level elements */
+    max-width: 100%; /* Ensures images don't exceed their parent container's width */
+    height: auto; /* Allows images to maintain their aspect ratio when resizing */
+    margin: 0 auto;
+    border-radius: 23px;
+    border: 1px dashed var(--primary-color);
+}
+
+a {
+    color: var(--primary-color);
+    
+    &:hover {
+        color: var(--dark-color);
+    }
+}
+
+.site-header {
+    background-image: url("../images/header.png");
+    height: 115px;
+}

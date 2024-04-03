@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %} {% block title %}About{% endblock %} {% block
+body %}
+<h1>Om Kursen MVC</h1>
+<div class="container">
+    <div class="left-column">
+        <p>
+            Kursen Objektorienterade webbteknologier, a.k.a. mvc, fokuserar på
+            objektorienterade programmeringstekniker i programmeringsspråket
+            PHP. Klassiska objektorienterade konstruktioner hanteras tillsammans
+            med objektorienterad programmering i webbaserat ramverk tillsammans
+            med databaser samt enhetstestning.
+        </p>
+    </div>
+    <div class="right-column">
+        <img src="{{ asset('img/mvc.jpg') }}" alt="MVC Model" />
+        <ul style="list-style: none; text-align: center;">
+            <li>
+                <a href="https://github.com/dbwebb-se/mvc">Kursens Git Repo</a>
+            </li>
+            <li><a href="länk">Mitt Repo</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

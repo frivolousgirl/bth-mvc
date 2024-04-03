@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="{{ asset('img/glider.svg') }}" />
+        {% block stylesheets %}
+        {{
+            encore_entry_link_tags("app")
+        }}
+        {% endblock %} {% block javascripts %}
+        {{
+            encore_entry_script_tags("app")
+        }}
+        {% block importmap %}{{
+            importmap("app")
+        }}{% endblock %} {% endblock %}
+    </head>
+
+    <body>
+        <header class="site-header">
+            <span class="site-title"></span>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="{{ path('home') }}">Home</a></li>
+                <li><a href="{{ path('about') }}">About</a></li>
+                <li><a href="{{ path('report') }}">Report</a></li>
+                <li><a href="{{ path('lucky') }}">Lucky Number</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer>
+            <div class="footer-wrapper">
+                <div class="footer">
+                    <h2 class="footer-header">En footer</h2>
+                    <p class="footer-email">
+                        hello@hello.com
+                    </p>
+                    <p class="made-by">
+                        Made by Isabel S.
+                    </p>
+
+                    <div class="social">
+                        <ul>
+                            <li>
+                                <a href="https://www.instagram.com/"
+                                    >Instagram</a
+                                >
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/">Linkedin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
