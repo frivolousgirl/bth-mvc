@@ -7,21 +7,21 @@ font-family: 'Space Mono', monospace;
 
 /* Colors */
 :root {
-    --primary-color: #E74F34; /* Primary color */
-    --secondary-color: #ECEAE4; /* Secondary color */
-    --success-color: #35E85F; /* Success color */
-    --danger-color: #E04D33; /* Danger color */
-    --warning-color: #35E89C; /* Warning color */
+    --primary-color: #e74f34; /* Primary color */
+    --secondary-color: #eceae4; /* Secondary color */
+    --success-color: #35e85f; /* Success color */
+    --danger-color: #e04d33; /* Danger color */
+    --warning-color: #35e89c; /* Warning color */
     --info-color: #17a2b8; /* Info color */
     --light-color: #f8f9fa; /* Light color */
     --dark-color: #333333; /* Dark color */
-    --site-backround-color: #ECEAE4;
+    --site-backround-color: #eceae4;
 }
 
 /* Typography */
 :root {
-    --font-family-sans: 'Gabarito', sans-serif; /* Default font family */
-    --font-family: 'Space Mono', monospace; /* Default font family */
+    --font-family-sans: "Gabarito", sans-serif; /* Default font family */
+    --font-family: "Space Mono", monospace; /* Default font family */
     --font-size-base: 16px; /* Base font size */
     --line-height-base: 1.5; /* Base line height */
 }

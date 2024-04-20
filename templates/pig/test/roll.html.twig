@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+{% block title %}Roll{% endblock %}
+{% block body %}
+<h1>Roll a dice</h1>
+
+<p>Here is the value of the dice.</p>
+
+<ul>
+    <li>{{ diceString }}</li>
+</ul>
+
+<p><a href="{{ path('test_roll_num_dices', {num: 5}) }}">Roll many</a></p>
+<p><a href="{{ path('test_dicehand', {num: 5}) }}">Dice Hand</a></p>
+{% endblock %}

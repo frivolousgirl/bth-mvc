@@ -1,0 +1,31 @@
+/* Flash Notice Styling */
+.flash-notice {
+    padding: 0.5em;
+    color: var(--light-color);
+    background-color: var(--info-color);
+    border-color: var(--info-color);
+}
+.flash-notice:before {
+    content: "ⓘ";
+}
+
+.flash-warning {
+    padding: 0.5em;
+    color: var(--light-color);
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+}
+.flash-warning:before {
+    content: "⚠";
+}
+
+.flash-success {
+    padding: 0.5em;
+    color: var(--light-color);
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.flash-success:before {
+    content: "✅";
+}

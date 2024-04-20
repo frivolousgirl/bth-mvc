@@ -1,0 +1,14 @@
+{% extends "./base.html.twig" %} {% block title %}Card deck draw multiple{% endblock %} {% block
+body%}
+
+<h1>Card deck draw multiple</h1>
+
+<ul class="card-deck">
+    {% for card in cards %}
+        <li>{{ card.getSuitSymbol() }} {{ card.rank }}</li>
+    {% endfor %}
+</ul>
+
+<p>Number of cards in deck: {{ number_of_cards }}</p>
+
+{% endblock %}

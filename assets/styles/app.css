@@ -1,8 +1,11 @@
 @import url("navbar.css");
 @import url("variables.css");
+@import url("typography.css");
 @import url("two-column.css");
+@import url("flash.css");
 @import url("footer.css");
-
+@import url("card.css");
+@import url("api.css");
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -31,41 +34,6 @@ main {
     max-width: 900px;
 }
 
-h1,
-h2,
-h3,
-h4 {
-    font-family: var(--font-family);
-}
-
-h1 {
-    font-size: 2.4rem;
-    margin-bottom: 2.8rem;
-    border-bottom: 4px dashed var(--primary-color);
-}
-
-h2 {
-    font-size: 2rem;
-    margin-bottom: 1.4rem;
-}
-
-h3 {
-    font-size: 1.3rem;
-    margin-top: 2.3rem;
-    margin-bottom: 0.5rem;
-}
-
-h4 {
-    font-size: 1rem;
-    margin-bottom: 0;
-}
-
-p {
-    margin-bottom: 1.4rem;
-    font-size: 1rem;
-    font-family: var(--font-family-sans);
-}
-
 img {
     display: block; /* Ensures images are displayed as block-level elements */
     max-width: 100%; /* Ensures images don't exceed their parent container's width */
@@ -73,14 +41,6 @@ img {
     margin: 0 auto;
     border-radius: 23px;
     border: 1px dashed var(--primary-color);
-}
-
-a {
-    color: var(--primary-color);
-    
-    &:hover {
-        color: var(--dark-color);
-    }
 }
 
 .site-header {

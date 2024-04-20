@@ -20,14 +20,14 @@ class LuckyController extends AbstractController
                 array_push($numbers, $value);
             }
         }
-        
+
         while (count($starnr) < 2) {
             $value = random_int(1, 10);
             if (!in_array($value, $starnr)) {
                 array_push($starnr, $value);
             }
         }
-        
+
         sort($numbers);
         sort($starnr);
 

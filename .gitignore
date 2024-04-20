@@ -7,6 +7,7 @@
 /public/bundles/
 /var/
 /vendor/
+
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
@@ -30,3 +31,8 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+/tools/
+/tools/**/vendor/
+/tools/**/composer.lock
+.php-cs-fixer.cache

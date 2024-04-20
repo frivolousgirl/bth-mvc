@@ -1,0 +1,18 @@
+{% extends "./base.html.twig" %} {% block title %}API routes{% endblock %} {% block
+body%}
+
+<h1>API routes</h1>
+
+{% for route in routes %}
+    {% if 'POST' in route.methods %}
+        <form method="POST" action="{{ route.url }}" class="api-form">
+            <p class="api-p">
+                <a href="{{ route.url }}" class="post-link">{{ route.path }}</a> – {{ route.title }}
+            </p>
+        </form>
+    {% else %}
+        <p class="api-p"><a href="{{ route.path }}">{{ route.path }}</a> – {{ route.title }}</p>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

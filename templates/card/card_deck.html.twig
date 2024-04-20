@@ -1,0 +1,13 @@
+{% extends "./base.html.twig" %} {% block title %}Card deck{% endblock %} {% block
+body%}
+
+<h1>Card deck</h1>
+
+<ul class="card-deck">
+
+{% for card in deck.getAllCardsSorted() %}
+    <li>{{ card.getSuitSymbol() }} {{ card.rank }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

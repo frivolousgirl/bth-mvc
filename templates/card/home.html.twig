@@ -1,0 +1,16 @@
+{% extends "./base.html.twig" %} {% block title %}Card game{% endblock %} {% block
+body%}
+
+<h1>Card game</h1>
+
+<p>
+    Show all classes and their meaning, including a UML diagram.
+</p>
+<p>
+    <a href="{{ path('card_deck') }}">Show Deck</a>
+    <a href="{{ path('card_deck_shuffle') }}">Shuffle Deck</a>
+    <a href="{{ path('card_deck_draw') }}">Draw card</a>
+    <a href="{{ path('card_deck_draw_number', {number:5}) }}">Draw cards</a>
+</p>
+
+{% endblock %}
