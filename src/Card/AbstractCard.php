@@ -28,9 +28,4 @@ abstract class AbstractCard
                 return '';
         }
     }
-
-    public function __toString(): string
-    {
-        return "{$this->getSuitSymbol()} of {$this->rank}";
-    }
 }

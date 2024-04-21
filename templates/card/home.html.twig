@@ -1,12 +1,58 @@
-{% extends "./base.html.twig" %} {% block title %}Card game{% endblock %} {% block
-body%}
+{% extends "./base.html.twig" %} {% block title %}Card game{% endblock %} {%
+block body%}
 
 <h1>Card game</h1>
 
 <img src="{{ asset('img/cards_uml.png') }}" alt="Card UML" />
-<p>
-    Show all classes and their meaning, including a UML diagram.
-</p>
+<h2>Klasstruktur och Relationer för Card Game:</h2>
+<ol>
+    <li>
+        <h3>Card:</h3>
+        <p>
+            Representerar ett enskilt spelkort. Används inom DeckOfCards för att
+            konstruera en kortlek.
+        </p>
+    </li>
+    <li>
+        <h3>DeckOfCards:</h3>
+        <p>
+            Representerar en kortlek. Används i AbstractCardController och
+            ansvarar för att hantera kortrelaterade operationer som att blanda,
+            dra kort och återställa kortleken.
+        </p>
+    </li>
+    <li>
+        <h3>AbstractCard:</h3>
+        <p>
+            Representerar grundläggande egenskaper (rank och suit) och beteenden
+            för ett spelkort. Används på alla ställen där Card används.
+        </p>
+    </li>
+    <li>
+        <h3>AbstractCardController:</h3>
+        <p>
+            Fungerar som grundkontroller för att hantera kortrelaterade
+            funktioner. Den utökas av olika kontroller, inklusive ApiController
+            och CardGameController.
+        </p>
+    </li>
+    <li>
+        <h3>CardGameController:</h3>
+        <p>
+            Hanterar routes relaterade till kortspel. Den utökar också
+            AbstractCardController och tillhandahåller åtgärder för att visa
+            kortleken, blanda kort och dra kort.
+        </p>
+    </li>
+    <li>
+        <h3>ApiController:</h3>
+        <p>
+            Denna kontroller hanterar API-relaterade endpoints. Den utökar
+            AbstractCardController och tillhandahåller metoder för att hämta
+            citat, kortinformation, blanda kort och dra kort.
+        </p>
+    </li>
+</ol>
 <p>
     <a href="{{ path('card_deck') }}">Show Deck</a>
     <a href="{{ path('card_deck_shuffle') }}">Shuffle Deck</a>
