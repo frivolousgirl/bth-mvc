@@ -3,7 +3,17 @@ block body%}
 
 <h1>Card game</h1>
 
-<img src="{{ asset('img/cards_uml.png') }}" alt="Card UML" />
+<img
+    src="{{ asset('img/cards_uml.png') }}"
+    alt="Card UML"
+    style="border: none; margin-bottom: 50px;"
+/>
+<p>
+    <a href="{{ path('card_deck') }}">Show Deck</a>
+    <a href="{{ path('card_deck_shuffle') }}">Shuffle Deck</a>
+    <a href="{{ path('card_deck_draw') }}">Draw card</a>
+    <a href="{{ path('card_deck_draw_number', {number:5}) }}">Draw cards</a>
+</p>
 <h2>Klasstruktur och Relationer för Card Game:</h2>
 <ul>
     <li>
@@ -53,11 +63,5 @@ block body%}
         </p>
     </li>
 </ul>
-<p>
-    <a href="{{ path('card_deck') }}">Show Deck</a>
-    <a href="{{ path('card_deck_shuffle') }}">Shuffle Deck</a>
-    <a href="{{ path('card_deck_draw') }}">Draw card</a>
-    <a href="{{ path('card_deck_draw_number', {number:5}) }}">Draw cards</a>
-</p>
 
 {% endblock %}
