@@ -2,18 +2,16 @@
 body%}
 
 <h1>21</h1>
-{% if gameOverMessage %}
-    <p>{{ gameOverMessage }}</p>
-{% endif %}
+{{ include("flash.html.twig") }}
 <form action="{{ path('game_action') }}" method="POST">
     {% if canTakeCard %}
-        <button type="submit" name="action" value="take">Ta kort</button>
+        <button class="game-button" type="submit" name="action" value="take">Ta kort</button>
     {% endif %}
     {% if canStop %}
-        <button type="submit" name="action" value="stay">Stanna</button>
+        <button class="game-button" type="submit" name="action" value="stay">Stanna</button>
     {% endif %}
     {% if not canTakeCard and not canStop %}
-        <button type="submit" name="action" value="new">Nytt spel</button>
+        <button class="game-button" type="submit" name="action" value="new">Nytt spel</button>
     {% endif %}
 </form>
 <div>

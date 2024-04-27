@@ -50,7 +50,7 @@ class Game21Controller extends AbstractCardController
             $this->save("bank", $player2);
             $this->save("canTakeCard", true);
             $this->save("canStop", false);
-            $this->save("gameOverMessage", "");
+            $this->save("gameover", false);
 
             $deck = $this->get("deck");
             
@@ -58,12 +58,11 @@ class Game21Controller extends AbstractCardController
             $deck->shuffle();
         }
 
-        $gameOverMessage = $this->get("gameOverMessage");
+        $gameover = $this->get("gameover");
 
         $data = [
-            "canTakeCard" => $this->get("canTakeCard") && !$gameOverMessage,
-            "canStop" => $this->get("canStop") && !$gameOverMessage,
-            "gameOverMessage" => $this->get("gameOverMessage"),
+            "canTakeCard" => $this->get("canTakeCard") && !$gameover,
+            "canStop" => $this->get("canStop") && !$gameover,
             "player1" => $player1,
             "player2" => $player2,
         ];
@@ -141,24 +140,29 @@ class Game21Controller extends AbstractCardController
 
     private function gameOver(): void
     {
+        $this->save("gameover", true);
+
         $player1 = $this->get("player");
         $player2 = $this->get("bank");
-
-        if ($player1->sumCardValues() > 21)
+        
+        $player1Sum = $player1->sumCardValues();
+        $player2Sum = $player2->sumCardValues();
+        
+        if ($player1Sum > 21)
         {
-            $this->save("gameOverMessage", "Banken vann!");
+            $this->addFlash('gameover', 'Game Over... Du Förlorade!');
         }
-        else if ($player2->sumCardValues() > 21)
+        else if ($player2Sum > 21)
         {
-            $this->save("gameOverMessage", "Grattis, du vann!");
+            $this->addFlash('winning', 'Grattis, Du Vann!');
         }
-        else if ($player2->sumCardValues() >= $player1->sumCardValues())
+        else if ($player2Sum >= $player1Sum)
         {
-            $this->save("gameOverMessage", "Banken vann!");
+            $this->addFlash('gameover', 'Game Over... Banken Vann Denna Gång!');
         }
         else
         {
-            $this->save("gameOverMessage", "Grattis, du vann!");
+            $this->addFlash('winning', 'Grattis, du vann!');
         }
     }
 }

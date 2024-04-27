@@ -29,3 +29,27 @@
 .flash-success:before {
     content: "✅";
 }
+
+.flash-winning {
+    padding: 0.5em;
+    margin-bottom: 1.5rem;
+    color: var(--dark-color);
+    background-color: var(--winning-color);
+    border-color: var(--winning-color);
+}
+
+.flash-winning:before {
+    content: "🏆";
+}
+
+.flash-gameover {
+    padding: 0.5em;
+    margin-bottom: 1.5rem;
+    color: var(--light-color);
+    background-color: var(--gameover-color);
+    border-color: var(--gameover-color);
+}
+
+.flash-gameover:before {
+    content: "🙇🏻‍♀️";
+}

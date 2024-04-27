@@ -8,10 +8,12 @@ font-family: 'Space Mono', monospace;
 /* Colors */
 :root {
     --primary-color: #e74f34; /* Primary color */
-    --secondary-color: #eceae4; /* Secondary color */
+    --secondary-color: #9b59b6; /* Secondary color */
     --success-color: #35e85f; /* Success color */
+    --winning-color: #ffd700;
+    --gameover-color: #6a5acd;
     --danger-color: #e04d33; /* Danger color */
-    --warning-color: #35e89c; /* Warning color */
+    --warning-color: #f1c40f; /* Warning color */
     --info-color: #17a2b8; /* Info color */
     --light-color: #f8f9fa; /* Light color */
     --dark-color: #333333; /* Dark color */
