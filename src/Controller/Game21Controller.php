@@ -51,7 +51,10 @@ class Game21Controller extends AbstractCardController
             $this->save("canTakeCard", true);
             $this->save("canStop", false);
 
-            $this->get("deck")->shuffle();
+            $deck = $this->get("deck");
+            
+            $deck->reset();
+            $deck->shuffle();
         }
 
         $data = [
@@ -76,6 +79,10 @@ class Game21Controller extends AbstractCardController
         else if ($action == "stay")
         {
             $this->stay();
+        }
+        else if ($action == "new")
+        {
+            return $this->newGame();
         }
 
         return $this->redirectToRoute("game_run");
@@ -110,5 +117,14 @@ class Game21Controller extends AbstractCardController
             $card = $deck->drawCard();
             $bank->addCard($card);
         }
+    }
+
+    private function newGame(): Response
+    {
+        $data = [
+            "init" => 1,
+        ];
+
+        return $this->redirectToRoute("game_run", $data);
     }
 }

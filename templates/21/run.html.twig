@@ -10,6 +10,9 @@ body%}
     {% if canStop %}
         <button type="submit" name="action" value="stay">Stanna</button>
     {% endif %}
+    {% if not canTakeCard and not canStop %}
+        <button type="submit" name="action" value="new">Nytt spel</button>
+    {% endif %}
 </form>
 <div>
     <h2>Du: {{ player1.sumCardValues() }} poäng</h2>
