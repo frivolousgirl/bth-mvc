@@ -2,7 +2,9 @@
 body%}
 
 <h1>21</h1>
-
+{% if gameOverMessage %}
+    <p>{{ gameOverMessage }}</p>
+{% endif %}
 <form action="{{ path('game_action') }}" method="POST">
     {% if canTakeCard %}
         <button type="submit" name="action" value="take">Ta kort</button>

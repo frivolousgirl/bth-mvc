@@ -50,6 +50,7 @@ class Game21Controller extends AbstractCardController
             $this->save("bank", $player2);
             $this->save("canTakeCard", true);
             $this->save("canStop", false);
+            $this->save("gameOverMessage", "");
 
             $deck = $this->get("deck");
             
@@ -57,9 +58,12 @@ class Game21Controller extends AbstractCardController
             $deck->shuffle();
         }
 
+        $gameOverMessage = $this->get("gameOverMessage");
+
         $data = [
-            "canTakeCard" => $this->get("canTakeCard"),
-            "canStop" => $this->get("canStop"),
+            "canTakeCard" => $this->get("canTakeCard") && !$gameOverMessage,
+            "canStop" => $this->get("canStop") && !$gameOverMessage,
+            "gameOverMessage" => $this->get("gameOverMessage"),
             "player1" => $player1,
             "player2" => $player2,
         ];
@@ -100,6 +104,11 @@ class Game21Controller extends AbstractCardController
         $this->save("deck", $deck);
         $this->save("player", $player);
         $this->save("canStop", true);
+
+        if ($player->sumCardValues() > 21)
+        {
+            $this->gameOver();
+        }
     }
 
     private function stay(): void
@@ -117,6 +126,8 @@ class Game21Controller extends AbstractCardController
             $card = $deck->drawCard();
             $bank->addCard($card);
         }
+
+        $this->gameOver();
     }
 
     private function newGame(): Response
@@ -126,5 +137,28 @@ class Game21Controller extends AbstractCardController
         ];
 
         return $this->redirectToRoute("game_run", $data);
+    }
+
+    private function gameOver(): void
+    {
+        $player1 = $this->get("player");
+        $player2 = $this->get("bank");
+
+        if ($player1->sumCardValues() > 21)
+        {
+            $this->save("gameOverMessage", "Banken vann!");
+        }
+        else if ($player2->sumCardValues() > 21)
+        {
+            $this->save("gameOverMessage", "Grattis, du vann!");
+        }
+        else if ($player2->sumCardValues() >= $player1->sumCardValues())
+        {
+            $this->save("gameOverMessage", "Banken vann!");
+        }
+        else
+        {
+            $this->save("gameOverMessage", "Grattis, du vann!");
+        }
     }
 }
