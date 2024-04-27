@@ -1,5 +1,7 @@
-{% extends "base.html.twig" %} {% block title %}Home{% endblock %} {% block body
-%} {% for key, value in app.session %} {{ key }} => {{ value | raw }}<br />
+{% extends "base.html.twig" %} {% block title %}Session{% endblock %} {% block body
+%} 
+<h1>Session</h1>
+{% for key, value in app.session %} {{ key }} => {{ value | raw }}<br />
 {% endfor %} 
 {{ include("flash.html.twig") }}
 {% endblock %}

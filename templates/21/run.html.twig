@@ -1,0 +1,25 @@
+{% extends "./base.html.twig" %} {% block title %}21{% endblock %} {% block
+body%}
+
+<h1>21</h1>
+
+<form action="{{ path('game_action') }}" method="POST">
+    <button type="submit" name="action" value="take">Ta kort</button>
+    {% if canStay %}
+        <button type="submit" name="action" value="stay">Stanna</button>
+    {% endif %}
+</form>
+<div>
+    <h2>Du: {{ player1.sumCardValues() }} poäng</h2>
+    {% for card in player1.getCards() %}
+        {{ card }} <br>
+    {% endfor %}
+</div>
+<div>
+    <h2>Banken: {{ player2.sumCardValues() }} poäng</h2>
+    {% for card in player2.getCards() %}
+        {{ card }} <br>
+    {% endfor %}
+</div>
+
+{% endblock %}

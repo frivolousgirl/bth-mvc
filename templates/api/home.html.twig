@@ -5,13 +5,13 @@ body%}
 
 {% for route in routes %}
     {% if 'POST' in route.methods %}
-        <form method="POST" action="{{ route.url }}" class="api-form">
+        <form method="POST" action="{{ app.request.basePath }}{{ route.url }}" class="api-form">
             <p class="api-p">
-                <a href="{{ route.url }}" class="post-link">{{ route.path }}</a> – {{ route.title }}
+                <a href="{{ app.request.basePath }}{{ route.url }}" class="post-link">{{ route.path }}</a> – {{ route.title }}
             </p>
         </form>
     {% else %}
-        <p class="api-p"><a href="{{ route.path }}">{{ route.path }}</a> – {{ route.title }}</p>
+        <p class="api-p"><a href="{{ app.request.basePath }}{{ route.path }}">{{ route.path }}</a> – {{ route.title }}</p>
     {% endif %}
 {% endfor %}
 

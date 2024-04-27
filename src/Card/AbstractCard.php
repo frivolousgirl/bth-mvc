@@ -28,4 +28,9 @@ abstract class AbstractCard
                 return '';
         }
     }
+
+    public function __toString()
+    {
+        return $this->getSuitSymbol() . ' ' . $this->rank;
+    }
 }
