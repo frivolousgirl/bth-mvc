@@ -48,15 +48,15 @@ class Game21Controller extends AbstractCardController
 
             $this->save("player", $player1);
             $this->save("bank", $player2);
-            $this->save("canStay", false);
+            $this->save("canTakeCard", true);
+            $this->save("canStop", false);
 
             $this->get("deck")->shuffle();
         }
 
-        $canStay = $this->getSession()->get("canStay");
-
         $data = [
-            "canStay" => $canStay,
+            "canTakeCard" => $this->get("canTakeCard"),
+            "canStop" => $this->get("canStop"),
             "player1" => $player1,
             "player2" => $player2,
         ];
@@ -92,12 +92,13 @@ class Game21Controller extends AbstractCardController
 
         $this->save("deck", $deck);
         $this->save("player", $player);
-        $this->save("canStay", true);
+        $this->save("canStop", true);
     }
 
     private function stay(): void
     {
-        $this->save("canStay", false);
+        $this->save("canTakeCard", false);
+        $this->save("canStop", false);
 
         $deck = $this->get("deck");
         

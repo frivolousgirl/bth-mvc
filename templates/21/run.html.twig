@@ -4,8 +4,10 @@ body%}
 <h1>21</h1>
 
 <form action="{{ path('game_action') }}" method="POST">
-    <button type="submit" name="action" value="take">Ta kort</button>
-    {% if canStay %}
+    {% if canTakeCard %}
+        <button type="submit" name="action" value="take">Ta kort</button>
+    {% endif %}
+    {% if canStop %}
         <button type="submit" name="action" value="stay">Stanna</button>
     {% endif %}
 </form>
