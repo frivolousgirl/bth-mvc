@@ -56,17 +56,12 @@ class Game
 
     public function getCanTakeCard(): bool
     {
-        return $this->canTakeCard;
+        return $this->canTakeCard && !$this->gameOver;
     }
 
     public function getCanStop(): bool
     {
-        return $this->canStop;
-    }
-
-    public function getGameOver(): bool
-    {
-        return $this->gameOver;
+        return $this->canStop && !$this->gameOver;
     }
 
     public function drawPlayerCard(FlashMessage $flashMessage): void
@@ -76,7 +71,7 @@ class Game
 
         $this->canStop = true;
 
-        if ($this->player->sumCardValues() > 21)
+        if ($this->player->sumCardValues() >= 21)
         {
             $this->setGameOver($flashMessage);
         }

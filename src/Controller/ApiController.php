@@ -22,6 +22,24 @@ class ApiController extends AbstractCardController
         return $this->render("api/home.html.twig", $data);
     }
 
+    #[Route("/api/game", "api_game", format: "json", defaults: ["title" => "returns the game 21 score"])]
+    public function apiGame(): JsonResponse
+    {
+        $game = $this->get("game");
+
+        if (!$game)
+        {
+            return new JsonResponse();
+        }
+
+        $response = [
+            "player_points" => $game->getPlayerPoints(),
+            "bank_points" => $game->getBankPoints(),
+        ];
+
+        return new JsonResponse($response);
+    }
+
     #[Route("/api/quote", name: "api_quote", format: "json", defaults: ['title' => 'returns a random quote'])]
     public function apiQuote($title): JsonResponse
     {
