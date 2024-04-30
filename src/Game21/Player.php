@@ -13,7 +13,7 @@ class Player
         $this->init();
     }
 
-    public function addCard(Card $card)
+    public function addCard(Card $card): void
     {
         $this->cards[] = $card;
     }

@@ -4,25 +4,25 @@ body%}
 <h1>21</h1>
 {{ include("flash.html.twig") }}
 <form action="{{ path('game_action') }}" method="POST">
-    {% if canTakeCard %}
+    {% if game.getCanTakeCard() %}
         <button class="game-button" type="submit" name="action" value="take">Ta kort</button>
     {% endif %}
-    {% if canStop %}
+    {% if game.getCanStop() %}
         <button class="game-button" type="submit" name="action" value="stay">Stanna</button>
     {% endif %}
-    {% if not canTakeCard and not canStop %}
+    {% if not game.getCanTakeCard() and not game.getCanStop() %}
         <button class="game-button" type="submit" name="action" value="new">Nytt spel</button>
     {% endif %}
 </form>
 <div>
-    <h2>Du: {{ player1.sumCardValues() }} poäng</h2>
-    {% for card in player1.getCards() %}
+    <h2>Du: {{ game.getPlayerPoints() }} poäng</h2>
+    {% for card in game.getPlayerCards() %}
         {{ card }} <br>
     {% endfor %}
 </div>
 <div>
-    <h2>Banken: {{ player2.sumCardValues() }} poäng</h2>
-    {% for card in player2.getCards() %}
+    <h2>Banken: {{ game.getBankPoints() }} poäng</h2>
+    {% for card in game.getBankCards() %}
         {{ card }} <br>
     {% endfor %}
 </div>

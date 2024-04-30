@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\Controller\AbstractCardController;
+use App\Game21\Game;
+use App\Game21\FlashMessage;
 
-use App\Game21\Player;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class Game21Controller extends AbstractCardController
+class Game21Controller extends AbstractCardController implements FlashMessage
 {
     public function __construct(RequestStack $requestStack)
     {
@@ -18,15 +19,15 @@ class Game21Controller extends AbstractCardController
 
         $session = $this->getSession();
 
-        if (!$session->get("player"))
+        if (!$session->get("game"))
         {
-            $session->set("player", new Player());
+            $session->set("game", new Game());
         }
+    }
 
-        if (!$session->get("bank"))
-        {
-            $session->set("bank", new Player());
-        }
+    public function addFlashMessage(string $type, mixed $message): void
+    {
+        $this->addFlash($type, $message);
     }
 
     #[Route("/game", name: "game")]
@@ -38,33 +39,16 @@ class Game21Controller extends AbstractCardController
     #[Route("game/run", "game_run")]
     public function run(Request $request): Response
     {
-        $player1 = $this->get("player");
-        $player2 = $this->get("bank");
+        $game = $this->get("game");
 
         if ($request->query->get("init") == "1")
         {
-            $player1->init();
-            $player2->init();
-
-            $this->save("player", $player1);
-            $this->save("bank", $player2);
-            $this->save("canTakeCard", true);
-            $this->save("canStop", false);
-            $this->save("gameover", false);
-
-            $deck = $this->get("deck");
-            
-            $deck->reset();
-            $deck->shuffle();
+            $game->init();
+            $this->save("game", $game);
         }
 
-        $gameover = $this->get("gameover");
-
         $data = [
-            "canTakeCard" => $this->get("canTakeCard") && !$gameover,
-            "canStop" => $this->get("canStop") && !$gameover,
-            "player1" => $player1,
-            "player2" => $player2,
+            "game" => $game,
         ];
 
         return $this->render("21/run.html.twig", $data);
@@ -75,13 +59,16 @@ class Game21Controller extends AbstractCardController
     {
         $action = $_POST["action"];
 
+        $game = $this->get("game");
+
         if ($action == "take")
         {
-            $this->takeCard();
+            $game->drawPlayerCard($this);
+            $this->save("game", $game);
         }
         else if ($action == "stay")
         {
-            $this->stay();
+            $game->playerStays($this);
         }
         else if ($action == "new")
         {
@@ -91,44 +78,6 @@ class Game21Controller extends AbstractCardController
         return $this->redirectToRoute("game_run");
     }
 
-    private function takeCard(): void
-    {
-        $deck = $this->get("deck");
-        
-        $card = $deck->drawCard();
-
-        $player = $this->get("player");
-        $player->addCard($card);
-
-        $this->save("deck", $deck);
-        $this->save("player", $player);
-        $this->save("canStop", true);
-
-        if ($player->sumCardValues() > 21)
-        {
-            $this->gameOver();
-        }
-    }
-
-    private function stay(): void
-    {
-        $this->save("canTakeCard", false);
-        $this->save("canStop", false);
-
-        $deck = $this->get("deck");
-        
-        $player = $this->get("player");
-        $bank = $this->get("bank");
-        
-        while ($bank->sumCardValues() < $player->sumCardValues())
-        {
-            $card = $deck->drawCard();
-            $bank->addCard($card);
-        }
-
-        $this->gameOver();
-    }
-
     private function newGame(): Response
     {
         $data = [
@@ -136,33 +85,5 @@ class Game21Controller extends AbstractCardController
         ];
 
         return $this->redirectToRoute("game_run", $data);
-    }
-
-    private function gameOver(): void
-    {
-        $this->save("gameover", true);
-
-        $player1 = $this->get("player");
-        $player2 = $this->get("bank");
-        
-        $player1Sum = $player1->sumCardValues();
-        $player2Sum = $player2->sumCardValues();
-        
-        if ($player1Sum > 21)
-        {
-            $this->addFlash('gameover', 'Game Over... Du Förlorade!');
-        }
-        else if ($player2Sum > 21)
-        {
-            $this->addFlash('winning', 'Grattis, Du Vann!');
-        }
-        else if ($player2Sum >= $player1Sum)
-        {
-            $this->addFlash('gameover', 'Game Over... Banken Vann Denna Gång!');
-        }
-        else
-        {
-            $this->addFlash('winning', 'Grattis, du vann!');
-        }
     }
 }
