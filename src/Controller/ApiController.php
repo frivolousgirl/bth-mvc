@@ -27,8 +27,7 @@ class ApiController extends AbstractCardController
     {
         $game = $this->get("game");
 
-        if (!$game)
-        {
+        if (!$game) {
             return new JsonResponse();
         }
 
@@ -41,7 +40,7 @@ class ApiController extends AbstractCardController
     }
 
     #[Route("/api/quote", name: "api_quote", format: "json", defaults: ['title' => 'returns a random quote'])]
-    public function apiQuote($title): JsonResponse
+    public function apiQuote(): JsonResponse
     {
         $quotes = array(
             "Don not seek for everything to happen as you wish it would, but rather wish that everything happens as it actually will. Then your life will flow well. - Epictetus",

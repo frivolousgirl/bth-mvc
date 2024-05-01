@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Card\DeckOfCards;
+use App\Game21\Game;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -10,6 +11,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 abstract class AbstractCardController extends AbstractController
 {
+    /** @var RequestStack */
     protected $requestStack;
 
     public function __construct(RequestStack $requestStack)

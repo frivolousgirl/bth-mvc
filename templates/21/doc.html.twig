@@ -1,8 +1,61 @@
-{% extends "./base.html.twig" %} {% block title %}21 Documentation{% endblock %} {% block
-body%}
+{% extends "./base.html.twig" %} {% block title %}21 Documentation{% endblock %}
+{% block body%}
 
 <h1>21 Documentation</h1>
 
-<p>...</p>
+<img
+    src="{{ asset('img/21flowchart.png') }}"
+    alt="Flowchart for Game 21"
+    style="border: none; margin-bottom: 50px;"
+/>
+
+<h2>Klasser och pseudokod</h2>
+
+<p>Jag tänker mig två kontrollerklasser: en för själva spelet, Game21Controller, och en för api:et (återanvändning av det som redan finns).</p>
+<p>På modellsidan kan det vara trevligt att skapa en klass som håller spelet, spelarna och poängen. Med en särskild klass för spelarna. Kortleksklassen återanvänds från tidigare uppgifter. Genom att endast ha en klass som håller hela spelet blir det också smidigt att spara undan den i sessionen.</p>
+<p>Spelklassen kan vi kalla för Game. Den initialiseras när ett nytt spel startas. I det ingår också att initialiseras spelarna och kortleken. Därefter kommer olika metoder på Game att anropas för att ändra sitt state beroende på vad användaren gör i gränssnittet.</p>
+<p>UI-mässigt ser jag framför mig två rutor: en per spelare. I en ruta visas dels spelarens totala poäng, dels vilka kort den dragit.</p>
+<p>Det ska också finnas ett antal knappar för användaren att trycka på, t.ex. "Starta", "Nytt spel", "Ta kort" och "Stanna".</p>
+<p>Ungefär så här skulle interaktionen med Game kunna gå till:</p>
+<p>
+    <pre>
+        Starta/Nytt spel: game->init()
+        Ta kort: game->drawCard()
+        Stanna: game->stay()
+    </pre>
+</p>
+<p>Ganska enkelt alltså i kontrollerklassen.</p>
+<p>Game->init() borde vara rätt simpel då den bara ska se till att spelarnas poäng nollställs och att kortleken återställs och shufflas.
+    <pre>
+        Resetta spelaren
+        Resetta banken
+        Resetta kortleken
+        Shuffla kortleken
+    </pre>
+</p>
+<p>Game->drawCard() är lite klurigare:
+    <pre>
+
+        Ta ett kort från kortleken och lägg till spelarens dragna kort.
+        Aktivera så att knappen Stanna kan väljas.
+        Kontrollera spelarens totala poäng:
+            Om den är >= 21 så avsluta spelet
+            Annars tillåts spelaren välja mellan att dra ett nytt kort eller att stanna
+        Om spelet avslutades:
+            Om poängen är 21 så indikera att spelaren vann
+            Annars indikera att spelaren förlorade
+    </pre>
+</p>
+<p>Game->stay() innebär att spelaren lämnar över till banken:
+    <pre>
+        Så länge bankens totala poäng är mindre än spelarens:
+            Dra ett nytt kort och lägg till bankens dragna kort
+        Kontrollera bankens totala poäng mot spelarens:
+            Om banken har 21 poäng indikera att banken vann
+            Om banken har mer än 21 poäng indikera att spelaren vann
+            Om banken har mer poäng än spelaren indikera att banken vann
+            Annars indikera att spelaren vann
+    </pre>
+</p>
 
 {% endblock %}

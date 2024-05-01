@@ -2,6 +2,7 @@
 
 namespace App\Game21;
 
+use App\Card\Card;
 use App\Card\DeckOfCards;
 use App\Game21\Player;
 
@@ -44,11 +45,13 @@ class Game
         return $this->bank->sumCardValues();
     }
 
+    /** @return array<Card> */
     public function getPlayerCards(): array
     {
         return $this->player->getCards();
     }
 
+    /** @return array<Card> */
     public function getBankCards(): array
     {
         return $this->bank->getCards();
@@ -67,12 +70,13 @@ class Game
     public function drawPlayerCard(FlashMessage $flashMessage): void
     {
         $card = $this->deck->drawCard();
-        $this->player->addCard($card);
+        if ($card) {
+            $this->player->addCard($card);
+        }
 
         $this->canStop = true;
 
-        if ($this->player->sumCardValues() >= 21)
-        {
+        if ($this->player->sumCardValues() >= 21) {
             $this->setGameOver($flashMessage);
         }
     }
@@ -83,21 +87,14 @@ class Game
 
         $player1Sum = $this->player->sumCardValues();
         $player2Sum = $this->bank->sumCardValues();
-        
-        if ($player1Sum > 21)
-        {
+
+        if ($player1Sum > 21) {
             $flashMessage->addFlashMessage('gameover', 'Game Over... Du Förlorade!');
-        }
-        else if ($player2Sum > 21)
-        {
+        } elseif ($player2Sum > 21) {
             $flashMessage->addFlashMessage('winning', 'Grattis, Du Vann!');
-        }
-        else if ($player2Sum >= $player1Sum)
-        {
+        } elseif ($player2Sum >= $player1Sum) {
             $flashMessage->addFlashMessage('gameover', 'Game Over... Banken Vann Denna Gång!');
-        }
-        else
-        {
+        } else {
             $flashMessage->addFlashMessage('winning', 'Grattis, du vann!');
         }
     }
@@ -107,9 +104,11 @@ class Game
         $this->canTakeCard = false;
         $this->canStop = false;
 
-        while ($this->bank->sumCardValues() < $this->player->sumCardValues())
-        {
+        while ($this->bank->sumCardValues() < $this->player->sumCardValues()) {
             $card = $this->deck->drawCard();
+            if (!$card) {
+                break;
+            }
             $this->bank->addCard($card);
         }
 

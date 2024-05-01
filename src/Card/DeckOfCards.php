@@ -4,7 +4,7 @@ namespace App\Card;
 
 class DeckOfCards
 {
-    // Properties
+    /** @var Card[] */
     private $cards = [];
 
     // Constructor
@@ -14,7 +14,7 @@ class DeckOfCards
     }
 
     // Initialize the deck of cards
-    private function initializeDeck()
+    private function initializeDeck(): void
     {
         $suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
         $ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
@@ -29,13 +29,13 @@ class DeckOfCards
     }
 
     // Shuffle the deck of cards
-    public function shuffle()
+    public function shuffle(): void
     {
         shuffle($this->cards);
     }
 
     // Draw a card from the deck
-    public function drawCard()
+    public function drawCard(): ?Card
     {
         if (empty($this->cards)) {
             return null; // Return null if the deck is empty
@@ -44,18 +44,19 @@ class DeckOfCards
     }
 
     // Get the number of cards remaining in the deck
-    public function countCards()
+    public function countCards(): int
     {
         return count($this->cards);
     }
 
     // Reset the deck of cards (reinitialize)
-    public function reset()
+    public function reset(): void
     {
         $this->initializeDeck();
     }
 
-    public function getAllCardsSorted()
+    /** @return Card[] */
+    public function getAllCardsSorted(): array
     {
         $cards = $this->cards;
 
@@ -74,7 +75,8 @@ class DeckOfCards
         return $cards;
     }
 
-    public function getAllCards()
+    /** @return Card[] */
+    public function getAllCards(): array
     {
         return $this->cards;
     }

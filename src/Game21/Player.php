@@ -6,6 +6,7 @@ use App\Card\Card;
 
 class Player
 {
+    /** @var Card[] */
     private $cards = [];
 
     public function __construct()
@@ -23,6 +24,8 @@ class Player
         return count($this->cards);
     }
 
+    /** @return array<Card> */
+
     public function getCards(): array
     {
         return $this->cards;
@@ -33,7 +36,7 @@ class Player
         $this->cards = [];
     }
 
-    public function sumCardValues()
+    public function sumCardValues(): int
     {
         $sum = 0;
         foreach ($this->cards as $card) {

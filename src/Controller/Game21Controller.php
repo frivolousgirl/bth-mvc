@@ -19,8 +19,7 @@ class Game21Controller extends AbstractCardController implements FlashMessage
 
         $session = $this->getSession();
 
-        if (!$session->get("game"))
-        {
+        if (!$session->get("game")) {
             $session->set("game", new Game());
         }
     }
@@ -47,8 +46,7 @@ class Game21Controller extends AbstractCardController implements FlashMessage
     {
         $game = $this->get("game");
 
-        if ($request->query->get("init") == "1")
-        {
+        if ($request->query->get("init") == "1" && $game instanceof Game) {
             $game->init();
             $this->save("game", $game);
         }
@@ -67,17 +65,16 @@ class Game21Controller extends AbstractCardController implements FlashMessage
 
         $game = $this->get("game");
 
-        if ($action == "take")
-        {
+        if (!($game instanceof Game)) {
+            return new Response();
+        }
+
+        if ($action == "take") {
             $game->drawPlayerCard($this);
             $this->save("game", $game);
-        }
-        else if ($action == "stay")
-        {
+        } elseif ($action == "stay") {
             $game->playerStays($this);
-        }
-        else if ($action == "new")
-        {
+        } elseif ($action == "new") {
             return $this->newGame();
         }
 

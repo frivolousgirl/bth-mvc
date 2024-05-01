@@ -147,7 +147,56 @@ body %}
     hur de är användbara att skapa mer “dry code”.
 </p>
 <h2 id="kmom03">Kmom03</h2>
-<p>...</p>
+<p>
+    Berätta hur det kändes att modellera ett kortspel med flödesdiagram och
+    psuedokod. Var det något som du tror stödjer dig i din problemlösning och
+    tankearbete för att strukturera koden kring en applikation?
+</p>
+
+<p>
+    Nu råkade jag commita koden innan flödesschema och pseudokod, även om jag
+    hela tiden haft tankar om hur jag vill lösa uppgiften. Men ja, det känns bra
+    att tänka igenom ett problem innan. Sedan kanske implementationen ändå blir
+    annorlunda mot ursprungstanken i takt med att man stöter på oväntade
+    problem.
+</p>
+
+<h3>
+    Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du
+    nöjd/missnöjd, vilken förbättringspotential ser du i din koden, dina klasser
+    och applikationen som helhet?
+</h3>
+
+<p>
+    Överlag är jag ganska nöjd. Lintern spökar lite: den klagar bl.a. på att jag
+    anropar metoder på en mixed; t.ex. så returnerar SessionInterface→get() en
+    mixed, vilket är förståeligt, men det sprider sig vidare i min kod vilket
+    gör det svårt att tydligt definiera returtyper m.m. Jag har inte grävt
+    vidare så mycket i hur man kan lösa den här typen av problem, utan
+    accepterar att det finns varningar från lintern. En hel del av dem gick dock
+    att rätta. Jag började med en hel del kod i kontrollern men som jag senare
+    lyckades flytta ut i mina klasser (Game). Jag lyckades också införa ett
+    interface, FlashMessage, som ett par metoder i Game tar in. På så vis kunde
+    jag lägga till flashmeddelanden på kontrollern från Game.
+</p>
+
+<h3>
+    Vilken är din känsla för att koda i ett ramverk som Symfony, så här långt in
+    i kursen?
+</h3>
+
+<p>
+    Helt ok, även om jag gillar Flask och expressjs bättre. Men PHP börjar växa
+    på mig.
+</p>
+
+<h3>Vilken är din TIL för detta kmom?</h3>
+
+<p>
+    Lärde mig lite om vad som är "bra och ren kod" och om SOLID-principerna som
+    främjar en modulär, flexibel och underhållbar kod.
+</p>
+
 <h2 id="kmom04">Kmom04</h2>
 <p>...</p>
 {% endblock %}

@@ -7,12 +7,13 @@ use App\Card\AbstractCard;
 class Card extends AbstractCard
 {
     // Constructor
-    public function __construct($suit, $rank)
+    public function __construct(string $suit, string $rank)
     {
         parent::__construct($suit, $rank);
     }
 
-    public static function valueFromRank($rank) {
+    public static function valueFromRank(string $rank): ?int
+    {
         switch ($rank) {
             case '2':
                 return 2;
