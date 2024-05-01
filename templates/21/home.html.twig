@@ -3,7 +3,15 @@ body%}
 
 <h1>21</h1>
 
-<p>Information om spelet 21...</p>
-<p><a href="{{ path('game_run') }}?init=1" class="button">Starta spelet</a></p>
+<p>Det här är kortspelet 21. Spelet går ut på att två deltagare, <i>spelare</i> och <i>bank</i>, tävlar mot varandra om att först nå till 21 poäng.</p>
+<p>Spelet börjar med att spelaren tar ett kort och sedan väljer ifall den vill fortsätta att ta fler kort. Spelaren kan, efter att ha tagit sitt första kort, när som helst stanna varpå turen går över till banken.</p>
+<p>När det är bankens tur så kommer den att ta kort tills den antingen vinner eller förlorar. Vid lika poäng vinner banken.</p>
+<p>Den spelare som först når 21 vinner. Om en spelare får mer än 21 poäng förlorar den.</p>
+<p>Om spelaren väljer att stanna på, säg, 18 poäng så vinner spelaren ifall banken får mer än 21 poäng.</p>
+<p>Ess är värt 1 poäng och övriga kort enligt sina ordinarie valörer.</p>
+<p>
+    <a href="{{ path('game_run') }}?init=1" class="button">Starta spelet</a> |
+    <a href="{{ path('game_doc') }}" class="button">Dokumentation</a>
+</p>
 
 {% endblock %}

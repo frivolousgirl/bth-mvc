@@ -36,7 +36,13 @@ class Game21Controller extends AbstractCardController implements FlashMessage
         return $this->render('21/home.html.twig');
     }
 
-    #[Route("game/run", "game_run")]
+    #[Route("/game/doc", "game_doc")]
+    public function gameDoc(): Response
+    {
+        return $this->render("21/doc.html.twig");
+    }
+
+    #[Route("/game/run", "game_run")]
     public function run(Request $request): Response
     {
         $game = $this->get("game");
@@ -54,7 +60,7 @@ class Game21Controller extends AbstractCardController implements FlashMessage
         return $this->render("21/run.html.twig", $data);
     }
 
-    #[Route("game/action", "game_action")]
+    #[Route("/game/action", "game_action")]
     public function action(): Response
     {
         $action = $_POST["action"];
