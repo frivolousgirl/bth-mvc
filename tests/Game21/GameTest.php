@@ -70,7 +70,19 @@ class GameTest extends TestCase
         $cards = $this->game->getPlayerCards();
 
         $this->assertCount(2, $cards);
-        $this->assertEquals($this->player->getCards()[0], $cards[0]);
-        $this->assertEquals($this->player->getCards()[1], $cards[1]);
+        $this->assertEquals($cards, $this->player->getCards());
+    }
+
+    public function testCanGetBankCards()
+    {
+        $this->assertCount(0, $this->game->getBankCards());
+
+        $this->game->drawPlayerCard($this->flashMessage);
+        $this->game->playerStays($this->flashMessage);
+
+        $cards = $this->game->getBankCards();
+
+        $this->assertNotCount(0, $cards);
+        $this->assertEquals($cards, $this->bank->getCards());
     }
 }
