@@ -85,4 +85,11 @@ class GameTest extends TestCase
         $this->assertNotCount(0, $cards);
         $this->assertEquals($cards, $this->bank->getCards());
     }
+
+    public function testWhenPlayerStaysTheyCantTakeAnotherCard()
+    {
+        $this->game->playerStays($this->flashMessage);
+
+        $this->assertFalse($this->game->getCanTakeCard());
+    }
 }
