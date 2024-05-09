@@ -4,9 +4,9 @@ namespace App\Game21;
 
 use App\Game21\Player;
 use App\Game21\Game;
+use App\Card\Card;
 use App\Card\DeckOfCards;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class GameTest extends TestCase
 {
@@ -110,12 +110,43 @@ class GameTest extends TestCase
             ->method("addFlashMessage")
             ->with("gameover", "Game Over... Du Förlorade!");
 
-        // Draw enough cards to get more than 21 points
-        for ($i = 0; $i < 7; $i++) 
-        {
-            $this->game->drawPlayerCard($flashMessage);
-        }
+        $deck = $this->createStub(DeckOfCards::class);
 
+        $card1 = new Card("", "Queen");
+        $card2 = new Card("", "King");
 
+        $deck
+            ->method("drawCard")
+            ->willReturnOnConsecutiveCalls($card1, $card2);
+
+        $game = new Game($this->player, $this->bank, $deck);
+
+        $game->drawPlayerCard($flashMessage);
+        $game->drawPlayerCard($flashMessage);
+    }
+
+    public function testWhenBankGetsMorePointsThan21ThePlayerWins()
+    {
+        $flashMessage = $this->createMock(FlashMessage::class);
+
+        $flashMessage
+            ->expects($this->atLeast(1))
+            ->method("addFlashMessage")
+            ->with("winning", "Grattis, Du Vann!");
+
+        $deck = $this->createStub(DeckOfCards::class);
+
+        $card1 = new Card("", "King");
+        $card2 = new Card("", "Queen");
+        $card3 = new Card("", "King");
+
+        $deck
+            ->method("drawCard")
+            ->willReturnOnConsecutiveCalls($card1, $card2, $card3);
+
+        $game = new Game($this->player, $this->bank, $deck);
+
+        $game->drawPlayerCard($flashMessage);
+        $game->playerStays($flashMessage);
     }
 }

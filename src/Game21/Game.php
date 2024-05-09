@@ -72,6 +72,7 @@ class Game
     public function drawPlayerCard(FlashMessage $flashMessage): void
     {
         $card = $this->deck->drawCard();
+
         if ($card) {
             $this->player->addCard($card);
         }
@@ -108,6 +109,7 @@ class Game
 
         while ($this->bank->sumCardValues() < $this->player->sumCardValues()) {
             $card = $this->deck->drawCard();
+
             if (!$card) {
                 break;
             }
