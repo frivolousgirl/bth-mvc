@@ -92,4 +92,11 @@ class GameTest extends TestCase
 
         $this->assertFalse($this->game->getCanTakeCard());
     }
+
+    public function testWhenPlayerStaysTheyNoLongerCanChooseToStop()
+    {
+        $this->game->playerStays($this->flashMessage);
+
+        $this->assertFalse($this->game->getCanStop());
+    }
 }
