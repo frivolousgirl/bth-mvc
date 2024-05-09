@@ -149,4 +149,28 @@ class GameTest extends TestCase
         $game->drawPlayerCard($flashMessage);
         $game->playerStays($flashMessage);
     }
+
+    public function testWhenPlayerGets21PointsTheyWin()
+    {
+        $flashMessage = $this->createMock(FlashMessage::class);
+
+        $flashMessage
+            ->expects($this->atLeast(1))
+            ->method("addFlashMessage")
+            ->with("winning", "Grattis, du vann!");
+
+        $deck = $this->createStub(DeckOfCards::class);
+
+        $card1 = new Card("", "10");
+        $card2 = new Card("", "Jack");
+
+        $deck
+            ->method("drawCard")
+            ->willReturnOnConsecutiveCalls($card1, $card2);
+
+        $game = new Game($this->player, $this->bank, $deck);
+
+        $game->drawPlayerCard($flashMessage);
+        $game->drawPlayerCard($flashMessage);
+    }
 }
