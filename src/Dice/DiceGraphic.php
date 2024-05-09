@@ -21,6 +21,11 @@ class DiceGraphic extends Dice
 
     public function getAsString(): string
     {
+        if ($this->value == 0)
+        {
+            return "";
+        }
+
         return "<span class='dice-graphic'>{$this->representation[$this->value - 1]}</span>";
     }
 }

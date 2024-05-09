@@ -15,11 +15,13 @@ class Game
     private bool $canStop;
     private bool $gameOver;
 
-    public function __construct()
+    public function __construct(Player $player, Player $bank, DeckOfCards $deck)
     {
-        $this->player = new Player();
-        $this->bank = new Player();
-        $this->deck = new DeckOfCards();
+        $this->player = $player;
+        $this->bank = $bank;
+        $this->deck = $deck;
+
+        $this->init();
     }
 
     public function init(): void

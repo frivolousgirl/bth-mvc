@@ -16,7 +16,7 @@ class DeckOfCards
     // Initialize the deck of cards
     private function initializeDeck(): void
     {
-        $suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
+        $suits = ['Clubs', 'Diamonds', 'Hearts', 'Spades'];
         $ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
 
         $this->cards = array();

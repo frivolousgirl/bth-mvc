@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Card\DeckOfCards;
+use App\Game21\Player;
 use App\Controller\AbstractCardController;
 use App\Game21\Game;
 use App\Game21\FlashMessage;
@@ -20,7 +22,11 @@ class Game21Controller extends AbstractCardController implements FlashMessage
         $session = $this->getSession();
 
         if (!$session->get("game")) {
-            $session->set("game", new Game());
+            $player = new Player();
+            $bank = new Player();
+            $deck = new DeckOfCards();
+
+            $session->set("game", new Game($player, $bank, $deck));
         }
     }
 
