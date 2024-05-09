@@ -6,6 +6,7 @@ use App\Game21\Player;
 use App\Game21\Game;
 use App\Card\DeckOfCards;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class GameTest extends TestCase
 {
@@ -98,5 +99,23 @@ class GameTest extends TestCase
         $this->game->playerStays($this->flashMessage);
 
         $this->assertFalse($this->game->getCanStop());
+    }
+
+    public function testWhenPlayerGetMorePointsThan21TheyLose()
+    {
+        $flashMessage = $this->createMock(FlashMessage::class);
+
+        $flashMessage
+            ->expects($this->atLeast(1))
+            ->method("addFlashMessage")
+            ->with("gameover", "Game Over... Du Förlorade!");
+
+        // Draw enough cards to get more than 21 points
+        for ($i = 0; $i < 7; $i++) 
+        {
+            $this->game->drawPlayerCard($flashMessage);
+        }
+
+
     }
 }
