@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List{% endblock %}
+
+{% block body %}
+
+<h1>Book list</h1>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Image</th>
+    </tr>
+{% for book in books %}
+    <tr>
+        <td>{{ book.getId | e }}</td>
+        <td>{{ book.getIsbn | e }}</td>
+        <td>{{ book.getTitle | e }}</td>
+        <td>{{ book.getAuthor | e }}</td>
+        <td>{{ book.getImage | e }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

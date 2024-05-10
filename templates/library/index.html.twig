@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LibraryController!{% endblock %}
+
+{% block body %}
+
+<h1>Welcome to the library!</h1>
+
+<ul>
+    <li><a href="{{ path('library_list') }}">View library</a></li>
+    <li><a href="{{ path('library_add') }}">Add new book to library</a></li>
+</ul>
+
+{% endblock %}
