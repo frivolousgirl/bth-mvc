@@ -336,6 +336,56 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-LuckyController.html#method_number"
         },                {
+            "fqsen": "\\App\\Controller\\ProductController",
+            "name": "ProductController",
+            "summary": "",
+            "url": "classes/App-Controller-ProductController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProductController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Controller-ProductController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controller\\ProductController\u003A\u003AcreateProduct\u0028\u0029",
+            "name": "createProduct",
+            "summary": "",
+            "url": "classes/App-Controller-ProductController.html#method_createProduct"
+        },                {
+            "fqsen": "\\App\\Controller\\ProductController\u003A\u003AshowAllProduct\u0028\u0029",
+            "name": "showAllProduct",
+            "summary": "",
+            "url": "classes/App-Controller-ProductController.html#method_showAllProduct"
+        },                {
+            "fqsen": "\\App\\Controller\\ProductController\u003A\u003AshowProductById\u0028\u0029",
+            "name": "showProductById",
+            "summary": "",
+            "url": "classes/App-Controller-ProductController.html#method_showProductById"
+        },                {
+            "fqsen": "\\App\\Controller\\ProductController\u003A\u003AdeleteProductById\u0028\u0029",
+            "name": "deleteProductById",
+            "summary": "",
+            "url": "classes/App-Controller-ProductController.html#method_deleteProductById"
+        },                {
+            "fqsen": "\\App\\Controller\\ProductController\u003A\u003AupdateProduct\u0028\u0029",
+            "name": "updateProduct",
+            "summary": "",
+            "url": "classes/App-Controller-ProductController.html#method_updateProduct"
+        },                {
+            "fqsen": "\\App\\Controller\\ProductController\u003A\u003AviewAllProduct\u0028\u0029",
+            "name": "viewAllProduct",
+            "summary": "",
+            "url": "classes/App-Controller-ProductController.html#method_viewAllProduct"
+        },                {
+            "fqsen": "\\App\\Controller\\ProductController\u003A\u003AviewProductWithMinimumValue\u0028\u0029",
+            "name": "viewProductWithMinimumValue",
+            "summary": "",
+            "url": "classes/App-Controller-ProductController.html#method_viewProductWithMinimumValue"
+        },                {
+            "fqsen": "\\App\\Controller\\ProductController\u003A\u003AshowProductByMinimumValue\u0028\u0029",
+            "name": "showProductByMinimumValue",
+            "summary": "",
+            "url": "classes/App-Controller-ProductController.html#method_showProductByMinimumValue"
+        },                {
             "fqsen": "\\App\\Controller\\ReportController",
             "name": "ReportController",
             "summary": "",
@@ -451,6 +501,51 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Dice-DiceHand.html#property_hand"
         },                {
+            "fqsen": "\\App\\Entity\\Product",
+            "name": "Product",
+            "summary": "",
+            "url": "classes/App-Entity-Product.html"
+        },                {
+            "fqsen": "\\App\\Entity\\Product\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "",
+            "url": "classes/App-Entity-Product.html#method_getId"
+        },                {
+            "fqsen": "\\App\\Entity\\Product\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "",
+            "url": "classes/App-Entity-Product.html#method_getName"
+        },                {
+            "fqsen": "\\App\\Entity\\Product\u003A\u003AsetName\u0028\u0029",
+            "name": "setName",
+            "summary": "",
+            "url": "classes/App-Entity-Product.html#method_setName"
+        },                {
+            "fqsen": "\\App\\Entity\\Product\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/App-Entity-Product.html#method_getValue"
+        },                {
+            "fqsen": "\\App\\Entity\\Product\u003A\u003AsetValue\u0028\u0029",
+            "name": "setValue",
+            "summary": "",
+            "url": "classes/App-Entity-Product.html#method_setValue"
+        },                {
+            "fqsen": "\\App\\Entity\\Product\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/App-Entity-Product.html#property_id"
+        },                {
+            "fqsen": "\\App\\Entity\\Product\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/App-Entity-Product.html#property_name"
+        },                {
+            "fqsen": "\\App\\Entity\\Product\u003A\u003A\u0024value",
+            "name": "value",
+            "summary": "",
+            "url": "classes/App-Entity-Product.html#property_value"
+        },                {
             "fqsen": "\\App\\Game21\\FlashMessage",
             "name": "FlashMessage",
             "summary": "",
@@ -463,62 +558,62 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game21\\Game",
             "name": "Game",
-            "summary": "",
+            "summary": "Class\u0020representing\u0020a\u0020game\u0020of\u002021.",
             "url": "classes/App-Game21-Game.html"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructor\u0020for\u0020the\u0020Game\u0020class.",
             "url": "classes/App-Game21-Game.html#method___construct"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003Ainit\u0028\u0029",
             "name": "init",
-            "summary": "",
+            "summary": "Initializes\u0020the\u0020game.",
             "url": "classes/App-Game21-Game.html#method_init"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003AgetPlayerPoints\u0028\u0029",
             "name": "getPlayerPoints",
-            "summary": "",
+            "summary": "Get\u0020the\u0020total\u0020points\u0020of\u0020the\u0020player.",
             "url": "classes/App-Game21-Game.html#method_getPlayerPoints"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003AgetBankPoints\u0028\u0029",
             "name": "getBankPoints",
-            "summary": "",
+            "summary": "Get\u0020the\u0020total\u0020points\u0020of\u0020the\u0020bank.",
             "url": "classes/App-Game21-Game.html#method_getBankPoints"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003AgetPlayerCards\u0028\u0029",
             "name": "getPlayerCards",
-            "summary": "",
+            "summary": "Get\u0020an\u0020array\u0020of\u0020cards\u0020held\u0020by\u0020the\u0020player.",
             "url": "classes/App-Game21-Game.html#method_getPlayerCards"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003AgetBankCards\u0028\u0029",
             "name": "getBankCards",
-            "summary": "",
+            "summary": "Get\u0020an\u0020array\u0020of\u0020cards\u0020held\u0020by\u0020the\u0020bank.",
             "url": "classes/App-Game21-Game.html#method_getBankCards"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003AgetCanTakeCard\u0028\u0029",
             "name": "getCanTakeCard",
-            "summary": "",
+            "summary": "Check\u0020if\u0020the\u0020player\u0020can\u0020take\u0020another\u0020card.",
             "url": "classes/App-Game21-Game.html#method_getCanTakeCard"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003AgetCanStop\u0028\u0029",
             "name": "getCanStop",
-            "summary": "",
+            "summary": "Checks\u0020if\u0020the\u0020player\u0020can\u0020stop\u0020drawing\u0020cards.",
             "url": "classes/App-Game21-Game.html#method_getCanStop"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003AdrawPlayerCard\u0028\u0029",
             "name": "drawPlayerCard",
-            "summary": "",
+            "summary": "Draws\u0020a\u0020card\u0020for\u0020the\u0020player.",
             "url": "classes/App-Game21-Game.html#method_drawPlayerCard"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003AsetGameOver\u0028\u0029",
             "name": "setGameOver",
-            "summary": "",
+            "summary": "Sets\u0020the\u0020game\u002Dover\u0020state\u0020and\u0020display\u0020appropriate\u0020messages.",
             "url": "classes/App-Game21-Game.html#method_setGameOver"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003AplayerStays\u0028\u0029",
             "name": "playerStays",
-            "summary": "",
+            "summary": "Lets\u0020the\u0020player\u0020stay\u0020in\u0020the\u0020game.",
             "url": "classes/App-Game21-Game.html#method_playerStays"
         },                {
             "fqsen": "\\App\\Game21\\Game\u003A\u003A\u0024player",
@@ -553,37 +648,37 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game21\\Player",
             "name": "Player",
-            "summary": "",
+            "summary": "Class\u0020representing\u0020a\u0020player\u0020in\u0020the\u0020game\u0020of\u002021.",
             "url": "classes/App-Game21-Player.html"
         },                {
             "fqsen": "\\App\\Game21\\Player\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructor\u0020for\u0020the\u0020Player\u0020class.",
             "url": "classes/App-Game21-Player.html#method___construct"
         },                {
             "fqsen": "\\App\\Game21\\Player\u003A\u003AaddCard\u0028\u0029",
             "name": "addCard",
-            "summary": "",
+            "summary": "Add\u0020a\u0020card\u0020to\u0020the\u0020player\u0027s\u0020hand.",
             "url": "classes/App-Game21-Player.html#method_addCard"
         },                {
             "fqsen": "\\App\\Game21\\Player\u003A\u003AcountCards\u0028\u0029",
             "name": "countCards",
-            "summary": "",
+            "summary": "Get\u0020the\u0020number\u0020of\u0020cards\u0020in\u0020the\u0020player\u0027s\u0020hand.",
             "url": "classes/App-Game21-Player.html#method_countCards"
         },                {
             "fqsen": "\\App\\Game21\\Player\u003A\u003AgetCards\u0028\u0029",
             "name": "getCards",
-            "summary": "",
+            "summary": "Get\u0020an\u0020array\u0020of\u0020cards\u0020held\u0020by\u0020the\u0020player.",
             "url": "classes/App-Game21-Player.html#method_getCards"
         },                {
             "fqsen": "\\App\\Game21\\Player\u003A\u003Ainit\u0028\u0029",
             "name": "init",
-            "summary": "",
+            "summary": "Initialize\u0020the\u0020player\u0027s\u0020hand\u0020by\u0020removing\u0020all\u0020cards.",
             "url": "classes/App-Game21-Player.html#method_init"
         },                {
             "fqsen": "\\App\\Game21\\Player\u003A\u003AsumCardValues\u0028\u0029",
             "name": "sumCardValues",
-            "summary": "",
+            "summary": "Calculate\u0020the\u0020total\u0020value\u0020of\u0020the\u0020player\u0027s\u0020cards.",
             "url": "classes/App-Game21-Player.html#method_sumCardValues"
         },                {
             "fqsen": "\\App\\Game21\\Player\u003A\u003A\u0024cards",
@@ -595,6 +690,26 @@ Search.appendIndex(
             "name": "Kernel",
             "summary": "",
             "url": "classes/App-Kernel.html"
+        },                {
+            "fqsen": "\\App\\Repository\\ProductRepository",
+            "name": "ProductRepository",
+            "summary": "Repository\u0020class\u0020for\u0020managing\u0020Product\u0020entities.",
+            "url": "classes/App-Repository-ProductRepository.html"
+        },                {
+            "fqsen": "\\App\\Repository\\ProductRepository\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020for\u0020the\u0020ProductRepository\u0020class.",
+            "url": "classes/App-Repository-ProductRepository.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Repository\\ProductRepository\u003A\u003AfindByMinimumValue\u0028\u0029",
+            "name": "findByMinimumValue",
+            "summary": "Find\u0020all\u0020products\u0020having\u0020a\u0020value\u0020above\u0020the\u0020specified\u0020one.",
+            "url": "classes/App-Repository-ProductRepository.html#method_findByMinimumValue"
+        },                {
+            "fqsen": "\\App\\Repository\\ProductRepository\u003A\u003AfindByMinimumValue2\u0028\u0029",
+            "name": "findByMinimumValue2",
+            "summary": "Find\u0020all\u0020products\u0020having\u0020a\u0020value\u0020above\u0020the\u0020specified\u0020one\u0020using\u0020raw\u0020SQL.",
+            "url": "classes/App-Repository-ProductRepository.html#method_findByMinimumValue2"
         },                {
             "fqsen": "\\",
             "name": "\\",
@@ -616,6 +731,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app-dice.html"
         },                {
+            "fqsen": "\\App\\Entity",
+            "name": "Entity",
+            "summary": "",
+            "url": "namespaces/app-entity.html"
+        },                {
             "fqsen": "\\App\\Game21",
             "name": "Game21",
             "summary": "",
@@ -625,5 +745,10 @@ Search.appendIndex(
             "name": "App",
             "summary": "",
             "url": "namespaces/app.html"
+        },                {
+            "fqsen": "\\App\\Repository",
+            "name": "Repository",
+            "summary": "",
+            "url": "namespaces/app-repository.html"
         }            ]
 );

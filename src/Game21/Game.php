@@ -6,6 +6,9 @@ use App\Card\Card;
 use App\Card\DeckOfCards;
 use App\Game21\Player;
 
+/**
+ * Class representing a game of 21.
+ */
 class Game
 {
     private Player $player;
@@ -15,6 +18,13 @@ class Game
     private bool $canStop;
     private bool $gameOver;
 
+    /**
+     * Constructor for the Game class.
+     *
+     * @param Player      $player The player object.
+     * @param Player      $bank   The bank object.
+     * @param DeckOfCards $deck   The deck of cards object.
+     */
     public function __construct(Player $player, Player $bank, DeckOfCards $deck)
     {
         $this->player = $player;
@@ -24,6 +34,9 @@ class Game
         $this->init();
     }
 
+    /**
+     * Initializes the game.
+     */
     public function init(): void
     {
         $this->player->init();
@@ -37,38 +50,72 @@ class Game
         $this->gameOver = false;
     }
 
+    /**
+     * Get the total points of the player.
+     *
+     * @return int The total points of the player.
+     */
     public function getPlayerPoints(): int
     {
         return $this->player->sumCardValues();
     }
 
+    /**
+     * Get the total points of the bank.
+     *
+     * @return int The total points of the bank.
+     */
     public function getBankPoints(): int
     {
         return $this->bank->sumCardValues();
     }
 
-    /** @return array<Card> */
+    /**
+     * Get an array of cards held by the player.
+     *
+     * @return array<Card> An array of cards held by the player.
+     */
     public function getPlayerCards(): array
     {
         return $this->player->getCards();
     }
 
-    /** @return array<Card> */
+      /**
+     * Get an array of cards held by the bank.
+     *
+     * @return array<Card> An array of cards held by the bank.
+     */
     public function getBankCards(): array
     {
         return $this->bank->getCards();
     }
 
+    /**
+     * Check if the player can take another card.
+     *
+     * @return bool True if the player can take another card, false otherwise.
+     */
     public function getCanTakeCard(): bool
     {
         return $this->canTakeCard && !$this->gameOver;
     }
 
+    /**
+     * Checks if the player can stop drawing cards.
+     *
+     * @return bool True if the player can stop, false otherwise.
+     */
     public function getCanStop(): bool
     {
         return $this->canStop && !$this->gameOver;
     }
 
+    
+    /**
+     * Draws a card for the player.
+     *
+     * @param FlashMessage $flashMessage The flash message object.
+     */
     public function drawPlayerCard(FlashMessage $flashMessage): void
     {
         $card = $this->deck->drawCard();
@@ -84,6 +131,11 @@ class Game
         }
     }
 
+     /**
+     * Sets the game-over state and display appropriate messages.
+     *
+     * @param FlashMessage $flashMessage The flash message object.
+     */
     private function setGameOver(FlashMessage $flashMessage): void
     {
         $this->gameOver = true;
@@ -102,6 +154,11 @@ class Game
         }
     }
 
+    /**
+     * Lets the player stay in the game.
+     *
+     * @param FlashMessage $flashMessage The flash message object.
+     */
     public function playerStays(FlashMessage $flashMessage): void
     {
         $this->canTakeCard = false;
