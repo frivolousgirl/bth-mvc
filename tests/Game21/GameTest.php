@@ -26,7 +26,7 @@ class GameTest extends TestCase
         $this->game = new Game($this->player, $this->bank, $this->deck);
     }
 
-    public function testCanGetPlayerPoints()
+    public function testCanGetPlayerPoints(): void
     {
         $this->assertEquals(0, $this->player->sumCardValues());
 
@@ -36,7 +36,7 @@ class GameTest extends TestCase
         $this->assertEquals($this->player->sumCardValues(), $this->game->getPlayerPoints());
     }
 
-    public function testCanGetBankPoints()
+    public function testCanGetBankPoints(): void
     {
         $this->assertEquals(0, $this->bank->sumCardValues());
 
@@ -47,7 +47,7 @@ class GameTest extends TestCase
         $this->assertEquals($this->bank->sumCardValues(), $this->game->getBankPoints());
     }
 
-    public function testWhenPlayerHasDrawnACardTheyCanStop()
+    public function testWhenPlayerHasDrawnACardTheyCanStop(): void
     {
         $this->assertFalse($this->game->getCanStop());
 
@@ -56,12 +56,12 @@ class GameTest extends TestCase
         $this->assertTrue($this->game->getCanStop());
     }
 
-    public function testWhenGameStartsPlayerCanTakeCard()
+    public function testWhenGameStartsPlayerCanTakeCard(): void
     {
         $this->assertTrue($this->game->getCanTakeCard());
     }
 
-    public function testCanGetPlayerCards()
+    public function testCanGetPlayerCards(): void
     {
         $this->assertCount(0, $this->game->getPlayerCards());
 
@@ -74,7 +74,7 @@ class GameTest extends TestCase
         $this->assertEquals($cards, $this->player->getCards());
     }
 
-    public function testCanGetBankCards()
+    public function testCanGetBankCards(): void
     {
         $this->assertCount(0, $this->game->getBankCards());
 
@@ -87,21 +87,21 @@ class GameTest extends TestCase
         $this->assertEquals($cards, $this->bank->getCards());
     }
 
-    public function testWhenPlayerStaysTheyCantTakeAnotherCard()
+    public function testWhenPlayerStaysTheyCantTakeAnotherCard(): void
     {
         $this->game->playerStays($this->flashMessage);
 
         $this->assertFalse($this->game->getCanTakeCard());
     }
 
-    public function testWhenPlayerStaysTheyNoLongerCanChooseToStop()
+    public function testWhenPlayerStaysTheyNoLongerCanChooseToStop(): void
     {
         $this->game->playerStays($this->flashMessage);
 
         $this->assertFalse($this->game->getCanStop());
     }
 
-    public function testWhenPlayerGetMorePointsThan21TheyLose()
+    public function testWhenPlayerGetMorePointsThan21TheyLose(): void
     {
         $flashMessage = $this->createMock(FlashMessage::class);
 
@@ -125,7 +125,7 @@ class GameTest extends TestCase
         $game->drawPlayerCard($flashMessage);
     }
 
-    public function testWhenBankGetsMorePointsThan21ThePlayerWins()
+    public function testWhenBankGetsMorePointsThan21ThePlayerWins(): void
     {
         $flashMessage = $this->createMock(FlashMessage::class);
 
@@ -150,7 +150,7 @@ class GameTest extends TestCase
         $game->playerStays($flashMessage);
     }
 
-    public function testWhenPlayerGets21PointsTheyWin()
+    public function testWhenPlayerGets21PointsTheyWin(): void
     {
         $flashMessage = $this->createMock(FlashMessage::class);
 

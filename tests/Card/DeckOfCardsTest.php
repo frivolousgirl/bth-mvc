@@ -9,14 +9,14 @@ use PHPUnit\Framework\TestCase;
  */
 class DeckOfCardsTest extends TestCase
 {
-    public function testCreatingNewDeckInitializesCards()
+    public function testCreatingNewDeckInitializesCards(): void
     {
         $deck = new DeckOfCards();
 
         $this->assertEquals(52, $deck->countCards());
     }
 
-    public function testShuffleShufflesCards()
+    public function testShuffleShufflesCards(): void
     {
         $deck = new DeckOfCards();
         $originalDeck = $deck->getAllCards();
@@ -27,19 +27,18 @@ class DeckOfCardsTest extends TestCase
         $this->assertNotEquals($originalDeck, $shuffledDeck);
     }
 
-    public function testDrawCardsReturnsNullWhenNoCards()
+    public function testDrawCardsReturnsNullWhenNoCards(): void
     {
         $deck = new DeckOfCards();
 
-        while ($deck->countCards() > 0)
-        {
+        while ($deck->countCards() > 0) {
             $deck->drawCard();
         }
 
         $this->assertEmpty($deck->drawCard());
     }
 
-    public function testDrawCardReturnsTopCardInDeck()
+    public function testDrawCardReturnsTopCardInDeck(): void
     {
         $deck = new DeckOfCards();
 
@@ -50,7 +49,7 @@ class DeckOfCardsTest extends TestCase
         $this->assertEquals($cards[0], $deck->drawCard());
     }
 
-    public function testResetResetsCardsInDeck()
+    public function testResetResetsCardsInDeck(): void
     {
         $deck = new DeckOfCards();
 
@@ -64,21 +63,21 @@ class DeckOfCardsTest extends TestCase
         $this->assertEquals($originalDeck, $resetDeck);
     }
 
-    public function testToStringReturnsNonEmptyString()
+    public function testToStringReturnsNonEmptyString(): void
     {
         $deck = new DeckOfCards();
 
         $this->assertNotEmpty($deck->__toString());
     }
 
-    public function testGetAllCardsSortedReturnsCardsSorted()
+    public function testGetAllCardsSortedReturnsCardsSorted(): void
     {
         $deck = new DeckOfCards();
-        
+
         $sortedCards = $deck->getAllCardsSorted();
-        
+
         $this->assertCount(52, $sortedCards);
-        
+
         $this->assertTrue($this->isSorted($sortedCards));
     }
 
@@ -103,7 +102,7 @@ class DeckOfCardsTest extends TestCase
         if ($suitComparison !== 0) {
             return $suitComparison;
         }
-        
+
         // If suits are equal, compare ranks
         return $card1->rank <=> $card2->rank;
     }

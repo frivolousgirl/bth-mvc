@@ -21,8 +21,7 @@ class DiceGraphic extends Dice
 
     public function getAsString(): string
     {
-        if ($this->value == 0)
-        {
+        if ($this->value == 0) {
             return "";
         }
 

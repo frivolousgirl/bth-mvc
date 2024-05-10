@@ -13,7 +13,7 @@ class DiceTest extends TestCase
      * Construct object and verify that the object has the expected
      * properties, use no arguments.
      */
-    public function testCreateDice()
+    public function testCreateDice(): void
     {
         $dice = new Dice();
         $this->assertInstanceOf("\App\Dice\Dice", $dice);
@@ -22,7 +22,7 @@ class DiceTest extends TestCase
         $this->assertNotEmpty($res);
     }
 
-    public function testRollReturnsRandomInteger()
+    public function testRollReturnsRandomInteger(): void
     {
         $dice = new Dice();
         $value = $dice->roll();
@@ -31,7 +31,7 @@ class DiceTest extends TestCase
         $this->assertLessThanOrEqual(6, $value);
     }
 
-    public function testGetValueReturnsRolledNumber()
+    public function testGetValueReturnsRolledNumber(): void
     {
         $dice = new Dice();
         $value = $dice->roll();

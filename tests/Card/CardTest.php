@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
  */
 class CardTest extends TestCase
 {
-    public function testValueFromRank()
+    public function testValueFromRank(): void
     {
         $this->assertEquals(2, Card::valueFromRank('2'));
         $this->assertEquals(3, Card::valueFromRank('3'));
@@ -27,42 +27,42 @@ class CardTest extends TestCase
         $this->assertEmpty(Card::valueFromRank('blaha'));
     }
 
-    public function testGetSuitSymbolForHearts()
+    public function testGetSuitSymbolForHearts(): void
     {
         $card = new Card('Hearts', '1');
 
         $this->assertEquals("♥", $card->getSuitSymbol());
     }
 
-    public function testGetSuitSymbolForSpades()
+    public function testGetSuitSymbolForSpades(): void
     {
         $card = new Card('Spades', '1');
 
         $this->assertEquals("♠", $card->getSuitSymbol());
     }
 
-    public function testGetSuitSymbolForClubs()
+    public function testGetSuitSymbolForClubs(): void
     {
         $card = new Card('Clubs', '1');
 
         $this->assertEquals("♣", $card->getSuitSymbol());
     }
 
-    public function testGetSuitSymbolForDiamonds()
+    public function testGetSuitSymbolForDiamonds(): void
     {
         $card = new Card('Diamonds', '1');
 
         $this->assertEquals("♦", $card->getSuitSymbol());
     }
 
-    public function testGetSuitSymbolReturnsEmptyStringWithInvalidSuit()
+    public function testGetSuitSymbolReturnsEmptyStringWithInvalidSuit(): void
     {
         $card = new Card('blaha', '1');
 
         $this->assertEmpty($card->getSuitSymbol());
     }
 
-    public function testSuitAndRankAreAssignedCorrectly()
+    public function testSuitAndRankAreAssignedCorrectly(): void
     {
         $card = new Card("Diamonds", "7");
 
@@ -70,7 +70,7 @@ class CardTest extends TestCase
         $this->assertEquals("7", $card->rank);
     }
 
-    public function testToStringReturnsBothSuitAndRank()
+    public function testToStringReturnsBothSuitAndRank(): void
     {
         $card = new Card("Diamonds", "7");
 

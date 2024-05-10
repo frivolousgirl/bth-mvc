@@ -9,14 +9,14 @@ use PHPUnit\Framework\TestCase;
  */
 class DiceGraphicTest extends TestCase
 {
-    public function testGetAsStringReturnsNullWhenDiceNotRolled()
+    public function testGetAsStringReturnsNullWhenDiceNotRolled(): void
     {
         $dice = new DiceGraphic();
 
         $this->assertEmpty($dice->getAsString());
     }
 
-    public function testGetAsStringReturnsNonEmptyString()
+    public function testGetAsStringReturnsNonEmptyString(): void
     {
         $dice = new DiceGraphic();
 

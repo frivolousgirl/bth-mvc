@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
  */
 class DiceHandTest extends TestCase
 {
-    public function testCanAddDie()
+    public function testCanAddDie(): void
     {
         $hand = new DiceHand();
 
@@ -20,28 +20,26 @@ class DiceHandTest extends TestCase
         $this->assertEquals(1, $hand->getNumberDices());
     }
 
-    public function testRollRollsAllDice()
+    public function testRollRollsAllDice(): void
     {
         $hand = new DiceHand();
 
         $hand->add(new Dice());
         $hand->add(new Dice());
 
-        foreach ($hand->getValues() as $value)
-        {
+        foreach ($hand->getValues() as $value) {
             $this->assertEquals(0, $value);
         }
 
         $hand->roll();
 
-        foreach ($hand->getValues() as $value)
-        {
+        foreach ($hand->getValues() as $value) {
             $this->assertGreaterThanOrEqual(1, $value);
             $this->assertLessThanOrEqual(6, $value);
         }
     }
 
-    public function testGetStringReturnsNonEmptyStrings()
+    public function testGetStringReturnsNonEmptyStrings(): void
     {
         $hand = new DiceHand();
 
@@ -50,13 +48,12 @@ class DiceHandTest extends TestCase
 
         $hand->roll();
 
-        foreach ($hand->getString() as $value)
-        {
+        foreach ($hand->getString() as $value) {
             $this->assertNotEmpty($value);
         }
     }
 
-    public function testToStringReturnsNonEmptyStrings()
+    public function testToStringReturnsNonEmptyStrings(): void
     {
         $hand = new DiceHand();
 

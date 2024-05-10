@@ -198,5 +198,72 @@ body %}
 </p>
 
 <h2 id="kmom04">Kmom04</h2>
+<h3>
+    Berätta hur du upplevde att skriva kod som testar annan kod med PHPUnit och
+    hur du upplever phpunit rent allmänt.
+</h3>
+<p>
+    En intressant upplevelse. PHPUnit var rätt trevligt att arbeta med. Dock
+    stötte jag på att deras dokumentation inte vara helt uppdaterad. T.ex. så försökte jag
+    vid nåt tillfälle använda <code>this→onConsecutiveCalls()</code> enligt
+    deras sida men fick då tillbaka att den är "deprecated". Hittade då att man
+    kunde använda <code>willReturnOnConsecutiveCalls()</code>.
+</p>
+
+<h3>
+    Hur väl lyckades du med kodtäckningen av din kod, lyckades du nå mer än 90%
+    kodtäckning?
+</h3>
+<p>
+    Ja, på de flesta klasserna. Bara Game som ligger lägre än 100 %.
+</p>
+
+<h3>
+    Upplever du din egen kod som “testbar kod” eller finns det delar i koden som
+    är mer eller mindre testbar och finns det saker som kan göras för att
+    förbättra kodens testbarhet?
+</h3>
+<p>
+    Jag tycker att en hel del gick att testa ganska enkelt. Vid några tillfällen fick jag både
+    leka med att stubba och mocka några klasser för att styra vad deras metoder returnerar.
+    Minst en av klasserna, Game, blev rätt komplex och kunde må bra av att
+    förenkla. T.ex. genom att dela upp den i fler självständiga delar/klasser.
+</p>
+
+<h3>
+    Valde du att skriva om delar av din kod för att förbättra den eller göra den
+    mer testbar, om så berätta lite hur du tänkte.
+</h3>
+<p>
+    I förra kursmomentet hade jag introducerat ett interface,
+    FlashMessage, som underlättade en hel del i testningen. Den främsta
+    ändringen jag gjorde var att låta Game::_construct() ta in spelarna och
+    kortleken i stället för att skapa upp dem däri. Detta underlättade i
+    testerna eftersom jag kunde skicka med mina egna versioner som i några fall
+    är stubbade.
+</p>
+
+<h3>
+    Fundera över om du anser att testbar kod är något som kan identifiera “snygg
+    och ren kod”.
+</h3>
+<p>
+    Det tror jag definitivt. Ju mer komplex koden är skriven desto krångligare
+    blir testfallet. Man villl nog inte hamna i en situation där
+    testmetoderna är för långa; känns som att man vill hålla det så enkelt som
+    möjligt och för att det ska vara möjligt måste den bakomliggande koden också
+    vara enkel.
+</p>
+
+<h3>Vilken är din TIL för detta kmom?</h3>
+<p>
+    Att mocka och stubba med PHPUnit. Många bra hjälpmetoder för att asserta
+    olika scenarion. Att man kan ha en setUp() i sin testklass som körs innan
+    varje test.
+</p>
+
+<h2 id="kmom05">Kmom05</h2>
+<p>...</p>
+<h2 id="kmom06">Kmom06</h2>
 <p>...</p>
 {% endblock %}
