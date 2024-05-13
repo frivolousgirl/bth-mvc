@@ -31,7 +31,34 @@ class LibraryController extends AbstractController
         ]);
     }
 
-    #[Route('/library/list/{id}', name: 'library_list_single')]
+    #[Route('/library/list/{id}/edit', name: 'library_edit', methods: ['GET'])]
+    public function editBook(int $id)
+    {
+        $book = $this->bookRepository->find($id);
+
+        return $this->render("library/edit.html.twig", ["book" => $book]);
+    }
+
+    #[Route('/library/list/{id}', name: "library_update", methods: ['POST'])]
+    public function updateBook(int $id, Request $request)
+    {
+        $entityManager = $this->managerRegistry->getManager();
+        $book = $this->bookRepository->find($id);
+
+        if ($book) 
+        {
+            $book->setTitle($request->request->get('title'));
+            $book->setIsbn($request->request->get('isbn'));
+            $book->setAuthor($request->request->get('author'));
+            $book->setImage($request->request->get('image'));
+
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute("library_list");
+    }
+
+    #[Route('/library/list/{id}', name: 'library_list_single', methods: ['GET'])]
     public function listSingle(int $id): Response
     {
         $book = $this->bookRepository->find($id);

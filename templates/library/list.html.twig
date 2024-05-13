@@ -6,12 +6,14 @@
 
 <h1>Book list</h1>
 
+<p><a href="{{ path('library_add') }}" class="book-button">Add Book</a></p>
 <table class="table-container">
     <tr>
         <th>Id</th>
         <th>ISBN</th>
         <th>Title</th>
         <th>Author</th>
+        <th></th>
         <th></th>
     </tr>
 {% for book in books %}
@@ -20,6 +22,7 @@
         <td>{{ book.getIsbn | e }}</td>
         <td><a href="{{ path('library_list') }}/{{ book.getId }}">{{ book.getTitle | e }}</a></td>
         <td>{{ book.getAuthor | e }}</td>
+        <td><a href="{{ path('library_edit', { id: book.getId }) }}">🖌</a></td>
         <td>
             <form action="{{ path('library_delete', { id: book.getId }) }}" method="POST">
                 <input type="submit" value="🗑">
@@ -28,5 +31,6 @@
     </tr>
 {% endfor %}
 </table>
+
 
 {% endblock %}
