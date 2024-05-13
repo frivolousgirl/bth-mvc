@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View book{% endblock %}
+
+{% block body %}
+
+<h1>{{ book.getTitle }}</h1>
+
+<div class="container">
+    <div class="left-column">
+        <p><b>ISBN:</b> {{ book.getIsbn }}</p>
+        <p><b>Author:</b>  {{ book.getAuthor }}</p>
+    </div>
+    <div class="right-column">
+        <img src="{{ book.getImage }}"/>
+    </div>
+</div>
+
+{% endblock %}

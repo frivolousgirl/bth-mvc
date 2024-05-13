@@ -14,10 +14,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class LibraryController extends AbstractController
 {
     private BookRepository $bookRepository;
+    private ManagerRegistry $managerRegistry;
 
-    public function __construct(BookRepository $bookRepository)
+    public function __construct(BookRepository $bookRepository
+        , ManagerRegistry $managerRegistry)
     {
         $this->bookRepository = $bookRepository;
+        $this->managerRegistry = $managerRegistry;
     }
 
     #[Route('/library', name: 'library')]
@@ -28,7 +31,15 @@ class LibraryController extends AbstractController
         ]);
     }
 
-    #[Route('/library/view', name:'library_list')]
+    #[Route('/library/list/{id}', name: 'library_list_single')]
+    public function listSingle(int $id): Response
+    {
+        $book = $this->bookRepository->find($id);
+
+        return $this->render("library/single.html.twig", ["book" => $book]);
+    }
+
+    #[Route('/library/list', name:'library_list')]
     public function list(): Response
     {
         $books = $this->bookRepository->findAll();
@@ -40,6 +51,22 @@ class LibraryController extends AbstractController
     public function add(): Response
     {
         return $this->render("library/add.html.twig");
+    }
+
+    #[Route('/library/delete/{id}', name: "library_delete", methods: ['POST'])]
+    public function deleteBook(int $id): Response
+    {
+        $book = $this->bookRepository->find($id);
+
+        if ($book)
+        {
+            $manager = $this->managerRegistry->getManager();
+
+            $manager->remove($book);
+            $manager->flush();
+        }
+
+        return $this->redirectToRoute("library_list");
     }
 
     #[Route('/library/create', name: 'library_create', methods: ['POST'])]
