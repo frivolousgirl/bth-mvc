@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AbstractCardController;
 use App\Repository\BookRepository;
+use App\Entity\Book;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -108,19 +109,37 @@ class ApiController extends AbstractCardController
 
         foreach ($books as $book)
         {
-            $data[] = [
-                "id" => $book->getId(),
-                "title" => $book->getTitle(),
-                "isbn" => $book->getIsbn(),
-                "author" => $book->getAuthor(),
-                "image" => $book->getImage()
-            ];
+            $data[] = $this->mapBook($book);
         }
 
         return new JsonResponse($data);
     }
 
+    private function mapBook(Book $book): array
+    {
+        return [
+            "id" => $book->getId(),
+            "title" => $book->getTitle(),
+            "isbn" => $book->getIsbn(),
+            "author" => $book->getAuthor(),
+            "image" => $book->getImage()
+        ];
+    }
 
+    #[Route("/api/library/book/{isbn}", name: "api_library_book_isbn", format: "json", defaults: ['isbn' => '9789129728583', 'title' => 'returns the book matching {isbn}'])]
+    public function apiGetBook(string $isbn): JsonResponse
+    {
+        $book = $this->bookRepository->findOneBy(["isbn" => $isbn]);
+
+        if ($book)
+        {
+            $data = $this->mapBook($book);
+
+            return new JsonResponse($data);
+        }
+
+        return new JsonResponse();
+    }
 
     private function apiDrawInternal($number)
     {

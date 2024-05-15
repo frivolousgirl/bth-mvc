@@ -11,7 +11,7 @@ body%}
             </p>
         </form>
     {% else %}
-        <p class="api-p"><a href="{{ app.request.basePath }}{{ route.path }}">{{ route.path }}</a> – {{ route.title }}</p>
+        <p class="api-p"><a href="{{ app.request.basePath }}{{ route.url }}">{{ route.path }}</a> – {{ route.title }}</p>
     {% endif %}
 {% endfor %}
 
