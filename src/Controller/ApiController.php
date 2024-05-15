@@ -3,13 +3,24 @@
 namespace App\Controller;
 
 use App\Controller\AbstractCardController;
+use App\Repository\BookRepository;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ApiController extends AbstractCardController
 {
+    private BookRepository $bookRepository;
+
+    public function __construct(RequestStack $requestStack, BookRepository $bookRepository)
+    {
+        parent::__construct($requestStack);
+
+        $this->bookRepository = $bookRepository;
+    }
+
     #[Route("/api", name: "api")]
     public function api(): Response
     {
@@ -87,6 +98,29 @@ class ApiController extends AbstractCardController
     {
         return $this->apiDrawInternal($number);
     }
+
+    #[Route("/api/library/books", name: "api_library_books", format: "json", defaults: ['title' => 'returns all books in the library'])]
+    public function apiListBooks(): JsonResponse
+    {
+        $books = $this->bookRepository->findAll();
+
+        $data = [];
+
+        foreach ($books as $book)
+        {
+            $data[] = [
+                "id" => $book->getId(),
+                "title" => $book->getTitle(),
+                "isbn" => $book->getIsbn(),
+                "author" => $book->getAuthor(),
+                "image" => $book->getImage()
+            ];
+        }
+
+        return new JsonResponse($data);
+    }
+
+
 
     private function apiDrawInternal($number)
     {
