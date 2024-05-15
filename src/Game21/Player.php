@@ -20,11 +20,11 @@ class Player
         $this->init();
     }
 
-     /**
-     * Add a card to the player's hand.
-     *
-     * @param Card $card The card to add to the player's hand.
-     */
+    /**
+    * Add a card to the player's hand.
+    *
+    * @param Card $card The card to add to the player's hand.
+    */
     public function addCard(Card $card): void
     {
         $this->cards[] = $card;
@@ -50,9 +50,9 @@ class Player
         return $this->cards;
     }
 
-     /**
-     * Initialize the player's hand by removing all cards.
-     */
+    /**
+    * Initialize the player's hand by removing all cards.
+    */
     public function init(): void
     {
         $this->cards = [];

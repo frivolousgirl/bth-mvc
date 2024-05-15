@@ -107,8 +107,7 @@ class ApiController extends AbstractCardController
 
         $data = [];
 
-        foreach ($books as $book)
-        {
+        foreach ($books as $book) {
             $data[] = $this->mapBook($book);
         }
 
@@ -131,8 +130,7 @@ class ApiController extends AbstractCardController
     {
         $book = $this->bookRepository->findOneBy(["isbn" => $isbn]);
 
-        if ($book)
-        {
+        if ($book) {
             $data = $this->mapBook($book);
 
             return new JsonResponse($data);

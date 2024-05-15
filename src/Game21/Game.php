@@ -80,7 +80,7 @@ class Game
         return $this->player->getCards();
     }
 
-      /**
+    /**
      * Get an array of cards held by the bank.
      *
      * @return array<Card> An array of cards held by the bank.
@@ -110,7 +110,7 @@ class Game
         return $this->canStop && !$this->gameOver;
     }
 
-    
+
     /**
      * Draws a card for the player.
      *
@@ -131,11 +131,11 @@ class Game
         }
     }
 
-     /**
-     * Sets the game-over state and display appropriate messages.
-     *
-     * @param FlashMessage $flashMessage The flash message object.
-     */
+    /**
+    * Sets the game-over state and display appropriate messages.
+    *
+    * @param FlashMessage $flashMessage The flash message object.
+    */
     private function setGameOver(FlashMessage $flashMessage): void
     {
         $this->gameOver = true;

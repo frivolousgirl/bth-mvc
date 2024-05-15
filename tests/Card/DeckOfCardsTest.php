@@ -82,6 +82,9 @@ class DeckOfCardsTest extends TestCase
     }
 
     // Helper function to check if an array of cards is sorted
+    /**
+     * @param Card[] $cards
+     */
     private function isSorted(array $cards): bool
     {
         $previousCard = null;

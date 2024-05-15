@@ -8,14 +8,14 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Repository class for managing Product entities.
- * 
+ *
  * @extends ServiceEntityRepository<Product>
  */
 class ProductRepository extends ServiceEntityRepository
 {
     /**
      * Constructor for the ProductRepository class.
-     * 
+     *
      * @param ManagerRegistry $registry The registry service.
      */
     public function __construct(ManagerRegistry $registry)
@@ -25,9 +25,9 @@ class ProductRepository extends ServiceEntityRepository
 
     /**
      * Find all products having a value above the specified one.
-     * 
+     *
      * @param int $value The minimum value to filter products.
-     * 
+     *
      * @return Product[] Returns an array of Product objects.
      */
     public function findByMinimumValue($value): array
@@ -43,9 +43,9 @@ class ProductRepository extends ServiceEntityRepository
 
     /**
      * Find all products having a value above the specified one using raw SQL.
-     * 
+     *
      * @param int $value The minimum value to filter products.
-     * 
+     *
      * @return array[] Returns an array of arrays (i.e. a raw data set).
      */
     public function findByMinimumValue2($value): array

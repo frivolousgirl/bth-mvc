@@ -16,8 +16,7 @@ class LibraryController extends AbstractController
     private BookRepository $bookRepository;
     private ManagerRegistry $managerRegistry;
 
-    public function __construct(BookRepository $bookRepository
-        , ManagerRegistry $managerRegistry)
+    public function __construct(BookRepository $bookRepository, ManagerRegistry $managerRegistry)
     {
         $this->bookRepository = $bookRepository;
         $this->managerRegistry = $managerRegistry;
@@ -32,7 +31,7 @@ class LibraryController extends AbstractController
     }
 
     #[Route('/library/list/{id}/edit', name: 'library_edit', methods: ['GET'])]
-    public function editBook(int $id)
+    public function editBook(int $id): Response
     {
         $book = $this->bookRepository->find($id);
 
@@ -40,13 +39,12 @@ class LibraryController extends AbstractController
     }
 
     #[Route('/library/list/{id}', name: "library_update", methods: ['POST'])]
-    public function updateBook(int $id, Request $request)
+    public function updateBook(int $id, Request $request): Response
     {
         $entityManager = $this->managerRegistry->getManager();
         $book = $this->bookRepository->find($id);
 
-        if ($book) 
-        {
+        if ($book) {
             $book->setTitle($request->request->get('title'));
             $book->setIsbn($request->request->get('isbn'));
             $book->setAuthor($request->request->get('author'));
@@ -85,8 +83,7 @@ class LibraryController extends AbstractController
     {
         $book = $this->bookRepository->find($id);
 
-        if ($book)
-        {
+        if ($book) {
             $manager = $this->managerRegistry->getManager();
 
             $manager->remove($book);

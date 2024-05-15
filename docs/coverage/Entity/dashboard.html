@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for /home/issa/dbwebb-kurser/mvc/me/report/src/Dice</title>
+  <title>Dashboard for /home/issa/dbwebb-kurser/mvc/me/report/src/Entity</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../_css/bootstrap.min.css?v=9.2.31" rel="stylesheet" type="text/css">
   <link href="../_css/nv.d3.min.css?v=9.2.31" rel="stylesheet" type="text/css">
@@ -17,7 +17,7 @@
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
          <li class="breadcrumb-item"><a href="../index.html">/home/issa/dbwebb-kurser/mvc/me/report/src</a></li>
-         <li class="breadcrumb-item"><a href="index.html">Dice</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Entity</a></li>
          <li class="breadcrumb-item active">(Dashboard)</li>
 
        </ol>
@@ -58,6 +58,8 @@
         </tr>
        </thead>
        <tbody>
+       <tr><td><a href="Book.php.html#8">App\Entity\Book</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#8">App\Entity\Product</a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -111,6 +113,20 @@
         </tr>
        </thead>
        <tbody>
+       <tr><td><a href="Book.php.html#28"><abbr title="App\Entity\Book::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Book.php.html#33"><abbr title="App\Entity\Book::getTitle">getTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Book.php.html#38"><abbr title="App\Entity\Book::setTitle">setTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Book.php.html#45"><abbr title="App\Entity\Book::getIsbn">getIsbn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Book.php.html#50"><abbr title="App\Entity\Book::setIsbn">setIsbn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Book.php.html#57"><abbr title="App\Entity\Book::getAuthor">getAuthor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Book.php.html#62"><abbr title="App\Entity\Book::setAuthor">setAuthor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Book.php.html#69"><abbr title="App\Entity\Book::getImage">getImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Book.php.html#74"><abbr title="App\Entity\Book::setImage">setImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#22"><abbr title="App\Entity\Product::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#27"><abbr title="App\Entity\Product::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#32"><abbr title="App\Entity\Product::setName">setName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#39"><abbr title="App\Entity\Product::getValue">getValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#44"><abbr title="App\Entity\Product::setValue">setValue</abbr></a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -155,7 +171,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,3], "Class Coverage"))
+      .datum(getCoverageDistributionData([2,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -173,7 +189,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,12], "Method Coverage"))
+      .datum(getCoverageDistributionData([14,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -223,7 +239,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,4,"<a href=\"Dice.php.html#5\">App\\Dice\\Dice<\/a>"],[100,3,"<a href=\"DiceGraphic.php.html#5\">App\\Dice\\DiceGraphic<\/a>"],[100,9,"<a href=\"DiceHand.php.html#7\">App\\Dice\\DiceHand<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[0,9,"<a href=\"Book.php.html#8\">App\\Entity\\Book<\/a>"],[0,5,"<a href=\"Product.php.html#8\">App\\Entity\\Product<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -247,7 +263,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"Dice.php.html#10\">App\\Dice\\Dice::__construct<\/a>"],[100,1,"<a href=\"Dice.php.html#15\">App\\Dice\\Dice::roll<\/a>"],[100,1,"<a href=\"Dice.php.html#21\">App\\Dice\\Dice::getValue<\/a>"],[100,1,"<a href=\"Dice.php.html#26\">App\\Dice\\Dice::getAsString<\/a>"],[100,1,"<a href=\"DiceGraphic.php.html#17\">App\\Dice\\DiceGraphic::__construct<\/a>"],[100,2,"<a href=\"DiceGraphic.php.html#22\">App\\Dice\\DiceGraphic::getAsString<\/a>"],[100,1,"<a href=\"DiceHand.php.html#12\">App\\Dice\\DiceHand::add<\/a>"],[100,2,"<a href=\"DiceHand.php.html#17\">App\\Dice\\DiceHand::roll<\/a>"],[100,1,"<a href=\"DiceHand.php.html#24\">App\\Dice\\DiceHand::getNumberDices<\/a>"],[100,2,"<a href=\"DiceHand.php.html#30\">App\\Dice\\DiceHand::getValues<\/a>"],[100,2,"<a href=\"DiceHand.php.html#40\">App\\Dice\\DiceHand::getString<\/a>"],[100,1,"<a href=\"DiceHand.php.html#49\">App\\Dice\\DiceHand::__toString<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[0,1,"<a href=\"Book.php.html#28\">App\\Entity\\Book::getId<\/a>"],[0,1,"<a href=\"Book.php.html#33\">App\\Entity\\Book::getTitle<\/a>"],[0,1,"<a href=\"Book.php.html#38\">App\\Entity\\Book::setTitle<\/a>"],[0,1,"<a href=\"Book.php.html#45\">App\\Entity\\Book::getIsbn<\/a>"],[0,1,"<a href=\"Book.php.html#50\">App\\Entity\\Book::setIsbn<\/a>"],[0,1,"<a href=\"Book.php.html#57\">App\\Entity\\Book::getAuthor<\/a>"],[0,1,"<a href=\"Book.php.html#62\">App\\Entity\\Book::setAuthor<\/a>"],[0,1,"<a href=\"Book.php.html#69\">App\\Entity\\Book::getImage<\/a>"],[0,1,"<a href=\"Book.php.html#74\">App\\Entity\\Book::setImage<\/a>"],[0,1,"<a href=\"Product.php.html#22\">App\\Entity\\Product::getId<\/a>"],[0,1,"<a href=\"Product.php.html#27\">App\\Entity\\Product::getName<\/a>"],[0,1,"<a href=\"Product.php.html#32\">App\\Entity\\Product::setName<\/a>"],[0,1,"<a href=\"Product.php.html#39\">App\\Entity\\Product::getValue<\/a>"],[0,1,"<a href=\"Product.php.html#44\">App\\Entity\\Product::setValue<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);
