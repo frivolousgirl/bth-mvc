@@ -206,10 +206,11 @@ body %}
 </h3>
 <p>
     En intressant upplevelse. PHPUnit var rätt trevligt att arbeta med. Dock
-    stötte jag på att deras dokumentation inte vara helt uppdaterad. T.ex. så försökte jag
-    vid nåt tillfälle använda <code>this→onConsecutiveCalls()</code> enligt
-    deras sida men fick då tillbaka att den är "deprecated". Hittade då att man
-    kunde använda <code>willReturnOnConsecutiveCalls()</code>.
+    stötte jag på att deras dokumentation inte vara helt uppdaterad. T.ex. så
+    försökte jag vid nåt tillfälle använda
+    <code>this→onConsecutiveCalls()</code> enligt deras sida men fick då
+    tillbaka att den är "deprecated". Hittade då att man kunde använda
+    <code>willReturnOnConsecutiveCalls()</code>.
 </p>
 
 <h3>
@@ -226,10 +227,11 @@ body %}
     förbättra kodens testbarhet?
 </h3>
 <p>
-    Jag tycker att en hel del gick att testa ganska enkelt. Vid några tillfällen fick jag både
-    leka med att stubba och mocka några klasser för att styra vad deras metoder returnerar.
-    Minst en av klasserna, Game, blev rätt komplex och kunde må bra av att
-    förenkla. T.ex. genom att dela upp den i fler självständiga delar/klasser.
+    Jag tycker att en hel del gick att testa ganska enkelt. Vid några tillfällen
+    fick jag både leka med att stubba och mocka några klasser för att styra vad
+    deras metoder returnerar. Minst en av klasserna, Game, blev rätt komplex och
+    kunde må bra av att förenkla. T.ex. genom att dela upp den i fler
+    självständiga delar/klasser.
 </p>
 
 <h3>
@@ -237,12 +239,11 @@ body %}
     mer testbar, om så berätta lite hur du tänkte.
 </h3>
 <p>
-    I förra kursmomentet hade jag introducerat ett interface,
-    FlashMessage, som underlättade en hel del i testningen. Den främsta
-    ändringen jag gjorde var att låta Game::_construct() ta in spelarna och
-    kortleken i stället för att skapa upp dem däri. Detta underlättade i
-    testerna eftersom jag kunde skicka med mina egna versioner som i några fall
-    är stubbade.
+    I förra kursmomentet hade jag introducerat ett interface, FlashMessage, som
+    underlättade en hel del i testningen. Den främsta ändringen jag gjorde var
+    att låta Game::_construct() ta in spelarna och kortleken i stället för att
+    skapa upp dem däri. Detta underlättade i testerna eftersom jag kunde skicka
+    med mina egna versioner som i några fall är stubbade.
 </p>
 
 <h3>
@@ -251,10 +252,9 @@ body %}
 </h3>
 <p>
     Det tror jag definitivt. Ju mer komplex koden är skriven desto krångligare
-    blir testfallet. Man villl nog inte hamna i en situation där
-    testmetoderna är för långa; känns som att man vill hålla det så enkelt som
-    möjligt och för att det ska vara möjligt måste den bakomliggande koden också
-    vara enkel.
+    blir testfallet. Man villl nog inte hamna i en situation där testmetoderna
+    är för långa; känns som att man vill hålla det så enkelt som möjligt och för
+    att det ska vara möjligt måste den bakomliggande koden också vara enkel.
 </p>
 
 <h3>Vilken är din TIL för detta kmom?</h3>
@@ -265,7 +265,56 @@ body %}
 </p>
 
 <h2 id="kmom05">Kmom05</h2>
-<p>...</p>
+<h3>
+    Gick det bra att jobba igenom övningen med Symfony och Doctrine. Något
+    särskilt du tänkte/reagerade på under övningen?
+</h3>
+<p>
+    Övningen var enkel att följa, stötte inte på några särskilda problem eller
+    tankar.
+</p>
+
+<h3>
+    Berätta om din applikation och hur du tänkte när du byggde upp den. Tänkte
+    du något speciellt på användargränssnittet?
+</h3>
+<p>
+    Jag tänkte att applikationen påminde väldigt mycket om tidigare uppgifter,
+    t.ex. den där vi skulle skapa och lägga till produkter för en webbshop. Så
+    sidorna ser ganska lika ut mellan dessa.
+</p>
+
+<h3>
+    Gick det bra att jobba med ORM i CRUD eller vad anser du om det, jämför
+    gärna med andra sätt att jobba med databaser?
+</h3>
+<p>
+    Det gick helt ok. Var enkelt att läsa upp, ändra, skapa och radera böcker. I
+    och för sig är Book en ganska enkel klass så frågan är hur det går om det
+    börjar finnas kopplingar till andra klasser. Om vi t.ex. skulle modellera
+    author som en “Person” i stället för en sträng, med attribut som namn, ålder
+    m.m. Då tänker jag att det kanske kan bli klurigare.
+</p>
+
+<h3>
+    Vad är din uppfattning om ORM så här långt och relatera gärna till andra
+    sätt att jobba med applikationskod mot databaser?
+</h3>
+<p>
+    Som sagt så känns det smidigt, i alla fall om det är enkla klasser som Book.
+    Om vi har mer komplexa strukturer så kanske det inte är lika enkelt. Genom
+    att skriva sql direkt så får jag fullständig kontroll på vad som hämtas och
+    sparas. Med en ORM så sker det automatiskt vilket kanske kan innebära
+    utmaningar framåt.
+</p>
+
+<h3>Vilken är din TIL för detta kmom?</h3>
+<p>
+    Doctrine och att arbeta med en ORM i php. Klassen som BookRepository ärver
+    ifrån, <strong>ServiceEntityRepository</strong>, har en massa färdiga
+    metoder som jag slapp skapa själv, t.ex. findOnyBy().
+</p>
+
 <h2 id="kmom06">Kmom06</h2>
 <p>...</p>
 {% endblock %}
