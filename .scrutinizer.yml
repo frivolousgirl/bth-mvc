@@ -9,6 +9,9 @@ filter:
 build:
     image: default-bionic
 
+    environment:
+        node: 10.8.0
+
     nodes:
         my-tests:
             environment:
