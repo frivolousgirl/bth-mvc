@@ -2,7 +2,9 @@ imports:
     - php
 
 filter:
-    excluded_paths: [vendor/*, test/*]
+    excluded_paths: 
+        - vendor/*
+        - test/*
 
 build:
     image: default-bionic
@@ -12,6 +14,7 @@ build:
             environment:
                 php:
                     version: 8.3.3
+                    # Uncomment the version you need
                     # version: 8.1.13
                     # version: 8.1.17
                     # version: 8.2.4
@@ -19,16 +22,19 @@ build:
             tests:
                 override:
                     - php-scrutinizer-run
-                    #- phpcs-run # Not used, missing config file
+                    # Uncomment if you have the config file
+                    # - phpcs-run
         node-with-auto-setup:
             tests:
                 override:
                     - command: ./run-tests.sh
-                    idle_timeout: "300"        # 5 minutes
+                      idle_timeout: "300"  # 5 minutes
+
     tests:
         override:
-            -   command: "composer phpunit"
-                # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
-                coverage:
-                    file: "docs/coverage.clover"
-                    format: "php-clover"
+            - command: "composer phpunit"
+              # Uncomment if you need code coverage
+              # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
+              coverage:
+                  file: "docs/coverage.clover"
+                  format: "php-clover"
