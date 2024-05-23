@@ -23,7 +23,7 @@ build:
         node-with-auto-setup:
             tests:
                 override:
-                - command: ./run-tests.sh
+                    - command: ./run-tests.sh
                     idle_timeout: 300        # 5 minutes
     tests:
         override:
