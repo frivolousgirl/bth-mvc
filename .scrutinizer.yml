@@ -20,6 +20,11 @@ build:
                 override:
                     - php-scrutinizer-run
                     #- phpcs-run # Not used, missing config file
+        node-with-auto-setup:
+            tests:
+                override:
+                - command: ./run-tests.sh
+                    idle_timeout: 300        # 5 minutes
     tests:
         override:
             -   command: "composer phpunit"
