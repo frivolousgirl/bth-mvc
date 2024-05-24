@@ -2,37 +2,27 @@ imports:
     - php
 
 filter:
-    excluded_paths: 
-        - vendor/*
-        - test/*
+    excluded_paths: [vendor/*, test/*]
 
 build:
     image: default-bionic
-
-    environment:
-        node: 10.15.3
 
     nodes:
         my-tests:
             environment:
                 php:
                     version: 8.3.3
-                    # Uncomment the version you need
-                    # version: 8.1.13
+                    # version: 8.3.3
                     # version: 8.1.17
-                    # version: 8.2.4
+                    #version: 8.2.4
         analysis:
             tests:
                 override:
                     - php-scrutinizer-run
-                    # Uncomment if you have the config file
-                    # - phpcs-run
-
     tests:
         override:
-            - command: "composer phpunit"
-              # Uncomment if you need code coverage
-              # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
-              coverage:
-                  file: "docs/coverage.clover"
-                  format: "php-clover"
+            -   command: "composer phpunit"
+                # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
+                coverage:
+                    file: "docs/coverage.clover"
+                    format: "php-clover"
