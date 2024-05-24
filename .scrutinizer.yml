@@ -4,6 +4,12 @@ imports:
 filter:
     excluded_paths: [vendor/*, test/*]
 
+dependencies:
+    override:
+        -   command: "npm rebuild"
+        -   command: "npm install"
+            idle_timeout: "300"
+
 build:
     image: default-bionic
 
