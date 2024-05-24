@@ -2,13 +2,10 @@ imports:
     - php
 
 filter:
-    excluded_paths: [vendor/*, test/*]
+    excluded_paths: [vendor/*, test/*, node_modules/*]
 
 build:
     image: default-bionic
-
-    environment:
-        node: 18.20.3
 
     nodes:
         my-tests:
