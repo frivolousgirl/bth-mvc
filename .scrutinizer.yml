@@ -10,13 +10,13 @@ build:
     image: default-bionic
 
     environment:
-        node: 10.8.0
+        node: 20.9.0
 
     nodes:
         my-tests:
             environment:
                 php:
-                    version: 8.3.3
+                    version: 8.2.12
                     # Uncomment the version you need
                     # version: 8.1.13
                     # version: 8.1.17
@@ -27,11 +27,6 @@ build:
                     - php-scrutinizer-run
                     # Uncomment if you have the config file
                     # - phpcs-run
-        node-with-auto-setup:
-            tests:
-                override:
-                    - command: ./run-tests.sh
-                      idle_timeout: "300"  # 5 minutes
 
     tests:
         override:
