@@ -7,6 +7,9 @@ filter:
 build:
     image: default-bionic
 
+    environment:
+        node: 18.20.3
+
     nodes:
         my-tests:
             environment:
