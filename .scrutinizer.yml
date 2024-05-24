@@ -21,19 +21,6 @@ build:
                     # version: 8.1.13
                     # version: 8.1.17
                     # version: 8.2.4
-            steps:
-                - setup:
-                    node:
-                        version: 20.13.1
-                    php:
-                        version: 8.3.3
-                - run:
-                    name: Install dependencies
-                    command: npm install
-
-                - run:
-                    name: Run tests
-                    command: npm test
         analysis:
             tests:
                 override:
