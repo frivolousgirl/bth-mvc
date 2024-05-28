@@ -11,12 +11,6 @@
         "webpack-cli": "^5.1.4",
         "webpack-notifier": "^1.15.0"
     },
-    "prettier": {
-        "parser": "php",
-        "plugins": [
-            "@prettier/plugin-php"
-        ]
-    },
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
