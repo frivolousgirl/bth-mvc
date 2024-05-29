@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1717014265">
-  <project timestamp="1717014265">
+<coverage generated="1717015908">
+  <project timestamp="1717015908">
     <file name="/home/issa/dbwebb-kurser/mvc/me/report/src/Card/AbstractCard.php">
       <class name="App\Card\AbstractCard" namespace="global">
         <metrics complexity="8" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="16" coveredelements="16"/>
@@ -638,7 +638,7 @@
     </file>
     <file name="/home/issa/dbwebb-kurser/mvc/me/report/src/Game21/Game.php">
       <class name="App\Game21\Game" namespace="global">
-        <metrics complexity="20" methods="11" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="40" elements="52" coveredelements="50"/>
+        <metrics complexity="20" methods="11" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="39" coveredstatements="38" elements="50" coveredelements="48"/>
       </class>
       <line num="28" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
       <line num="30" type="stmt" count="11"/>
@@ -679,20 +679,18 @@
       <line num="146" type="stmt" count="7"/>
       <line num="147" type="stmt" count="1"/>
       <line num="148" type="stmt" count="6"/>
-      <line num="149" type="stmt" count="1"/>
-      <line num="150" type="stmt" count="5"/>
-      <line num="151" type="stmt" count="4"/>
-      <line num="153" type="stmt" count="1"/>
-      <line num="162" type="method" name="playerStays" visibility="public" complexity="3" crap="3.02" count="5"/>
-      <line num="164" type="stmt" count="5"/>
+      <line num="149" type="stmt" count="3"/>
+      <line num="151" type="stmt" count="3"/>
+      <line num="160" type="method" name="playerStays" visibility="public" complexity="3" crap="3.02" count="5"/>
+      <line num="162" type="stmt" count="5"/>
+      <line num="163" type="stmt" count="5"/>
       <line num="165" type="stmt" count="5"/>
-      <line num="167" type="stmt" count="5"/>
+      <line num="166" type="stmt" count="3"/>
       <line num="168" type="stmt" count="3"/>
-      <line num="170" type="stmt" count="3"/>
-      <line num="171" type="stmt" count="0"/>
-      <line num="173" type="stmt" count="3"/>
-      <line num="176" type="stmt" count="5"/>
-      <metrics loc="179" ncloc="121" classes="1" methods="11" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="40" elements="52" coveredelements="50"/>
+      <line num="169" type="stmt" count="0"/>
+      <line num="171" type="stmt" count="3"/>
+      <line num="174" type="stmt" count="5"/>
+      <metrics loc="177" ncloc="119" classes="1" methods="11" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="39" coveredstatements="38" elements="50" coveredelements="48"/>
     </file>
     <file name="/home/issa/dbwebb-kurser/mvc/me/report/src/Game21/Player.php">
       <class name="App\Game21\Player" namespace="global">
@@ -751,6 +749,6 @@
       <line num="63" type="stmt" count="0"/>
       <metrics loc="91" ncloc="44" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="16" coveredelements="0"/>
     </file>
-    <metrics files="27" loc="1766" ncloc="1538" classes="25" methods="118" coveredmethods="60" conditionals="0" coveredconditionals="0" statements="473" coveredstatements="185" elements="591" coveredelements="245"/>
+    <metrics files="27" loc="1764" ncloc="1536" classes="25" methods="118" coveredmethods="60" conditionals="0" coveredconditionals="0" statements="471" coveredstatements="183" elements="589" coveredelements="243"/>
   </project>
 </coverage>

@@ -145,12 +145,10 @@ class Game
 
         if ($player1Sum > 21) {
             $flashMessage->addFlashMessage('gameover', 'Game Over... Du Förlorade!');
-        } elseif ($player2Sum > 21) {
+        } elseif ($player2Sum > 21 || $player2Sum < $player1Sum) {
             $flashMessage->addFlashMessage('winning', 'Grattis, Du Vann!');
-        } elseif ($player2Sum >= $player1Sum) {
-            $flashMessage->addFlashMessage('gameover', 'Game Over... Banken Vann Denna Gång!');
         } else {
-            $flashMessage->addFlashMessage('winning', 'Grattis, du vann!');
+            $flashMessage->addFlashMessage('gameover', 'Game Over... Banken Vann Denna Gång!');
         }
     }
 

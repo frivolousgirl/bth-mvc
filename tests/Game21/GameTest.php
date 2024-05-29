@@ -157,7 +157,7 @@ class GameTest extends TestCase
         $flashMessage
             ->expects($this->atLeast(1))
             ->method("addFlashMessage")
-            ->with("winning", "Grattis, du vann!");
+            ->with("winning", "Grattis, Du Vann!");
 
         $deck = $this->createStub(DeckOfCards::class);
 
