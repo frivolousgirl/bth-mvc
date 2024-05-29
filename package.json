@@ -12,18 +12,11 @@
         "webpack-notifier": "^1.15.0"
     },
     "license": "UNLICENSED",
-    "private": true,
+    "private": true,dbwebb
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
-    },
-    "dependencies": {
-        "clean-webpack-plugin": "^4.0.0",
-        "del": "^7.1.0",
-        "glob": "^10.4.1",
-        "latest-version": "^9.0.0",
-        "webpack-dev-server": "^5.0.4"
     }
 }
