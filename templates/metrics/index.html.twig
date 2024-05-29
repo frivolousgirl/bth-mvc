@@ -1,12 +1,299 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Metrics{% endblock %}
-
-{% block body %}
+{% extends 'base.html.twig' %} {% block title %}Metrics{% endblock %} {% block
+body %}
 
 <div class="example-wrapper">
     <h1>Metrics</h1>
 
-    <p>Lite text kommer snart....</p>
+    <h2>Introduktion</h2>
+    <p>
+        Clean Code är en uppsättning principer och praxis som hjälper utvecklare
+        att skriva kod som är lätt att läsa, underhålla och förbättra. Det är
+        ingen hård regel, utan mer av en filosofi med riktlinjer för att skriva
+        kod som är så enkel och tydlig som möjligt. 💁🏻‍♀️
+    </p>
+    <p>
+        För att uppnå denna kodkvalité finns det så kallde “clean
+        code”-principer, de sex C:na:
+    </p>
+
+    <h3>Codestyle</h3>
+    <p>
+        Codestyle syftar på formateringen, som användning av indentering,
+        placering av parenteser, användning av blanksteg och hur variabler och
+        funktioner namnges.
+    </p>
+
+    <p>
+        Att hålla en konsekvent kodstil gör koden lättare att läsa och
+        underhålla och därav minskar risken för fel. Ett bra sätt att följa
+        denna princip är att följa kodningsstandard för de språk (t.ex. PEP 8
+        för Python, ESLint för JavaScript) man använder.
+    </p>
+
+    <p>
+        <strong>Exempel ur koden:</strong> I denna kurs använder vi en sorts
+        lint för PHP som hjälper oss åstadkomma detta.
+    </p>
+
+    <h3>Coverage</h3>
+    <p>
+        Coverage handlar om att ha bra “test coverage”. Dvs, detta mäter hur
+        stor del av ens kod som täcks av ens egna automatiserade tester. Den ger
+        ett mått på hur väl testad ens kod är och hur mycket av den potentiella
+        risken för buggar och fel som täcks av ens egna tester.
+    </p>
+
+    <p>
+        <strong>Exempel ur koden:</strong> I min kod hade till exempel
+        ApiController 0 testfall och därmed 0 % coverage. Detta kan lätt
+        åtgärdas genom att implementera fler testfall för denna klass.
+    </p>
+
+    <h3>Complexity</h3>
+    <p>
+        Complexity står för hur komplicerad och svår det är att förstå ens kod.
+        T ex, för många if-satser och nestlade loopar ger en “hög komplexitet”.
+        Desto högre komplexitet ju svårare är koden att underhålla och debugga.
+        Därför vill man hålla komplexiteten så låg som möjlig och med hjälp av
+        clean code-principer vill man helst modualisera. Dvs, bryta ner stora
+        och komplexa funktioner till mindre, mer hanterbara bitar.
+    </p>
+
+    <p>
+        <strong>Exempel ur koden:</strong> I min kod har ApiController en hög
+        komplexitet därför att den innehåller många metoder med olika ansvars
+        områden, och externa beroenden. Den innehåller även många route-attribut
+        vilket indikerar en ny endpoint, och många endpoints innebär mer kod att
+        underhålla och testa. En lösning skulle vara att dela upp och
+        modualisera för att minska specifika metoders ansvar. T ex, skapa
+        separata klasser för olika ansvar: DeckApiController, GameApiController
+        och BookApiController.
+    </p>
+
+    <h3>Cohesion</h3>
+    <p>
+        Cohesion är ett mått för kodens sammanhållning. Detta mäter hur väl
+        olika delar av en kodmodul eller klass hänger ihop. En “hög cohesion”
+        innebär att alla delar av en modul eller klass är starkt relaterade och
+        bidrar till samma funktionalitet, medan en “låg cohesion” tyder på att
+        modulen eller klassen har många olika, orelaterade funktioner.
+    </p>
+
+    <p>
+        <strong>Exempel ur koden:</strong> ProductRepository samt
+        Game21Controller har ett relativt högt LCOM-nummer (Lack of Cohesion of
+        Methods), vilket indikerar att klasserna har låg sammanhållning. Detta
+        beror på att båda klasserna innehåller flera metoder som är orelaterade
+        och inte delar mycket gemensam data.
+    </p>
+
+    <h3>Coupling</h3>
+    <p>
+        Coupling refererar till graden av beroende mellan olika moduler, klasser
+        eller komponenter i en kodbas. En hög koppling innebär att ändringar i
+        en del av koden kan ha en stor påverkan på andra delar (likt en
+        dominoeffekt), medan låg koppling innebär att moduler eller klasser är
+        mer oberoende av varandra.
+    </p>
+
+    <p>
+        <strong>Exempel ur koden:</strong> AbstractCardController är en sådan
+        klass som påverkar tre andra klasser och påverkas själv av fyra andra
+        klasser. Detta ger en instabilitetsfaktor på 0,57 av 1, vilket indikerar
+        måttlig instabilitet.
+    </p>
+
+    <h3>CRAP (Change Risk Analysis and Predictions)</h3>
+    <p>
+        CRAP kan man säga är ett kompletterande verktyg till Coupling. Det är en
+        metod för att mäta och bedöma riskerna och konsekvenserna av att göra
+        ändringar i koden. Den gör detta genom att analysera komplexitet,
+        ansvar, abstraktion och polymorfism i koden och hjälper utvecklare
+        identifiera potentiella problemområden. Detta hjälper att förbättra
+        kodens kvalitet och underhåll över tid.
+    </p>
+
+    <h2>Phpmetrics</h2>
+    <p>
+        Jag har analyserat min kod med Phpmetrics och identifierat flera områden
+        med förbättringspotential. Här är en sammanfattning av resultaten:
+    </p>
+    <ol>
+        <li>
+            <strong>Violations</strong>
+
+            <p>Totalt 8 violations, varav 2 är errors.</p>
+            <p>Av dessa är 4 klassrelaterade och 4 paketrelaterade.</p>
+            <p>
+                <strong>Förslag på förbättring</strong>: Genomgå dessa
+                violations och åtgärda specifika fel och varningar, särskilt de
+                som är markerade som errors, för att förbättra kodkvaliteten.
+            </p>
+        </li>
+        <li>
+            <strong>Cyclomatic Complexity</strong>
+            <p>
+                Det finns några stora röda cirklar som indikerar hög cyclomatic
+                complexity, där den största har ett värde av 14.
+            </p>
+            <p>
+                <strong>Förslag på förbättring</strong>: Identifiera metoder med
+                hög cyclomatic complexity och refaktorera dem för att minska
+                komplexiteten. Detta kan innebära att bryta ner komplexa metoder
+                i mindre, mer hanterbara delar.
+            </p>
+        </li>
+        <li>
+            <strong>Test Coverage</strong>
+
+            <p>Det finns 19 klasser som inte omfattas av tester.</p>
+            <p>
+                <strong>Förslag på förbättring</strong>: Öka testtäckningen
+                genom att skriva enhetstester för de klasser som saknar test.
+                Detta kommer att förbättra koden pålitlighet och underlättar
+                framtida underhåll.
+            </p>
+        </li>
+    </ol>
+
+    <h2>Förbättringar</h2>
+    <p>Följande tre förbättringar ska jag genomföra:</p>
+    <ol>
+        <li>
+            <strong>Minska komplexiteten i App\Card\Card</strong>
+            <p>
+                <strong>Vad jag tänker göra:</strong> Jag ska släcka ett
+                violation-error (too complex method code) genom att ersätta en
+                switch-sats med ett direkt uppslag i en array.
+            </p>
+            <p>
+                <strong>Varför jag väljer detta:</strong> Detta kommer att sänka
+                komplexiteten i metoden genom att ersätta många “case”-satser
+                med en enkel array-uppslagning, vilket gör koden mer lättläst
+                och underhållsbar.
+            </p>
+            <p>
+                <strong>Förväntad påverkan:</strong> Jag förväntar mig att detta
+                kommer att minska cyclomatic complexity och förbättra kodens
+                läsbarhet. Före förbättringen hade jag 8 violations, varav 2
+                errors. Efter förbättringen minskade antalet violations till 7,
+                varav 1 error.
+            </p>
+        </li>
+        <li>
+            <strong>Ta bort oanvänd kod (ProductController)</strong>
+            <p>
+                <strong>Vad jag tänker göra:</strong> Jag kommer att ta bort
+                <strong><code>ProductController</code></strong> klassen eftersom
+                den bara används i en tidigare övning och inte längre behövs.
+            </p>
+            <p>
+                <strong>Varför jag väljer detta:</strong> Att ta bort oanvänd
+                kod minskar den tekniska skulden och ökar kodbasens övergripande
+                underhållbarhet. Även om det inte direkt påverkar 6C-måtten,
+                reducerar det teknisk skuld.
+            </p>
+            <p>
+                <strong>Förväntad påverkan:</strong> Eftersom klassen inte har
+                några tester kommer detta också att förbättra testtäckningen.
+                Maintainability index för denna klass var 68,04. Efter
+                borttagningen förväntar jag mig en förbättrad kodkvalitet och
+                minskad teknisk skuld.
+            </p>
+        </li>
+        <li>
+            <strong>Öka testtäckningen för ApiController</strong>
+            <p>
+                <strong>Vad jag tänker göra:</strong> Jag ska skriva
+                enhetstester för tre av de publika metoderna i
+                <strong><code>ApiController</code></strong
+                >.
+            </p>
+            <p>
+                <strong>Varför jag väljer detta:</strong> Att öka testtäckningen
+                kommer att förbättra kodens tillförlitlighet och göra det
+                enklare att underhålla och vidareutveckla koden.
+            </p>
+            <p>
+                <strong>Förväntad påverkan:</strong> Från 0 % testtäckning för
+                <strong><code>ApiController</code></strong> till en mer täckt
+                klass. Antalet violations minskade till 5 och antalet errors
+                till 0. Dessutom ökade antalet assertions från 80 till 92.
+            </p>
+        </li>
+    </ol>
+
+    <h3>Före och Efter Jämförelse</h3>
+    <p><strong>Före förbättringar:</strong></p>
+    <ul>
+        <li>Totalt antal violations: 8</li>
+        <li>Errors: 2</li>
+        <li>
+            Maintainability index för
+            <strong><code>ProductController</code></strong
+            >: 68,04
+        </li>
+        <li>
+            Testtäckning för <strong><code>ApiController</code></strong
+            >: 0 %
+        </li>
+        <li>Antal assertions: 80</li>
+    </ul>
+
+    <p><strong>Efter förbättringar:</strong></p>
+    <ul>
+        <li>Totalt antal violations: 5</li>
+        <li>Errors: 0</li>
+        <li>
+            <strong><code>ProductController</code></strong
+            >: Borttagen
+        </li>
+        <li>
+            Testtäckning för <strong><code>ApiController</code></strong
+            >: Ökad (3 metoder testade)
+        </li>
+        <li>Antal assertions: 92</li>
+    </ul>
+
+    <h2>Diskussion</h2>
+    <p>
+        Genom att använda den här typen av verktyg så kan man absolut jobba med
+        kodkvalitet. Kan gå till överdrift om det blir alltför många verktyg som
+        ska köras, och dessutom om några finns lokalt (phpunit) och andra på
+        internet (scrutinizer). Ett eller två verktyg som dessutom gärna körs
+        mer eller mindre automatiskt vore trevligt. Om jag hade fått Scrutinizer
+        att funka hade jag nog fördragit att köra med den utifrån vad jag
+        testkört med ett annat git repository.
+    </p>
+    <p>
+        En möjlig nackdel kan vara att man fokuserar för mycket på att allt ska
+        vara grönt. Tester ska såklart vara gröna, men 100 % coverage behöver
+        inte nödvändigtvis vara något att sträva efter, vilket dragits upp på
+        föreläsningen. Det finns väl risk att man skriver tester “bara för att”.
+        Inte för att de gör någon nytta. Kollar man på nätet och YouTube så är
+        det många videos och artiklar om “Stop Doing Clean Code”, där jag tror
+        man kanske gått för långt och missförstått vad det egentligen innebär?
+        En i kommentarerna sammanfattade det väldigt bra tycker jag:
+    </p>
+    <blockquote>
+        <p>
+            “I think a code without bugs is not considered a 'clean code' and is
+            more like 'a code without bugs'. Clean code refers more to
+            formatting for better readability, docs, consistency in naming
+            convention, low cyclomatic complexity, not have duplicate code
+            blocks etc. A code that can be read after 8 months and is still
+            understandable and its purpose is clear...that's a clean code.”
+        </p>
+    </blockquote>
+    <p>
+        Så en viktig fördel, tror jag, med clean code är att om man kommer
+        överens om ett antal regler och verktyg att använda så blir det lättare
+        att läsa och ändra varandras kod, särskilt när man jobbar i projekt med
+        andra. För egna privata projekt med ingen tanke på om framtida samarbete
+        kan man visserligen göra lite som man vill. Men det händer väl ibland
+        att man inte kan läsa sin egen skrivstil? Så det är nog nyttigt att
+        förhålla sig till universiella principer ändå.
+    </p>
 </div>
+
 {% endblock %}
