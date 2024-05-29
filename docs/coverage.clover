@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1716989295">
-  <project timestamp="1716989295">
+<coverage generated="1717014265">
+  <project timestamp="1717014265">
     <file name="/home/issa/dbwebb-kurser/mvc/me/report/src/Card/AbstractCard.php">
       <class name="App\Card\AbstractCard" namespace="global">
         <metrics complexity="8" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="16" coveredelements="16"/>
       </class>
-      <line num="12" type="method" name="__construct" visibility="protected" complexity="1" crap="1" count="31"/>
-      <line num="14" type="stmt" count="31"/>
-      <line num="15" type="stmt" count="31"/>
+      <line num="12" type="method" name="__construct" visibility="protected" complexity="1" crap="1" count="32"/>
+      <line num="14" type="stmt" count="32"/>
+      <line num="15" type="stmt" count="32"/>
       <line num="18" type="method" name="getSuitSymbol" visibility="public" complexity="6" crap="6" count="7"/>
       <line num="20" type="stmt" count="7"/>
       <line num="21" type="stmt" count="7"/>
@@ -27,8 +27,8 @@
       <class name="App\Card\Card" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="19" coveredelements="19"/>
       </class>
-      <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="31"/>
-      <line num="12" type="stmt" count="31"/>
+      <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="32"/>
+      <line num="12" type="stmt" count="32"/>
       <line num="15" type="method" name="valueFromRank" visibility="public" complexity="1" crap="1" count="10"/>
       <line num="17" type="stmt" count="10"/>
       <line num="18" type="stmt" count="10"/>
@@ -52,15 +52,15 @@
       <class name="App\Card\DeckOfCards" namespace="global">
         <metrics complexity="14" methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="27" elements="36" coveredelements="36"/>
       </class>
-      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="21"/>
-      <line num="13" type="stmt" count="21"/>
-      <line num="17" type="method" name="initializeDeck" visibility="private" complexity="3" crap="3" count="21"/>
-      <line num="19" type="stmt" count="21"/>
-      <line num="20" type="stmt" count="21"/>
-      <line num="22" type="stmt" count="21"/>
-      <line num="24" type="stmt" count="21"/>
-      <line num="25" type="stmt" count="21"/>
-      <line num="26" type="stmt" count="21"/>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="22"/>
+      <line num="13" type="stmt" count="22"/>
+      <line num="17" type="method" name="initializeDeck" visibility="private" complexity="3" crap="3" count="22"/>
+      <line num="19" type="stmt" count="22"/>
+      <line num="20" type="stmt" count="22"/>
+      <line num="22" type="stmt" count="22"/>
+      <line num="24" type="stmt" count="22"/>
+      <line num="25" type="stmt" count="22"/>
+      <line num="26" type="stmt" count="22"/>
       <line num="32" type="method" name="shuffle" visibility="public" complexity="1" crap="1" count="14"/>
       <line num="34" type="stmt" count="14"/>
       <line num="38" type="method" name="drawCard" visibility="public" complexity="2" crap="2" count="7"/>
@@ -100,23 +100,23 @@
     </file>
     <file name="/home/issa/dbwebb-kurser/mvc/me/report/src/Controller/AbstractCardController.php">
       <class name="App\Controller\AbstractCardController" namespace="global">
-        <metrics complexity="5" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="8" elements="14" coveredelements="11"/>
+        <metrics complexity="5" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="14" coveredelements="14"/>
       </class>
-      <line num="17" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="3"/>
-      <line num="19" type="stmt" count="3"/>
-      <line num="21" type="stmt" count="3"/>
-      <line num="23" type="stmt" count="3"/>
-      <line num="24" type="stmt" count="3"/>
-      <line num="26" type="stmt" count="3"/>
-      <line num="30" type="method" name="getSession" visibility="protected" complexity="1" crap="1" count="3"/>
-      <line num="32" type="stmt" count="3"/>
-      <line num="35" type="method" name="save" visibility="protected" complexity="1" crap="2" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="38" type="stmt" count="0"/>
-      <line num="41" type="method" name="get" visibility="protected" complexity="1" crap="1" count="1"/>
-      <line num="43" type="stmt" count="1"/>
-      <line num="44" type="stmt" count="1"/>
-      <metrics loc="47" ncloc="46" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="8" elements="14" coveredelements="11"/>
+      <line num="17" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="19" type="stmt" count="4"/>
+      <line num="21" type="stmt" count="4"/>
+      <line num="23" type="stmt" count="4"/>
+      <line num="24" type="stmt" count="4"/>
+      <line num="26" type="stmt" count="4"/>
+      <line num="30" type="method" name="getSession" visibility="protected" complexity="1" crap="1" count="4"/>
+      <line num="32" type="stmt" count="4"/>
+      <line num="35" type="method" name="save" visibility="protected" complexity="1" crap="1" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="41" type="method" name="get" visibility="protected" complexity="1" crap="1" count="2"/>
+      <line num="43" type="stmt" count="2"/>
+      <line num="44" type="stmt" count="2"/>
+      <metrics loc="47" ncloc="46" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="14" coveredelements="14"/>
     </file>
     <file name="/home/issa/dbwebb-kurser/mvc/me/report/src/Controller/ApiController.php">
       <class name="App\Controller\ApiController" namespace="global">
@@ -751,6 +751,6 @@
       <line num="63" type="stmt" count="0"/>
       <metrics loc="91" ncloc="44" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="16" coveredelements="0"/>
     </file>
-    <metrics files="27" loc="1766" ncloc="1538" classes="25" methods="118" coveredmethods="59" conditionals="0" coveredconditionals="0" statements="473" coveredstatements="183" elements="591" coveredelements="242"/>
+    <metrics files="27" loc="1766" ncloc="1538" classes="25" methods="118" coveredmethods="60" conditionals="0" coveredconditionals="0" statements="473" coveredstatements="185" elements="591" coveredelements="245"/>
   </project>
 </coverage>
