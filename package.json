@@ -12,7 +12,7 @@
         "webpack-notifier": "^1.15.0"
     },
     "license": "UNLICENSED",
-    "private": true,dbwebb
+    "private": true,
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
