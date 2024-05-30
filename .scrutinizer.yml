@@ -4,10 +4,6 @@ imports:
 filter:
     excluded_paths: [vendor/*, tests/*, .php-cs-fixer.dist.php]
 
-before_commands:
-    - npm install
-    - npm run build
-
 build:
     image: default-bionic
 
