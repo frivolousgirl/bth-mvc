@@ -4,6 +4,10 @@ imports:
 filter:
     excluded_paths: [vendor/*, tests/*, .php-cs-fixer.dist.php]
 
+before_commands:
+    - npm install
+    - npm run build
+
 build:
     image: default-bionic
 
@@ -21,7 +25,6 @@ build:
                     - php-scrutinizer-run
     tests:
         override:
-            -   npm run build
             -   command: "composer phpunit"
                 # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
                 coverage:
