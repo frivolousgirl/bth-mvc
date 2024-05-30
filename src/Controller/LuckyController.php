@@ -11,22 +11,8 @@ class LuckyController extends AbstractController
     #[Route('/lucky', name: 'lucky')]
     public function number(): Response
     {
-        $numbers = array();
-        $starnr = array();
-
-        while (count($numbers) < 5) {
-            $value = random_int(1, 50);
-            if (!in_array($value, $numbers)) {
-                array_push($numbers, $value);
-            }
-        }
-
-        while (count($starnr) < 2) {
-            $value = random_int(1, 10);
-            if (!in_array($value, $starnr)) {
-                array_push($starnr, $value);
-            }
-        }
+        $numbers = $this->generateUniqueRandomNumbers(5, 1, 50);
+        $starnr = $this->generateUniqueRandomNumbers(2, 1, 10);
 
         sort($numbers);
         sort($starnr);
@@ -37,5 +23,19 @@ class LuckyController extends AbstractController
         ];
 
         return $this->render('lucky.html.twig', $data);
+    }
+
+    private function generateUniqueRandomNumbers(int $count, int $min, int $max): array
+    {
+        $numbers = [];
+
+        while (count($numbers) < $count) {
+            $value = random_int($min, $max);
+            if (!in_array($value, $numbers)) {
+                $numbers[] = $value;
+            }
+        }
+
+        return $numbers;
     }
 }
