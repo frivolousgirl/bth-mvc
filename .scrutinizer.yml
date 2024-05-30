@@ -21,6 +21,7 @@ build:
                     - php-scrutinizer-run
     tests:
         override:
+            -   npm run build
             -   command: "composer phpunit"
                 # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
                 coverage:
