@@ -316,5 +316,65 @@ body %}
 </p>
 
 <h2 id="kmom06">Kmom06</h2>
-<p>...</p>
+<h3>
+    Hur uppfattade du verktyget phpmetrics och fann du några särskilda bitar mer
+    värdefulla än andra? Var det några särskilda metrics eller bilder du
+    uppskattade?
+</h3>
+<p>
+    Phpmetrics var trevligt på så vis att jag når resultatet på localhost och
+    inte behöver internet (vad jag vet i alla fall). Det gick snabbt att
+    generera nya resultat efter ändringar. Det var överlag en bra sida även om
+    man behöver lägga lite extra tid på att läsa på om vad de olika värden
+    betyder. En hover-effekt som förklarar hade varit trevligt.
+</p>
+
+<h3>
+    Berätta hur det gick att integrera med Scrutinizer och vilken är din första
+    känsla av verktyget och dess badges? Vilken kodtäckning och kodkvalitet fick
+    du efter första bygget?
+</h3>
+<p>
+    Jag stötte på problem med bygget direkt och det tog nästintill en vecka att
+    få en godkänd rapport, vilket jag skrev om på discord. Så mitt första
+    intryck var inte alls positivt. Väldigt tråkigt då det verkade annars som
+    ett smidigare verktyg än Phpmetrics iom inget behov av att installera något
+    mer än en yml-fil.
+</p>
+<p>
+    Jag var därför inställd på att hoppa över det här steget eftersom jag inte
+    kom nån vart och under tiden gick vidare till att implementera uppgiften
+    utan Scrutinizer-delen. Så tyvärr har jag inga siffror på hur det såg efter
+    första bygget för när jag väl lyckades få igång den så var jag i princip på
+    väg att skicka in uppgiften utan Scrutinizer-delen. Därför, när jag väl fick
+    igång verktyget fick jag 10 i kodkvalitet och 41 % kodtäckning.
+</p>
+
+<h3>
+    Hur är din egen syn på kodkvalitet, berätta lite om den? Tror du man kan
+    påvisa kodkvalitet i någon viss mån med badges eller vad tror du?
+</h3>
+<p>
+    Tror det finns en ganska liten vinst i att visa upp badges. Osäker på ifall
+    det imponerar på någon. Dessutom kanske det blir olika resultat med olika
+    verktyg? Men självklart finns det någon vinst med det i och med att det
+    tvingar en att tänka efter och följa sunda principer när man utvecklar. Sen
+    kanske bedges är mer som en varning/skyltning för andra som tittar på ens
+    kod?
+</p>
+<p>
+    Efter vad jag läst och hört om clean code så handlar det för mig om att
+    skriva kod som andra kan förstå. Hellre en enkel lösning än en avancerad.
+    Det ska vara lätt för andra att sätta sig in i koden och göra ändringar. Att
+    en klass har många metoder, eller att en metod har många kodrader, behöver
+    inte betyda att kvaliteten är dålig; det kanske bara är så att i just det
+    fallet råkar det vara mer vettigt att lösa uppgiften på det sättet.
+</p>
+
+<h3>Vilken är din TIL för detta kmom?</h3>
+<p>
+    Att få lära mig mer om vilka verktyg det finns för att mäta kodkvalitet,
+    samt vad 6C är för nåt.
+</p>
+
 {% endblock %}

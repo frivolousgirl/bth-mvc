@@ -78,7 +78,10 @@ body %}
         bidrar till samma funktionalitet, medan en “låg cohesion” tyder på att
         modulen eller klassen har många olika, orelaterade funktioner.
     </p>
-
+    <img
+        src="{{ asset('img/cohesion_example.png') }}"
+        alt="Example of Lack of Cohesion of Methods in current code"
+    />
     <p>
         <strong>Exempel ur koden:</strong> ProductRepository samt
         Game21Controller har ett relativt högt LCOM-nummer (Lack of Cohesion of
@@ -95,12 +98,15 @@ body %}
         dominoeffekt), medan låg koppling innebär att moduler eller klasser är
         mer oberoende av varandra.
     </p>
-
+    <img
+        src="{{ asset('img/coupling_example.png') }}"
+        alt="Example of coupling in the code"
+    />
     <p>
         <strong>Exempel ur koden:</strong> AbstractCardController är en sådan
         klass som påverkar tre andra klasser och påverkas själv av fyra andra
-        klasser. Detta ger en instabilitetsfaktor på 0,57 av 1, vilket indikerar
-        måttlig instabilitet.
+        klasser. Detta ger en instabilitetsfaktor på 0,57 av 1,0, vilket
+        indikerar måttlig instabilitet.
     </p>
 
     <h3>CRAP (Change Risk Analysis and Predictions)</h3>
@@ -112,8 +118,12 @@ body %}
         identifiera potentiella problemområden. Detta hjälper att förbättra
         kodens kvalitet och underhåll över tid.
     </p>
-
     <h2>Phpmetrics</h2>
+    <img
+        src="{{ asset('img/phpmetrics.png') }}"
+        style="float: right;"
+        alt="Phpmetrics cloud"
+    />
     <p>
         Jag har analyserat min kod med Phpmetrics och identifierat flera områden
         med förbättringspotential. Här är en sammanfattning av resultaten:
@@ -155,14 +165,111 @@ body %}
             </p>
         </li>
     </ol>
+    <h2>Scrutinizer</h2>
+    <p>
+        Jag har försökt cirka 68 gånger – även tagit bort och lagt till git
+        repository på nytt – att bygga upp en rapport via Scrutinizer men inte
+        fått det att fungera. Se:
+        <a
+            href="https://scrutinizer-ci.com/g/frivolousgirl/bth-mvc/inspections/f4a9d571-70a0-4400-913f-c980dc87c224"
+            target="_blank"
+            >Scrutinizer Report</a
+        >
+    </p>
 
+    <p>
+        <strong>UPDATE:</strong> Nu fick jag det att fungera! Tyvärr, då efter
+        att jag gjort mina ändringar efter Phpmetrics, vilket innebär att jag
+        inte har några före-siffror att visa. Men jag försöker ändå!
+    </p>
+
+    <p>Via Scrutinizer hittar jag tre förbättringsområden:</p>
+    <ol>
+        <li>
+            <strong>Två buggrapporter på .php-cs-fixer.dist.php</strong>
+            <ul>
+                <p>
+                    <strong>Problem:</strong> Av totalt 3 issues, två specifika
+                    buggrapporter:
+                    <ol>
+                        <p>The type PhpCsFixer\Finder was not found</p>
+                        <p>The type PhpCsFixer\Config was not found</p>
+                    </ol>
+                </p>
+                <p>
+                    <strong>Lösning:</strong> Jag löser detta genom att
+                    exkludera php-filen i .scrutinizer.yml. Eftersom det är
+                    vendor-kod, och /vendor är exkluderad, borde jag också kunna
+                    exkludera denna fil. Resultatet leder till endast en issue
+                    kvar:
+                </p>
+            </ul>
+            <img
+                src="{{ asset('img/improvement1.png') }}"
+                alt="Example of coupling in the code"
+            />
+        </li>
+        <li>
+            <strong>Kodtäckning för AbstractCardController</strong>
+            <ul>
+                <p>
+                    <strong>Problem:</strong> AbstractCardController har en
+                    kodtäckning på 78,56 %. Genom att skapa tester för save()
+                    och get() förväntar jag mig att täckningen ökar.
+                </p>
+                <p>
+                    <strong>Lösning:</strong> Efter att ha skrivit ett test som
+                    kombinerat testar både save() och get(), blev resultatet
+                    följande:
+                </p>
+                <img
+                    src="{{ asset('img/improvement21.png') }}"
+                    alt="Example of coupling in the code"
+                />
+                <img
+                    src="{{ asset('img/improvement22.png') }}"
+                    alt="Example of coupling in the code"
+                />
+            </ul>
+        </li>
+        <li>
+            <strong>Hög CRAP-score för LuckyController::number()</strong>
+            <ul>
+                <p>
+                    <strong>Problem:</strong> LuckyController::number() har
+                    många rader och en CRAP-score på 30.
+                </p>
+                <p>
+                    <strong>Lösning:</strong> Jag försöker lösa detta genom att
+                    förenkla number() och addera ett test. När jag lade till ett
+                    LuckyControllerTest.php vars testklass extendar WebTestCase,
+                    får jag felmeddelanden i Scrutinizer om att en manifest.json
+                    saknas. Jag lyckades inte lista ut hur man lägger till en
+                    sådan i Scrutinizer-världen, så istället tog jag bort
+                    asset()-anrop från min base.twig.html, eftersom sökningar på
+                    nätet gav att det kan vara sådana som triggar att
+                    manifest.json letas efter. Men då fick jag följdfel om att
+                    entrypoints saknades. Då gav jag upp:
+                </p>
+            </ul>
+            <img
+                    src="{{ asset('img/improvement3.png') }}"
+                    alt="Example of coupling in the code"
+                />
+        </li>
+    </ol>
+    <div class="scrutinizer">
+        <img src="https://scrutinizer-ci.com/g/frivolousgirl/bth-mvc/badges/quality-score.png?b=main" alt="Scrutinizer Quality" />
+        <img src="https://scrutinizer-ci.com/g/frivolousgirl/bth-mvc/badges/coverage.png?b=main" alt="Scrutinizer Coverage" />
+        <img src="https://scrutinizer-ci.com/g/frivolousgirl/bth-mvc/badges/code-intelligence.svg?b=main" alt="Scrutinizer Build" />
+    </div>
     <h2>Förbättringar</h2>
     <p>Följande tre förbättringar ska jag genomföra:</p>
     <ol>
         <li>
             <strong>Minska komplexiteten i App\Card\Card</strong>
             <p>
-                <strong>Vad jag tänker göra:</strong> Jag ska släcka ett
+                <strong>Vad jag tänker göra:</strong> Jag ska rätta ett
                 violation-error (too complex method code) genom att ersätta en
                 switch-sats med ett direkt uppslag i en array.
             </p>

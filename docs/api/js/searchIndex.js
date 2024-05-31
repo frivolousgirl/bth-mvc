@@ -421,6 +421,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-LuckyController.html#method_number"
         },                {
+            "fqsen": "\\App\\Controller\\LuckyController\u003A\u003AgenerateUniqueRandomNumbers\u0028\u0029",
+            "name": "generateUniqueRandomNumbers",
+            "summary": "",
+            "url": "classes/App-Controller-LuckyController.html#method_generateUniqueRandomNumbers"
+        },                {
             "fqsen": "\\App\\Controller\\MetricsController",
             "name": "MetricsController",
             "summary": "",

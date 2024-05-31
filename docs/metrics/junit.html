@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2024-05-29 13:30:38        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2024-05-31 18:34:43        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -60,14 +60,14 @@
         <div class="bloc bloc-number">
             <div class="label">Test suites</div>
             <div class="number">
-                8            </div>
+                9            </div>
         </div>
     </div>
     <div class="column">
         <div class="bloc bloc-number">
             <div class="label">Assertions</div>
             <div class="number">
-                92            </div>
+                94            </div>
         </div>
     </div>
     <div class="column">
@@ -270,8 +270,8 @@
                                                         <tr>
                                 <td><span class="path">App\Controller\LuckyController</span></td>
                                                                     <td>
-                                        <span class="badge"  style="background-color: hsla(203, 82%, 76%, 0.44);">
-                                        5                                        </span>
+                                        <span class="badge"  style="background-color: hsla(203, 82%, 76%, 0.22);">
+                                        3                                        </span>
                                     </td>
                                                                     <td>
                                         <span class="badge"  style="background-color: hsla(203, 82%, 76%, 0.07);">
@@ -346,6 +346,17 @@
                                                                             <br>                                        <span class="badge" title="Cyclomatic complexity of class">
                                             2                                        </span>
                                         <span class="path">App\Card\Card</span>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <td valign="top"><span class="path">App\Tests\Controller\ConcreteCardControllerTest</span></td>
+                                <td style="padding-bottom: 1em;">
+                                                                                                                    <span class="badge" title="Cyclomatic complexity of class">
+                                            -                                        </span>
+                                        <span class="path">PHPUnit\Framework\TestCase</span>
+                                                                            <br>                                        <span class="badge" title="Cyclomatic complexity of class">
+                                            -                                        </span>
+                                        <span class="path">App\Tests\Controller\ConcreteCardController</span>
                                                                     </td>
                             </tr>
                                                     <tr>
@@ -682,7 +693,7 @@
 
 
             
-            var json = {"name":"Execution time","children":[{"name":"App\\Card\\CardTest","time":0.015002},{"name":"App\\Card\\DeckOfCardsTest","time":0.036026},{"name":"App\\Tests\\Controller\\ApiControllerTest","time":0.112951},{"name":"App\\Dice\\DiceGraphicTest","time":0.002105},{"name":"App\\Dice\\DiceHandTest","time":0.006479},{"name":"App\\Dice\\DiceTest","time":0.002095},{"name":"App\\Game21\\GameTest","time":0.028764},{"name":"App\\Game21\\PlayerTest","time":0.001484}]};
+            var json = {"name":"Execution time","children":[{"name":"App\\Card\\CardTest","time":0.013711},{"name":"App\\Card\\DeckOfCardsTest","time":0.029538},{"name":"App\\Tests\\Controller\\ConcreteCardControllerTest","time":0.03954},{"name":"App\\Tests\\Controller\\ApiControllerTest","time":0.065956},{"name":"App\\Dice\\DiceGraphicTest","time":0.001685},{"name":"App\\Dice\\DiceHandTest","time":0.005487},{"name":"App\\Dice\\DiceTest","time":0.002144},{"name":"App\\Game21\\GameTest","time":0.022171},{"name":"App\\Game21\\PlayerTest","time":0.001603}]};
             root = json;
             var nodes = treemap.nodes(json)
                 .filter(function (d) {
