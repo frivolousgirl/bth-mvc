@@ -23,9 +23,14 @@ class DeckOfCards
 
         foreach ($suits as $suit) {
             foreach ($ranks as $rank) {
-                $this->cards[] = new Card($suit, $rank);
+                $this->cards[] = $this->createCard($suit, $rank);
             }
         }
+    }
+
+    protected function createCard(string $suit, string $rank): Card
+    {
+        return new Card($suit, $rank);
     }
 
     // Shuffle the deck of cards

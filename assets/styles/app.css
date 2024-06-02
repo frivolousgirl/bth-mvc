@@ -8,6 +8,7 @@
 @import url("card.css");
 @import url("api.css");
 @import url("table.css");
+@import url("card5.css");
 
 ::-webkit-scrollbar {
     width: 10px;

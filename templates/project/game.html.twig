@@ -1,0 +1,62 @@
+{% extends '/project/proj_base.html.twig' %}
+
+{% block title %}Project Kmom10{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>5-kortspoker</h1>
+    <h2>Current round</h2>
+    <p>{{ state }}</p>
+    <h2>Pott</h2>
+    <p>{{ pot }} kr</p>
+    <h2>Händelser</h2>
+    <table>
+    {% for event in events %}
+        <tr>
+            <td>{{ event | raw }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <h2>Spelare</h2>
+    <ul>
+    {% for player in players %}
+        <li>{{ player.name }}
+            <p>
+            {% for card in player.hand %}
+                <span class="{{ card.suit | lower }}">{{ card | raw }}</span> &nbsp;
+            {% endfor %}
+            </p>
+        </li>
+    {% endfor %}
+    </ul>
+    {% if state == "ANTE" %}
+        <form action="{{ path('project_game') }}" method="POST">
+            <input type="submit" value="Satsa 10 kr">
+        </form>
+    {% elseif state == "DEALING" %}
+        <form action="{{ path('project_game') }}" method="POST">
+            <input type="submit" value="Dela ut kort">
+        </form>
+    {% elseif state == "FIRST_BETTING_ROUND" %}
+    {{currentPlayer.name}}
+        <form action="{{ path('project_game') }}" method="POST">
+        {% if canCheck %}
+            <button type="submit" value="check" name="action">Check</button>
+        {% endif %}
+        {% if canBet %}
+            <button type="submit" value="bet" name="action">Bet</button>
+        {% endif %}
+        {% if canCall %}
+            <button type="submit" value="call" name="action">Call</button>
+        {% endif %}
+        {% if canFold %}
+            <button type="submit" value="fold" name="action">Fold</button>
+        {% endif %}
+        {% if currentPlayer.name != "Jag" %}
+            <button type="submit" name="action">Datorns tur</button>
+        {% endif %}
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

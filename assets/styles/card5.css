@@ -1,0 +1,11 @@
+.hearts, .clubs, .spades, .diamonds {
+    font-size: 72px;
+}
+
+.hearts, .clubs {
+    color: red;
+}
+
+.spades, .diamonds {
+    color: black;
+}

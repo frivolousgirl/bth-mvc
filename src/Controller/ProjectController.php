@@ -5,12 +5,117 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Card5\Game;
 
 class ProjectController extends AbstractController
 {
-    #[Route("/project", name: "project")]
+    private RequestStack $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+
+        if (!$this->get("game")) {
+            $game = new Game(["Jag", "Datorn"]);
+
+            $this->save("game", $game);
+        }
+    }
+
+    protected function getSession(): SessionInterface
+    {
+        return $this->requestStack->getSession();
+    }
+
+    protected function save(string $sessionKey, mixed $data): void
+    {
+        $session = $this->getSession();
+        $session->set($sessionKey, $data);
+    }
+
+    protected function get(string $sessionKey): mixed
+    {
+        $session = $this->getSession();
+        return $session->get($sessionKey);
+    }
+
+    #[Route("/proj", name: "project")]
+    public function home(): Response
+    {
+        return $this->render("project/home.html.twig");
+    }
+
+    #[Route("/proj/about", name: "project_about")]
     public function about(): Response
     {
-        return $this->render('project/index.html.twig');
+        return $this->render('project/about.html.twig');
+    }
+
+    #[Route("/proj/api", name: "project_api")]
+    public function api(): Response
+    {
+        return $this->render('project/about.html.twig');
+    }
+
+    #[Route("/proj/report", name: "project_report")]
+    public function report(): Response
+    {
+        return $this->render('project/about.html.twig');
+    }
+
+    #[Route("/proj/game", name: "project_game", methods: ["GET"])]
+    public function game(): Response
+    {
+        $game = $this->get("game");
+
+        $game->reset();
+
+        $this->save("game", $game);
+        
+        return $this->renderGame();
+    }
+
+    #[Route("/proj/game", name: "project_gameplay", methods: ["POST"])]
+    public function gameplay(): Response
+    {
+        $game = $this->get("game");
+        $action = $this->getAction();
+
+        $game->action($action);
+
+        $this->save("game", $game);
+
+        return $this->renderGame();
+    }
+
+    private function getAction(): string
+    {
+        if (isset($_POST["action"]))
+        {
+            return $_POST["action"];
+        }
+
+        return "";
+    }
+
+    private function renderGame(): Response
+    {
+        $game = $this->get("game");
+
+        $data = [
+            "players" => $game->getPlayers(),
+            "state" => $game->getState(),
+            "pot" => $game->getPot(),
+            "events" => $game->getEvents(),
+            "canCheck" => $game->canCheck(),
+            "canBet" => $game->canBet(),
+            "canCall" => $game->canCall(),
+            "canFold" => $game->canFold(),
+            "currentPlayer" => $game->getCurrentPlayer(),
+        ];
+
+        return $this->render('project/game.html.twig', $data);
     }
 }
