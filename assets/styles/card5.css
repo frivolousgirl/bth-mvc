@@ -1,11 +1,20 @@
-.hearts, .clubs, .spades, .diamonds {
+.hearts, .clubs, .spades, .diamonds, .card-back {
     font-size: 72px;
 }
 
-.hearts, .clubs {
+.hearts, .diamonds {
     color: red;
 }
 
-.spades, .diamonds {
+.spades, .clubs {
     color: black;
+}
+
+.interactive-card {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.interactive-card.highlighted {
+    transform: translateY(-8px)
 }

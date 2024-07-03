@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -78,26 +79,16 @@ class ProjectController extends AbstractController
     }
 
     #[Route("/proj/game", name: "project_gameplay", methods: ["POST"])]
-    public function gameplay(): Response
+    public function gameplay(Request $request): Response
     {
         $game = $this->get("game");
-        $action = $this->getAction();
+        $postData = $request->request->all();
 
-        $game->action($action);
+        $game->action($postData);
 
         $this->save("game", $game);
 
         return $this->renderGame();
-    }
-
-    private function getAction(): string
-    {
-        if (isset($_POST["action"]))
-        {
-            return $_POST["action"];
-        }
-
-        return "";
     }
 
     private function renderGame(): Response
@@ -113,6 +104,7 @@ class ProjectController extends AbstractController
             "canBet" => $game->canBet(),
             "canCall" => $game->canCall(),
             "canFold" => $game->canFold(),
+            "canDraw" => $game->canDraw(),
             "currentPlayer" => $game->getCurrentPlayer(),
         ];
 

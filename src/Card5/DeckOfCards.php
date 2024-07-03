@@ -10,6 +10,8 @@ class DeckOfCards
 
     public function reset(): void
     {
+        $this->cards = [];
+
         $suits = ['Spades', 'Diamonds', 'Clubs', 'Hearts'];
         $ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
         foreach ($suits as $suit) {

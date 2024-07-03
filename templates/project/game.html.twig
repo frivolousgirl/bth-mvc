@@ -23,39 +23,60 @@
     {% for player in players %}
         <li>{{ player.name }}
             <p>
-            {% for card in player.hand %}
-                <span class="{{ card.suit | lower }}">{{ card | raw }}</span> &nbsp;
-            {% endfor %}
+            {% if canDraw %}
+                {% set class = "interactive-card" %}
+            {% else %}
+                {% set class = "" %}
+            {% endif %}
+            {% if player.name == "Jag" or state == "SHOWDOWN" %}
+                {% for card in player.hand %}
+                    <span data-card="{{ loop.index0 }}" class="{{ class }} {{ card.suit | lower }}">{{ card | raw }}</span> &nbsp;
+                {% endfor %}
+            {% else %}
+                {% for card in player.hand %}
+                    <span class="card-back">&#x1F0A0;</span> &nbsp;
+                {% endfor %}
+            {% endif %}
             </p>
         </li>
     {% endfor %}
     </ul>
+    <form action="{{ path('project_game') }}" method="POST">
     {% if state == "ANTE" %}
-        <form action="{{ path('project_game') }}" method="POST">
-            <input type="submit" value="Satsa 10 kr">
-        </form>
+        <input type="submit" value="Satsa 10 kr">
     {% elseif state == "DEALING" %}
-        <form action="{{ path('project_game') }}" method="POST">
-            <input type="submit" value="Dela ut kort">
-        </form>
-    {% elseif state == "FIRST_BETTING_ROUND" %}
+        <input type="submit" value="Dela ut kort">
+    {% elseif state == "FIRST_BETTING_ROUND" or state == "SECOND_BETTING_ROUND" %}
     {{currentPlayer.name}}
-        <form action="{{ path('project_game') }}" method="POST">
-        {% if canCheck %}
-            <button type="submit" value="check" name="action">Check</button>
-        {% endif %}
-        {% if canBet %}
-            <button type="submit" value="bet" name="action">Bet</button>
-        {% endif %}
-        {% if canCall %}
-            <button type="submit" value="call" name="action">Call</button>
-        {% endif %}
-        {% if canFold %}
-            <button type="submit" value="fold" name="action">Fold</button>
-        {% endif %}
-        {% if currentPlayer.name != "Jag" %}
-            <button type="submit" name="action">Datorns tur</button>
-        {% endif %}
+    {% if canCheck %}
+        <button type="submit" value="check" name="action">Check</button>
+    {% endif %}
+    {% if canBet %}
+        <button type="submit" value="bet" name="action">Bet</button>
+    {% endif %}
+    {% if canCall %}
+        <button type="submit" value="call" name="action">Call</button>
+    {% endif %}
+    {% if canFold %}
+        <button type="submit" value="fold" name="action">Fold</button>
+    {% endif %}
+    {% if currentPlayer.name != "Jag" %}
+        <button type="submit" name="action">Datorns tur</button>
+    {% endif %}
+    {% elseif state == "DRAW" %}
+    {% if canDraw %}
+        <input type="hidden" name="selectedCards" id="selectedCards">
+        <button type="submit" value="stand_pat" name="action">Stand pat</button>
+        <button type="submit" value="swap" name="action">Swap</button>
+    {% endif %}
+    {% if currentPlayer.name != "Jag" %}
+        <button type="submit" name="action">Datorns tur</button>
+    {% endif %}
+    {% endif %}
+    </form>
+    {% if state == "SHOWDOWN" %}
+        <form action="{{ path('project_game') }}">
+            <input type="submit" value="New game">
         </form>
     {% endif %}
 </div>
