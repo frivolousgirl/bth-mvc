@@ -1,0 +1,88 @@
+/* Text Styling */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-family);
+}
+
+h1 {
+    font-size: 2.4rem;
+    margin-bottom: 2.8rem;
+    border-bottom: 4px dashed var(--primary-color);
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1.4rem;
+}
+
+h3 {
+    font-size: 1.3rem;
+    margin-top: 2.3rem;
+    margin-bottom: 0.5rem;
+}
+
+h4 {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+p {
+    margin-bottom: 1.4rem;
+    font-size: 1rem;
+    font-family: var(--font-family-sans);
+}
+
+a {
+    color: var(--primary-color);
+
+    &:hover {
+        color: var(--dark-color);
+    }
+}
+
+input {
+    font-size: 1em;
+    font-family: var(--font-family-sans);
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    border: none;
+    padding: 10px;
+}
+
+blockquote {
+    font-style: italic;
+    padding: 10px;
+    margin: 0;
+    border-left: 5px solid var(--primary-color);
+    background-color: #f9f9f9;
+}
+
+li {
+    margin-top: 20px;
+}
+
+.scrutinizer {
+    display: flex;
+}
+
+.die {
+    font-size: 2em;
+}
+
+.dice-graphic {
+    font-size: 2em;
+}
+
+.dice-list {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.site-title {
+    font-size: 2.4rem;
+}

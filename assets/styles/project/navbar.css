@@ -1,0 +1,56 @@
+/* Container for the navbar and main content */
+.content-wrapper {
+    display: flex;
+}
+
+/* Navbar styles */
+nav {
+    width: 200px; /* Set a fixed width for the navbar */
+    background-color: #f8f9fa; /* Background color for the navbar */
+    padding: 20px; /* Add some padding */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Optional: Add a shadow for separation */
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    margin-bottom: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--primary-color);
+    padding: 10px 20px;
+    transition: all 200ms ease;
+    display: block; /* Make the links block-level for full width */
+    font-weight: bold;
+    font-size: larger;
+}
+
+nav a:hover,
+.selected {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+}
+
+/* Main content styles */
+main {
+    flex: 1; /* Take up the remaining space */
+    padding: 20px; /* Add some padding */
+}
+
+/* Header styles */
+header.site-header {
+    width: 100%;
+    background-color: var(--secondary-color); /* Example background color */
+    color: #fff; /* Example text color */
+    padding: 10px 20px; /* Example padding */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: Add a shadow for separation */
+    height: 115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+/* 
+font-family: "Bungee", sans-serif;
+font-family: "Titillium Web", sans-serif;
+*/
+/* Variables */
+
+/* Colors */
+:root {
+    --primary-color: #a2d639; /* Primary color */
+    --secondary-color: #9b59b6; /* Secondary color */
+    --success-color: #35e85f; /* Success color */
+    --winning-color: #ffd700;
+    --gameover-color: #6a5acd;
+    --danger-color: #e04d33; /* Danger color */
+    --warning-color: #f1c40f; /* Warning color */
+    --info-color: #17a2b8; /* Info color */
+    --light-color: #f8f9fa; /* Light color */
+    --dark-color: #333333; /* Dark color */
+    --heart-diamond: rgba(224, 33, 33, 0.881);
+    --clove-spade: var(var(--dark-color));
+    --card-back: rgba(57, 57, 202, 0.794);
+    --site-backround-color: var(--light-color);
+}
+
+/* Typography */
+:root {
+    --font-family-sans: "Titillium Web", sans-serif; /* Default font family */
+    --font-family: "Bungee", sans-serif; /* Default font family */
+    --font-size-base: 16px; /* Base font size */
+    --line-height-base: 1.5; /* Base line height */
+}
+
+/* Spacing */
+:root {
+    --spacing-unit: 1rem; /* Base spacing unit */
+}
+
+/* Border radius */
+:root {
+    --border-radius: 0.25rem; /* Default border radius */
+}
+
+/* Box shadow */
+:root {
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Default box shadow */
+}
+
+/* Breakpoints */
+:root {
+    --breakpoint-xs: 0; /* Extra small devices (phones) */
+    --breakpoint-sm: 576px; /* Small devices (landscape phones) */
+    --breakpoint-md: 768px; /* Medium devices (tablets) */
+    --breakpoint-lg: 992px; /* Large devices (desktops) */
+    --breakpoint-xl: 1200px; /* Extra large devices (large desktops) */
+}

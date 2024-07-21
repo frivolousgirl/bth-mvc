@@ -23,5 +23,7 @@ export default () => {
     const greeting = getGreeting();
     let greetingElement = document.getElementById("greeting");
 
-    greetingElement.textContent = greeting;
+    if (greetingElement) {
+        greetingElement.textContent = greeting;
+    }
 })();

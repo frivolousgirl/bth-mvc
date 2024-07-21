@@ -1,0 +1,56 @@
+.hearts, .clubs, .spades, .diamonds, .card-back {
+    font-size: 72px;
+}
+
+.hearts, .diamonds {
+    color: var(--heart-diamond);
+}
+
+.spades, .clubs {
+    color: var(--clove-spade);
+}
+
+.card-back {
+    color: var(--card-back);
+}
+
+.interactive-card {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.card-deck {
+    list-style: none;
+}
+
+.interactive-card.highlighted {
+    transform: translateY(-8px)
+}
+
+button[value="check"], button[value="bet"], button[value="call"], button[value="stand_pat"] {
+    background-color: var(--success-color); /* Grön för positiva åtgärder */
+    color: white;
+    font-size: 1em;
+    font-family: var(--font-family-sans);
+    border: none;
+    padding: 10px;
+}
+
+
+button[value="fold"], button[value="swap"] {
+    background-color: var(--danger-color); /* Röd för negativa åtgärder */
+    color: white;
+    font-size: 1em;
+    font-family: var(--font-family-sans);
+    border: none;
+    padding: 10px;
+}
+
+button[value="computer_turn"] {
+    background-color: var(--secondary-color); 
+    color: white;
+    font-size: 1em;
+    font-family: var(--font-family-sans);
+    border: none;
+    padding: 10px;
+}

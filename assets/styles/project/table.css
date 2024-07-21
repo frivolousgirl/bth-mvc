@@ -1,0 +1,28 @@
+/* Table Styling */
+
+/* CSS for flat design table */
+.table-container {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Border color */
+}
+
+.table-container th {
+  background-color: #f2f2f2; /* Header background color */
+}
+
+/* Alternate row color */
+.table-container tr:nth-child(even) {
+  background-color: #f9f9f9; /* Even row background color */
+}
+
+/* Hover effect */
+.table-container tr:hover {
+  background-color: #f2f2f2; /* Hover background color */
+}

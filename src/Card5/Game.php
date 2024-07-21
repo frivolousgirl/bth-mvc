@@ -303,7 +303,7 @@ class Game
 
         switch ($action)
         {
-            case "":
+            case "computer_turn":
             {
                 $cards = $currentPlayer->decideCardsToSwap();
                 $this->addEvent("Datorn byter " . count($cards) . " kort");
@@ -344,7 +344,7 @@ class Game
 
         switch ($action)
         {
-            case "":
+            case "computer_turn":
             {
                 $this->addEvent("Datorns tur att betta");
                 $handStrength = $this->handEvaluator->evaluateHand($currentPlayer->hand);
