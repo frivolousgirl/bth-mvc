@@ -187,7 +187,7 @@ class ProjectController extends AbstractController
         return new JsonResponse($response);
     }
 
-    #[Route("/proj/api/reset", "api_reset", methods: ['POST'], format: "json", defaults: ["title" => "Resets the current game"])]
+    #[Route("/proj/api/reset", "api_reset", methods: ['POST'], format: "json", defaults: ["title" => "resets the current game"])]
     public function apiReset(): JsonResponse
     {
         $game = $this->get("game");
