@@ -28,7 +28,7 @@
 }
 
 button[value="check"], button[value="bet"], button[value="call"], button[value="stand_pat"] {
-    background-color: var(--success-color); /* Grön för positiva åtgärder */
+    background-color: var(--primary-color);
     color: white;
     font-size: 1em;
     font-family: var(--font-family-sans);
@@ -38,7 +38,7 @@ button[value="check"], button[value="bet"], button[value="call"], button[value="
 
 
 button[value="fold"], button[value="swap"] {
-    background-color: var(--danger-color); /* Röd för negativa åtgärder */
+    background-color: var(--danger-color);
     color: white;
     font-size: 1em;
     font-family: var(--font-family-sans);

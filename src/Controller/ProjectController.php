@@ -70,7 +70,7 @@ class ProjectController extends AbstractController
     #[Route("/proj/report", name: "project_report")]
     public function report(): Response
     {
-        return $this->render('project/about.html.twig');
+        return $this->render('project/report.html.twig');
     }
 
     #[Route("/proj/game", name: "project_game", methods: ["GET"])]

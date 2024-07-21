@@ -23,7 +23,8 @@ class DeckOfCards
         shuffle($this->cards);
     }
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->reset();
     }
 

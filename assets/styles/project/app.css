@@ -45,6 +45,16 @@ img {
 }
 
 /* Footer Styling */
-footer {
-    margin-top: 100px;
+footer .footer {
+    height: 50px;
+    background-color: var(--primary-color);
 }
+
+.full-height-border {
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 100vh;
+    background-color: var(--secondary-color);
+}
+

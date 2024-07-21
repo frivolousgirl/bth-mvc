@@ -8,7 +8,6 @@ nav {
     width: 200px; /* Set a fixed width for the navbar */
     background-color: #f8f9fa; /* Background color for the navbar */
     padding: 20px; /* Add some padding */
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Optional: Add a shadow for separation */
 }
 
 nav ul {
@@ -44,7 +43,6 @@ main {
 
 /* Header styles */
 header.site-header {
-    width: 100%;
     background-color: var(--secondary-color); /* Example background color */
     color: #fff; /* Example text color */
     padding: 10px 20px; /* Example padding */

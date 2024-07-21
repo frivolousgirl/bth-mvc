@@ -18,7 +18,7 @@ font-family: "Titillium Web", sans-serif;
     --light-color: #f8f9fa; /* Light color */
     --dark-color: #333333; /* Dark color */
     --heart-diamond: rgba(224, 33, 33, 0.881);
-    --clove-spade: var(var(--dark-color));
+    --clove-spade: var(--dark-color);
     --card-back: rgba(57, 57, 202, 0.794);
     --site-backround-color: var(--light-color);
 }

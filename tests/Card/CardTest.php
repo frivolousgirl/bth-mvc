@@ -23,7 +23,7 @@ class CardTest extends TestCase
         $this->assertEquals(11, Card::valueFromRank('Jack'));
         $this->assertEquals(12, Card::valueFromRank('Queen'));
         $this->assertEquals(13, Card::valueFromRank('King'));
-        $this->assertEquals(1, Card::valueFromRank('Ace'));
+        $this->assertEquals(14, Card::valueFromRank('Ace'));
         $this->assertEmpty(Card::valueFromRank('blaha'));
     }
 

@@ -22,11 +22,11 @@ class HandEvaluator
 
     public function evaluateHand(array $hand): string
     {
-        $ranks = array_map(function(CardGraphics $card){
+        $ranks = array_map(function (CardGraphics $card) {
             return Card::valueFromRank($card->rank);
         }, $hand);
 
-        $suits = array_map(function(CardGraphics $card){
+        $suits = array_map(function (CardGraphics $card) {
             return $card->suit;
         }, $hand);
 
@@ -35,8 +35,7 @@ class HandEvaluator
         $isFlush = count(array_unique($suits)) === 1;
         $isStraight = $this->isStraight($ranks);
 
-        if ($isFlush && $isStraight)
-        {
+        if ($isFlush && $isStraight) {
             return "Straight Flush";
         }
 
@@ -45,45 +44,39 @@ class HandEvaluator
 
         rsort($values);
 
-        if ($values[0] === 4)
-        {
+        if ($values[0] === 4) {
             return 'Four of a Kind';
         }
 
-        if ($values[0] === 3 && $values[1] === 2)
-        {
+        if ($values[0] === 3 && $values[1] === 2) {
             return 'Full House';
         }
 
-        if ($isFlush)
-        {
+        if ($isFlush) {
             return 'Flush';
-        } 
+        }
 
-        if ($isStraight)
-        {
+        if ($isStraight) {
             return 'Straight';
         }
 
-        if ($values[0] === 3)
-        {
+        if ($values[0] === 3) {
             return 'Three of a Kind';
         }
 
-        if ($values[0] === 2 && $values[1] === 2)
-        {
+        if ($values[0] === 2 && $values[1] === 2) {
             return 'Two Pair';
         }
 
-        if ($values[0] === 2)
-        {
+        if ($values[0] === 2) {
             return 'One Pair';
         }
 
         return "High Card";
     }
 
-    private function isStraight(array $ranks) {
+    private function isStraight(array $ranks)
+    {
         for ($i = 0; $i < count($ranks) - 1; $i++) {
             if ($ranks[$i] + 1 !== $ranks[$i + 1]) {
                 return false;
@@ -95,8 +88,7 @@ class HandEvaluator
     // Returns the players that have the best hands.
     public function evaluateBestHand(array $players): array
     {
-        if (count($players) === 0)
-        {
+        if (count($players) === 0) {
             return [];
         }
 
@@ -104,20 +96,16 @@ class HandEvaluator
 
         $winners = [$players[0]];
 
-        for ($i = 1; $i < count($players); $i++)
-        {
+        for ($i = 1; $i < count($players); $i++) {
             $handType = $this->evaluateHand($players[$i]->hand);
-            
+
             $bestHandRank = self::HAND_RANKS[$bestHandType];
             $currentHandRank = self::HAND_RANKS[$handType];
 
-            if ($currentHandRank > $bestHandRank)
-            {
+            if ($currentHandRank > $bestHandRank) {
                 $bestHandRank = $currentHandRank;
                 $winners = [$players[$i]];
-            }
-            else if ($currentHandRank === $bestHandRank)
-            {
+            } elseif ($currentHandRank === $bestHandRank) {
                 array_push($winners, $players[$i]);
             }
         }
