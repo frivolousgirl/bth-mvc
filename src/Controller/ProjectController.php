@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -57,7 +58,13 @@ class ProjectController extends AbstractController
     #[Route("/proj/api", name: "project_api")]
     public function api(): Response
     {
-        return $this->render('project/about.html.twig');
+        $routes = $this->getRoutes();
+
+        $data = [
+            "routes" => $routes,
+        ];
+
+        return $this->render('project/api.html.twig', $data);
     }
 
     #[Route("/proj/report", name: "project_report")]
@@ -69,13 +76,18 @@ class ProjectController extends AbstractController
     #[Route("/proj/game", name: "project_game", methods: ["GET"])]
     public function game(): Response
     {
+        $this->startNew();
+
+        return $this->renderGame();
+    }
+
+    private function startNew(): void
+    {
         $game = $this->get("game");
 
         $game->reset();
 
         $this->save("game", $game);
-        
-        return $this->renderGame();
     }
 
     #[Route("/proj/game", name: "project_gameplay", methods: ["POST"])]
@@ -109,5 +121,136 @@ class ProjectController extends AbstractController
         ];
 
         return $this->render('project/game.html.twig', $data);
+    }
+
+    #[Route("/proj/api/state", "api_state", format: "json", defaults: ["title" => "returns the game's current state"])]
+    public function apiGetState(): JsonResponse
+    {
+        $game = $this->get("game");
+
+        if (!$game) {
+            return new JsonResponse();
+        }
+
+        $response = [
+            "state" => $game->getState()
+        ];
+
+        return new JsonResponse($response);
+    }
+
+    #[Route("/proj/api/events", "api_events", format: "json", defaults: ["title" => "returns the game's events"])]
+    public function apiGetEvents(): JsonResponse
+    {
+        $game = $this->get("game");
+
+        if (!$game) {
+            return new JsonResponse();
+        }
+
+        $response = [
+            "events" => $game->getEvents()
+        ];
+
+        return new JsonResponse($response);
+    }
+
+    #[Route("/proj/api/players", "api_players", format: "json", defaults: ["title" => "returns the game's players"])]
+    public function apiGetPlayers(): JsonResponse
+    {
+        $game = $this->get("game");
+
+        if (!$game) {
+            return new JsonResponse();
+        }
+
+        $response = [
+            "players" => $game->getPlayers()
+        ];
+
+        return new JsonResponse($response);
+    }
+
+    #[Route("/proj/api/pot", "api_pot", format: "json", defaults: ["title" => "returns the game's pot"])]
+    public function apiGetPot(): JsonResponse
+    {
+        $game = $this->get("game");
+
+        if (!$game) {
+            return new JsonResponse();
+        }
+
+        $response = [
+            "pot" => $game->getPot()
+        ];
+
+        return new JsonResponse($response);
+    }
+
+    #[Route("/proj/api/reset", "api_reset", methods: ['POST'], format: "json", defaults: ["title" => "Resets the current game"])]
+    public function apiReset(): JsonResponse
+    {
+        $game = $this->get("game");
+
+        if (!$game) {
+            return new JsonResponse();
+        }
+
+        $prevState = $game->getState();
+
+        $this->startNew();
+
+        $game = $this->get("game");
+
+        $response = [
+            "prevState" => $prevState,
+            "currentState" => $game->getState(),
+        ];
+
+        return new JsonResponse($response);
+    }
+
+    private function getRoutes()
+    {
+        $routes = [];
+
+        // Get all routes from the Router
+        $router = $this->container->get('router');
+        $allRoutes = $router->getRouteCollection()->all();
+
+        foreach ($allRoutes as $routeName => $route) {
+            $routePath = $route->getPath();
+
+            if (!str_starts_with($routePath, '/proj/api')) {
+                continue;
+            }
+
+            // Check if the route returns JSON response
+            if ($this->isJsonRoute($route)) {
+                $defaults = $route->getDefaults();
+                $url = $routePath;
+
+                foreach ($defaults as $key => $value) {
+                    $pattern = '{' . $key . '}';
+                    $url = str_replace($pattern, $value, $url);
+                }
+
+                $routes[] = [
+                    'name' => $routeName,
+                    'path' => $routePath,
+                    'title' => $defaults['title'],
+                    'methods' => $route->getMethods(),
+                    'url' => $url,
+                ];
+            }
+        }
+
+        return $routes;
+    }
+
+    private function isJsonRoute($route)
+    {
+        // Check if the route returns JSON response
+        return $route->getDefault('_format') === 'json';
     }
 }
