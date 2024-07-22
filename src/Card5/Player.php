@@ -14,10 +14,10 @@ class Player
     private bool $hasSwapped = false;
     private HandEvaluator $handEvaluator;
 
-    public function __construct(string $name)
+    public function __construct(string $name, HandEvaluator $handEvaluator)
     {
         $this->name = $name;
-        $this->handEvaluator = new HandEvaluator();
+        $this->handEvaluator = $handEvaluator;
     }
 
     public function reset(): void

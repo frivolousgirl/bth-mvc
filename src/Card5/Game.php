@@ -31,11 +31,12 @@ class Game
 
     public function __construct(array $playerNames)
     {
+        $this->handEvaluator = new HandEvaluator();
+
         foreach ($playerNames as $name) {
-            $this->players[] = new Player($name);
+            $this->players[] = new Player($name, $this->handEvaluator);
         }
 
-        $this->handEvaluator = new HandEvaluator();
 
         $this->deck = new DeckOfCards();
 

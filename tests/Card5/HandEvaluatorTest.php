@@ -145,7 +145,7 @@ class HandEvaluatorTest extends TestCase
     {
         $handEvaluator = new HandEvaluator();
 
-        $player1 = new Player('Player 1');
+        $player1 = new Player('Player 1', $handEvaluator);
 
         $player1->receiveCards([
             new CardGraphics('hearts', '10'),
@@ -155,7 +155,7 @@ class HandEvaluatorTest extends TestCase
             new CardGraphics('hearts', 'Ace')
         ]);
 
-        $player2 = new Player('Player 2');
+        $player2 = new Player('Player 2', $handEvaluator);
 
         $player2->receiveCards([
             new CardGraphics('hearts', '2'),
@@ -165,7 +165,7 @@ class HandEvaluatorTest extends TestCase
             new CardGraphics('hearts', 'King')
         ]);
 
-        $player3 = new Player('Player 3');
+        $player3 = new Player('Player 3', $handEvaluator);
 
         $player3->receiveCards([
             new CardGraphics('hearts', '10'),
