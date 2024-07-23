@@ -156,51 +156,63 @@ class Game
 
         switch ($this->getState()) {
             case "ANTE":
-                {
-                    $this->ante();
-                    $this->eventLogger->log("Alla spelare har satsat");
-                    $this->nextRound();
-                    break;
-                }
+                $this->handleAnte();
+                break;
             case "DEALING":
-                {
-                    $this->dealCards();
-                    $this->eventLogger->log("Spelarna har fått 5 kort var");
-                    $this->nextRound();
-                    break;
-                }
+                $this->handleDealing();
+                break;
             case "FIRST_BETTING_ROUND":
             case "SECOND_BETTING_ROUND":
-                {
-                    $this->bettingRound($action);
-                    $numberOfPlayers = count($this->getPlayers());
-                    if ($this->bettingRound->isBettingRoundOver($numberOfPlayers)) {
-                        $this->bettingRound->reset();
-                        if ($this->nextRound() === "SHOWDOWN") {
-                            $this->decideWinner();
-                            $this->showdown();
-                        }
-                    } else {
-                        $folds = array_filter($this->getPlayers(), function (Player $player) {
-                            return $player->hasFolded();
-                        });
-
-                        if (count($folds) > 0) {
-                            $this->decideWinner();
-                            $this->showdown();
-                        }
-                    }
-                    break;
-                }
+                $this->handleBettingRound($action);
+                break;
             case "DRAW":
-                {
-                    $this->draw($postData);
-                    if ($this->allSwapped()) {
-                        $this->currentPlayer = $this->startingPlayer;
-                        $this->nextRound();
-                    }
-                    break;
-                }
+                $this->handleDraw($postData);
+                break;
+        }
+    }
+
+    private function handleAnte(): void
+    {
+        $this->ante();
+        $this->eventLogger->log("Alla spelare har satsat");
+        $this->nextRound();
+    }
+
+    private function handleDealing(): void
+    {
+        $this->dealCards();
+        $this->eventLogger->log("Spelarna har fått 5 kort var");
+        $this->nextRound();
+    }
+
+    private function handleBettingRound(string $action): void
+    {
+        $this->bettingRound($action);
+        $numberOfPlayers = count($this->getPlayers());
+        if ($this->bettingRound->isBettingRoundOver($numberOfPlayers)) {
+            $this->bettingRound->reset();
+            if ($this->nextRound() === "SHOWDOWN") {
+                $this->decideWinner();
+                $this->showdown();
+            }
+        } else {
+            $folds = array_filter($this->getPlayers(), function (Player $player) {
+                return $player->hasFolded();
+            });
+
+            if (count($folds) > 0) {
+                $this->decideWinner();
+                $this->showdown();
+            }
+        }
+    }
+
+    private function handleDraw(array $postData): void
+    {
+        $this->draw($postData);
+        if ($this->allSwapped()) {
+            $this->currentPlayer = $this->startingPlayer;
+            $this->nextRound();
         }
     }
 
