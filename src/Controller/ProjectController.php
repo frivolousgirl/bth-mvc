@@ -10,6 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Card5\Game;
+use App\Card5\HandEvaluator;
+use App\Card5\Pot;
+use App\Card5\DeckOfCards;
+use App\Card5\GameState;
+use App\Card5\BettingRound;
+use App\Card5\PlayerManager;
 
 class ProjectController extends AbstractController
 {
@@ -20,7 +26,18 @@ class ProjectController extends AbstractController
         $this->requestStack = $requestStack;
 
         if (!$this->get("game")) {
-            $game = new Game(["Jag", "Datorn"]);
+            $handEvaluator = new HandEvaluator();
+            $playerManager = new PlayerManager(["Jag", "Datorn"]
+                , $handEvaluator
+            );
+
+            $game = new Game($playerManager
+                , $handEvaluator
+                , new DeckOfCards()
+                , new Pot()
+                , new GameState()
+                , new BettingRound()
+            );
 
             $this->save("game", $game);
         }

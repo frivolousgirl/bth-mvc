@@ -4,48 +4,47 @@ namespace App\Card5;
 
 use App\Card5\Player;
 use App\Card5\HandEvaluator;
+use App\Card5\DeckOfCards;
+use App\Card5\Pot;
+use App\Card5\GameState;
+use App\Card5\BettingRound;
+use App\Card5\PlayerManager;
 
 class Game
 {
-    private $players = [];
     private $events = [];
+    private PlayerManager $playerManager;
     private DeckOfCards $deck;
-    private int $pot = 0;
-    private string $state;
+    private Pot $pot;
+    private GameState $gameState;
+    private HandEvaluator $handEvaluator;
+    private BettingRound $bettingRound;
     private int $ante = 10;
-    private $states = [
-        "ANTE",
-        "DEALING",
-        "FIRST_BETTING_ROUND",
-        "DRAW",
-        "SECOND_BETTING_ROUND",
-        "SHOWDOWN"
-    ];
-    private int $currentState = 0;
-    private $bettingRound = [];
-    private $secondBettingRound = [];
     private int $currentPlayer = 0;
     private int $startingPlayer = 0;
-    private HandEvaluator $handEvaluator;
     private bool $gameOver = false;
 
-    public function __construct(array $playerNames)
+    public function __construct(PlayerManager $playerManager
+        , HandEvaluator $handEvaluator
+        , DeckOfCards $deck
+        , Pot $pot
+        , GameState $gameState
+        , BettingRound $bettingRound
+        )
     {
-        $this->handEvaluator = new HandEvaluator();
-
-        foreach ($playerNames as $name) {
-            $this->players[] = new Player($name, $this->handEvaluator);
-        }
-
-
-        $this->deck = new DeckOfCards();
+        $this->playerManager = $playerManager;
+        $this->handEvaluator = $handEvaluator;
+        $this->deck = $deck;
+        $this->pot = $pot;
+        $this->gameState = $gameState;
+        $this->bettingRound = $bettingRound;
 
         $this->reset();
     }
 
     public function getPot(): int
     {
-        return $this->pot;
+        return $this->pot->getAmount();
     }
 
     private function isPlayersTurn(): bool
@@ -59,7 +58,7 @@ class Game
 
         return $this->isPlayersTurn()
             && ($state === "FIRST_BETTING_ROUND" || $state === "SECOND_BETTING_ROUND")
-            && count($this->bettingRound) === 0;
+            && !$this->bettingRound->hasBets();
     }
 
     private static function all(array $array, int $value): bool
@@ -73,7 +72,7 @@ class Game
 
         return $this->isPlayersTurn()
             && ($state === "FIRST_BETTING_ROUND" || $state === "SECOND_BETTING_ROUND")
-            && count($this->bettingRound) < count($this->players);
+            && count($this->bettingRound->getBets()) < count($this->getPlayers());
     }
 
     public function canCall(): bool
@@ -82,7 +81,7 @@ class Game
 
         return $this->isPlayersTurn()
             && ($state === "FIRST_BETTING_ROUND" || $state === "SECOND_BETTING_ROUND")
-            && count($this->bettingRound) > 0;
+            && $this->bettingRound->hasBets();
     }
 
     public function canFold(): bool
@@ -91,7 +90,7 @@ class Game
 
         return $this->isPlayersTurn()
             && ($state === "FIRST_BETTING_ROUND" || $state === "SECOND_BETTING_ROUND")
-            && count($this->bettingRound) > 0;
+            && $this->bettingRound->hasBets();
     }
 
     public function canDraw(): bool
@@ -105,18 +104,13 @@ class Game
     public function reset(): void
     {
         $this->deck->reset();
-
-        foreach ($this->players as $player) {
-            $player->reset();
-        }
-
-        $this->pot = 0;
-        $this->currentState = 0;
+        $this->playerManager->reset();
+        $this->pot->reset();
+        $this->bettingRound->reset();
+        $this->gameState->setState("ANTE");
 
         $this->gameOver = false;
 
-        $this->bettingRound = [];
-        $this->secondBettingRound = [];
         $this->events = [];
 
         $this->currentPlayer = rand(0, 1);
@@ -130,7 +124,7 @@ class Game
 
     public function getCurrentPlayer(): Player
     {
-        return $this->players[$this->currentPlayer];
+        return $this->getPlayers()[$this->currentPlayer];
     }
 
     public function getEvents(): array
@@ -145,17 +139,17 @@ class Game
 
     public function getPlayers(): array
     {
-        return $this->players;
+        return $this->playerManager->getPlayers();
     }
 
     public function getState(): string
     {
-        return $this->states[$this->currentState];
+        return $this->gameState->getState();
     }
 
     private function ante(): void
     {
-        $this->pot += count($this->players) * $this->ante;
+        $this->pot->add(count($this->getPlayers()) * $this->ante);
     }
 
     public function action(array $postData): void
@@ -181,16 +175,15 @@ class Game
             case "SECOND_BETTING_ROUND":
                 {
                     $this->bettingRound($action);
-                    if (count(array_unique($this->bettingRound)) === 1 &&
-                        count($this->bettingRound) === count($this->players) &&
-                        $this->bettingRound[0] !== -1) {
-                        $this->bettingRound = [];
+                    $numberOfPlayers = count($this->getPlayers());
+                    if ($this->bettingRound->isBettingRoundOver($numberOfPlayers)) {
+                        $this->bettingRound->reset();
                         if ($this->nextRound() === "SHOWDOWN") {
                             $this->decideWinner();
                             $this->showdown();
                         }
                     } else {
-                        $folds = array_filter($this->players, function (Player $player) {
+                        $folds = array_filter($this->getPlayers(), function (Player $player) {
                             return $player->hasFolded();
                         });
 
@@ -217,7 +210,7 @@ class Game
     {
         $winner = null;
         $folds = 0;
-        foreach ($this->players as $player) {
+        foreach ($this->getPlayers() as $player) {
             if ($player->hasFolded()) {
                 $folds++;
             } elseif ($winner === null) {
@@ -228,10 +221,10 @@ class Game
             }
         }
 
-        if ($folds === count($this->players) - 1 && $winner !== null) {
+        if ($folds === count($this->getPlayers()) - 1 && $winner !== null) {
             $this->addEvent("Spelet är slut");
             $this->addEvent("Alla spelare utom en lade sig");
-            $this->addEvent($winner->name . " tar hem potten på " . $this->pot . " kr");
+            $this->addEvent($winner->name . " tar hem potten på " . $this->pot->getAmount() . " kr");
             return true;
         }
 
@@ -244,7 +237,7 @@ class Game
             return;
         }
 
-        $winners = $this->handEvaluator->evaluateBestHand($this->players);
+        $winners = $this->handEvaluator->evaluateBestHand($this->getPlayers());
         $winnerCount = count($winners);
 
         if ($winnerCount === 0) {
@@ -253,10 +246,10 @@ class Game
             $hand = $this->handEvaluator->evaluateHand($winners[0]->hand);
             $this->addEvent("Spelet är slut");
             $this->addEvent("Vinnare är " . $winners[0]->name . " med följande hand: " . $hand);
-            $this->addEvent($winners[0]->name . " tar hem potten på " . $this->pot . " kr");
+            $this->addEvent($winners[0]->name . " tar hem potten på " . $this->pot->getAmount() . " kr");
         } else {
             $hand = $this->handEvaluator->evaluateHand($winners[0]->hand);
-            $money = $this->pot / $winnerCount;
+            $money = $this->pot->getAmount() / $winnerCount;
             $this->addEvent("Spelet är slut");
             $this->addEvent("Det blev oavgjort. Alla spelare hade följande hand: " . $hand);
             $this->addEvent("Spelarna delar på potten vilket innebär " . $money . " kr vardera");
@@ -265,7 +258,7 @@ class Game
 
     private function allSwapped(): bool
     {
-        foreach ($this->players as $player) {
+        foreach ($this->getPlayers() as $player) {
             if (!$player->hasSwapped()) {
                 return false;
             }
@@ -324,29 +317,29 @@ class Game
                     $this->addEvent("Datorns tur att betta");
                     $handStrength = $this->handEvaluator->evaluateHand($currentPlayer->hand);
                     $bet = $this->getBet($handStrength);
-                    $lastBet = $this->lastBet($this->bettingRound);
+                    $lastBet = $this->bettingRound->getLastBet();
                     if ($lastBet === -1) {
                         if ($bet === 0) {
-                            array_push($this->bettingRound, 0);
+                            $this->bettingRound->addBet(0);
                             $this->addEvent("Datorn checkar");
                         } else {
-                            $this->pot += $bet;
-                            array_push($this->bettingRound, $bet);
+                            $this->pot->add($bet);
+                            $this->bettingRound->addBet($bet);
                             $this->addEvent("Datorn bettar " . $bet . " kr");
                         }
                     } elseif ($lastBet === 0) {
                         if ($bet === 0) {
-                            array_push($this->bettingRound, $bet);
+                            $this->bettingRound->addBet($bet);
                             $this->addEvent("Datorn synar");
                         } else {
-                            $this->pot += $bet;
-                            array_push($this->bettingRound, $bet);
+                            $this->pot->add($bet);
+                            $this->bettingRound->addBet($bet);
                             $this->addEvent("Datorn bettar " . $bet . " kr");
                         }
                     } else {
                         if ($bet >= $lastBet) {
-                            $this->pot += $lastBet;
-                            array_push($this->bettingRound, $lastBet);
+                            $this->pot->add($lastBet);
+                            $this->bettingRound->addBet($lastBet);
                             $this->addEvent("Datorn synar");
                         } elseif ($bet < $lastBet) {
                             $this->addEvent("Datorn lägger sig");
@@ -359,29 +352,29 @@ class Game
             case "check":
                 {
                     $this->addEvent("Spelaren checkar");
-                    array_push($this->bettingRound, 0);
+                    $this->bettingRound->addBet(0);
                     $this->nextPlayer();
                     break;
                 }
             case "bet":
                 {
                     $handStrength = $this->handEvaluator->evaluateHand($currentPlayer->hand);
-                    $lastBet = $this->lastBet($this->bettingRound);
+                    $lastBet = $this->bettingRound->getLastBet();
                     $bet = $this->getBet($handStrength);
                     $bet = $bet === 0 ? $this->ante : $bet;
                     $bet = $lastBet === -1 ? $bet : ($bet > $lastBet ? $bet : $lastBet + $this->ante);
-                    $this->pot += $bet;
+                    $this->pot->add($bet);
                     $this->addEvent("Spelaren bettar " . $bet . " kr");
-                    array_push($this->bettingRound, $bet);
+                    $this->bettingRound->addBet($bet);
                     $this->nextPlayer();
                     break;
                 }
             case "call":
                 {
                     $this->addEvent("Spelaren synar");
-                    $lastBet = $this->lastBet($this->bettingRound);
-                    $this->pot += $lastBet;
-                    array_push($this->bettingRound, $lastBet);
+                    $lastBet = $this->bettingRound->getLastBet();
+                    $this->pot->add($lastBet);
+                    $this->bettingRound->addBet($lastBet);
                     $this->nextPlayer();
                     break;
                 }
@@ -399,7 +392,7 @@ class Game
     {
         $this->currentPlayer++;
 
-        if ($this->currentPlayer === count($this->players)) {
+        if ($this->currentPlayer === count($this->getPlayers())) {
             $this->currentPlayer = 0;
         }
     }
@@ -424,36 +417,16 @@ class Game
 
     public function nextRound(): string
     {
-        if ($this->currentState === count($this->states) - 1) {
-            $this->currentState = 0;
-        } else {
-            $this->currentState += 1;
-        }
-
-        return $this->states[$this->currentState];
+        return $this->gameState->nextState();
     }
 
     public function dealCards()
     {
-        foreach ($this->players as $player) {
-            $player->receiveCards($this->deck->deal(5));
-        }
-    }
-
-    public function drawRound()
-    {
-        foreach ($this->players as $player) {
-            if (!$player->hasFolded()) {
-                // In a real game, you'd prompt the player for which cards to discard
-                // Here, we'll just simulate drawing new cards
-                $player->discardAndDraw([0, 1], $this->deck); // Example: discarding first two cards
-                //echo "{$player->name} draws new cards: " . $player->showHand() . "\n";
-            }
-        }
+        $this->playerManager->dealCards($this->deck);
     }
 
     public function showdown(): void
     {
-        $this->currentState = array_search("SHOWDOWN", $this->states);
+        $this->gameState->setState("SHOWDOWN");
     }
 }
