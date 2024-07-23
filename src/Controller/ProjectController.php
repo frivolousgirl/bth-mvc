@@ -17,6 +17,7 @@ use App\Card5\GameState;
 use App\Card5\BettingRound;
 use App\Card5\PlayerManager;
 use App\Card5\PlayerFactory;
+use App\Card5\EventLogger;
 
 class ProjectController extends AbstractController
 {
@@ -39,6 +40,7 @@ class ProjectController extends AbstractController
                 , new Pot()
                 , new GameState()
                 , new BettingRound()
+                , new EventLogger()
             );
 
             $this->save("game", $game);

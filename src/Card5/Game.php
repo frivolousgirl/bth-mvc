@@ -9,10 +9,11 @@ use App\Card5\Pot;
 use App\Card5\GameState;
 use App\Card5\BettingRound;
 use App\Card5\PlayerManager;
+use App\Card5\EventLogger;
 
 class Game
 {
-    private $events = [];
+    private EventLogger $eventLogger;
     private PlayerManager $playerManager;
     private DeckOfCards $deck;
     private Pot $pot;
@@ -30,6 +31,7 @@ class Game
         , Pot $pot
         , GameState $gameState
         , BettingRound $bettingRound
+        , EventLogger $eventLogger
         )
     {
         $this->playerManager = $playerManager;
@@ -38,6 +40,7 @@ class Game
         $this->pot = $pot;
         $this->gameState = $gameState;
         $this->bettingRound = $bettingRound;
+        $this->eventLogger = $eventLogger;
 
         $this->reset();
     }
@@ -109,12 +112,17 @@ class Game
         $this->bettingRound->reset();
         $this->gameState->setState("ANTE");
 
-        $this->gameOver = false;
+        $this->eventLogger->clear();
 
-        $this->events = [];
+        $this->gameOver = false;
 
         $this->currentPlayer = rand(0, 1);
         $this->startingPlayer = $this->currentPlayer;
+    }
+
+    public function getEvents(): array
+    {
+        return $this->eventLogger->getEvents();
     }
 
     public function isGameOver(): bool
@@ -125,16 +133,6 @@ class Game
     public function getCurrentPlayer(): Player
     {
         return $this->getPlayers()[$this->currentPlayer];
-    }
-
-    public function getEvents(): array
-    {
-        return $this->events;
-    }
-
-    public function addEvent(string $event): void
-    {
-        array_unshift($this->events, $event);
     }
 
     public function getPlayers(): array
@@ -160,14 +158,14 @@ class Game
             case "ANTE":
                 {
                     $this->ante();
-                    $this->addEvent("Alla spelare har satsat");
+                    $this->eventLogger->log("Alla spelare har satsat");
                     $this->nextRound();
                     break;
                 }
             case "DEALING":
                 {
                     $this->dealCards();
-                    $this->addEvent("Spelarna har fått 5 kort var");
+                    $this->eventLogger->log("Spelarna har fått 5 kort var");
                     $this->nextRound();
                     break;
                 }
@@ -222,9 +220,9 @@ class Game
         }
 
         if ($folds === count($this->getPlayers()) - 1 && $winner !== null) {
-            $this->addEvent("Spelet är slut");
-            $this->addEvent("Alla spelare utom en lade sig");
-            $this->addEvent($winner->name . " tar hem potten på " . $this->pot->getAmount() . " kr");
+            $this->eventLogger->log("Spelet är slut");
+            $this->eventLogger->log("Alla spelare utom en lade sig");
+            $this->eventLogger->log($winner->name . " tar hem potten på " . $this->pot->getAmount() . " kr");
             return true;
         }
 
@@ -241,18 +239,18 @@ class Game
         $winnerCount = count($winners);
 
         if ($winnerCount === 0) {
-            $this->addEvent("Ingen vinnare korad då inga spelare deltog. Märkligt...");
+            $this->eventLogger->log("Ingen vinnare korad då inga spelare deltog. Märkligt...");
         } elseif ($winnerCount === 1) {
             $hand = $this->handEvaluator->evaluateHand($winners[0]->hand);
-            $this->addEvent("Spelet är slut");
-            $this->addEvent("Vinnare är " . $winners[0]->name . " med följande hand: " . $hand);
-            $this->addEvent($winners[0]->name . " tar hem potten på " . $this->pot->getAmount() . " kr");
+            $this->eventLogger->log("Spelet är slut");
+            $this->eventLogger->log("Vinnare är " . $winners[0]->name . " med följande hand: " . $hand);
+            $this->eventLogger->log($winners[0]->name . " tar hem potten på " . $this->pot->getAmount() . " kr");
         } else {
             $hand = $this->handEvaluator->evaluateHand($winners[0]->hand);
             $money = $this->pot->getAmount() / $winnerCount;
-            $this->addEvent("Spelet är slut");
-            $this->addEvent("Det blev oavgjort. Alla spelare hade följande hand: " . $hand);
-            $this->addEvent("Spelarna delar på potten vilket innebär " . $money . " kr vardera");
+            $this->eventLogger->log("Spelet är slut");
+            $this->eventLogger->log("Det blev oavgjort. Alla spelare hade följande hand: " . $hand);
+            $this->eventLogger->log("Spelarna delar på potten vilket innebär " . $money . " kr vardera");
         }
     }
 
@@ -276,7 +274,7 @@ class Game
             case "computer_turn":
                 {
                     $cards = $currentPlayer->decideCardsToSwap();
-                    $this->addEvent("Datorn byter " . count($cards) . " kort");
+                    $this->eventLogger->log("Datorn byter " . count($cards) . " kort");
 
                     $this->playerManager->discardAndDraw($this->currentPlayer
                         , $cards
@@ -287,7 +285,7 @@ class Game
             case "stand_pat":
                 {
                     // happy with current cards
-                    $this->addEvent("Spelaren byter inga kort");
+                    $this->eventLogger->log("Spelaren byter inga kort");
                     $this->playerManager->discardAndDraw($this->currentPlayer
                         , []
                         , $this->deck
@@ -297,7 +295,7 @@ class Game
             case "swap":
                 {
                     $cards = explode(",", $postData["selectedCards"]);
-                    $this->addEvent("Spelaren byter " . count($cards) . " kort");
+                    $this->eventLogger->log("Spelaren byter " . count($cards) . " kort");
                     $this->playerManager->discardAndDraw($this->currentPlayer
                         , $cards
                         , $this->deck
@@ -324,35 +322,35 @@ class Game
         switch ($action) {
             case "computer_turn":
                 {
-                    $this->addEvent("Datorns tur att betta");
+                    $this->eventLogger->log("Datorns tur att betta");
                     $handStrength = $this->handEvaluator->evaluateHand($currentPlayer->hand);
                     $bet = $this->getBet($handStrength);
                     $lastBet = $this->bettingRound->getLastBet();
                     if ($lastBet === -1) {
                         if ($bet === 0) {
                             $this->bettingRound->addBet(0);
-                            $this->addEvent("Datorn checkar");
+                            $this->eventLogger->log("Datorn checkar");
                         } else {
                             $this->pot->add($bet);
                             $this->bettingRound->addBet($bet);
-                            $this->addEvent("Datorn bettar " . $bet . " kr");
+                            $this->eventLogger->log("Datorn bettar " . $bet . " kr");
                         }
                     } elseif ($lastBet === 0) {
                         if ($bet === 0) {
                             $this->bettingRound->addBet($bet);
-                            $this->addEvent("Datorn synar");
+                            $this->eventLogger->log("Datorn synar");
                         } else {
                             $this->pot->add($bet);
                             $this->bettingRound->addBet($bet);
-                            $this->addEvent("Datorn bettar " . $bet . " kr");
+                            $this->eventLogger->log("Datorn bettar " . $bet . " kr");
                         }
                     } else {
                         if ($bet >= $lastBet) {
                             $this->pot->add($lastBet);
                             $this->bettingRound->addBet($lastBet);
-                            $this->addEvent("Datorn synar");
+                            $this->eventLogger->log("Datorn synar");
                         } elseif ($bet < $lastBet) {
-                            $this->addEvent("Datorn lägger sig");
+                            $this->eventLogger->log("Datorn lägger sig");
                             $this->playerManager->fold($this->currentPlayer);
                         }
                     }
@@ -361,7 +359,7 @@ class Game
                 }
             case "check":
                 {
-                    $this->addEvent("Spelaren checkar");
+                    $this->eventLogger->log("Spelaren checkar");
                     $this->bettingRound->addBet(0);
                     $this->nextPlayer();
                     break;
@@ -374,14 +372,14 @@ class Game
                     $bet = $bet === 0 ? $this->ante : $bet;
                     $bet = $lastBet === -1 ? $bet : ($bet > $lastBet ? $bet : $lastBet + $this->ante);
                     $this->pot->add($bet);
-                    $this->addEvent("Spelaren bettar " . $bet . " kr");
+                    $this->eventLogger->log("Spelaren bettar " . $bet . " kr");
                     $this->bettingRound->addBet($bet);
                     $this->nextPlayer();
                     break;
                 }
             case "call":
                 {
-                    $this->addEvent("Spelaren synar");
+                    $this->eventLogger->log("Spelaren synar");
                     $lastBet = $this->bettingRound->getLastBet();
                     $this->pot->add($lastBet);
                     $this->bettingRound->addBet($lastBet);
@@ -390,7 +388,7 @@ class Game
                 }
             case "fold":
                 {
-                    $this->addEvent("Spelaren lägger sig");
+                    $this->eventLogger->log("Spelaren lägger sig");
                     $this->playerManager->fold($this->currentPlayer);
                     $this->showdown();
                     break;
