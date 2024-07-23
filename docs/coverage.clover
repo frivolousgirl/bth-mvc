@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1721764126">
-  <project timestamp="1721764126">
+<coverage generated="1721764296">
+  <project timestamp="1721764296">
     <file name="/home/issa/dbwebb-kurser/mvc/me/report/src/Card/AbstractCard.php">
       <class name="App\Card\AbstractCard" namespace="global">
         <metrics complexity="8" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="16" coveredelements="16"/>
@@ -94,25 +94,25 @@
     </file>
     <file name="/home/issa/dbwebb-kurser/mvc/me/report/src/Card5/BettingRound.php">
       <class name="App\Card5\BettingRound" namespace="global">
-        <metrics complexity="8" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="16" coveredelements="0"/>
+        <metrics complexity="8" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
       </class>
-      <line num="10" type="method" name="addBet" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="12" type="stmt" count="0"/>
-      <line num="13" type="stmt" count="0"/>
-      <line num="16" type="method" name="isBettingRoundOver" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="20" type="stmt" count="0"/>
-      <line num="23" type="method" name="getLastBet" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="25" type="stmt" count="0"/>
-      <line num="28" type="method" name="getBets" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="30" type="stmt" count="0"/>
-      <line num="33" type="method" name="hasBets" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="38" type="method" name="reset" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <line num="41" type="stmt" count="0"/>
-      <metrics loc="44" ncloc="44" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="16" coveredelements="0"/>
+      <line num="10" type="method" name="addBet" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="12" type="stmt" count="6"/>
+      <line num="13" type="stmt" count="6"/>
+      <line num="16" type="method" name="isBettingRoundOver" visibility="public" complexity="3" crap="3" count="3"/>
+      <line num="18" type="stmt" count="3"/>
+      <line num="19" type="stmt" count="3"/>
+      <line num="20" type="stmt" count="3"/>
+      <line num="23" type="method" name="getLastBet" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="25" type="stmt" count="3"/>
+      <line num="28" type="method" name="getBets" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="30" type="stmt" count="2"/>
+      <line num="33" type="method" name="hasBets" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="38" type="method" name="reset" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <metrics loc="44" ncloc="44" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
     </file>
     <file name="/home/issa/dbwebb-kurser/mvc/me/report/src/Card5/CardGraphics.php">
       <class name="App\Card5\CardGraphics" namespace="global">
@@ -1323,13 +1323,13 @@
       <line num="124" type="stmt" count="8"/>
       <line num="127" type="stmt" count="8"/>
       <line num="129" type="stmt" count="8"/>
-      <line num="130" type="stmt" count="2"/>
-      <line num="139" type="method" name="setGameOver" visibility="private" complexity="4" crap="4" count="7"/>
-      <line num="141" type="stmt" count="7"/>
-      <line num="143" type="stmt" count="7"/>
-      <line num="144" type="stmt" count="7"/>
-      <line num="146" type="stmt" count="7"/>
-      <line num="147" type="stmt" count="1"/>
+      <line num="130" type="stmt" count="3"/>
+      <line num="139" type="method" name="setGameOver" visibility="private" complexity="4" crap="4" count="8"/>
+      <line num="141" type="stmt" count="8"/>
+      <line num="143" type="stmt" count="8"/>
+      <line num="144" type="stmt" count="8"/>
+      <line num="146" type="stmt" count="8"/>
+      <line num="147" type="stmt" count="2"/>
       <line num="148" type="stmt" count="6"/>
       <line num="149" type="stmt" count="2"/>
       <line num="151" type="stmt" count="4"/>
@@ -1401,6 +1401,6 @@
       <line num="63" type="stmt" count="0"/>
       <metrics loc="91" ncloc="44" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="16" coveredelements="0"/>
     </file>
-    <metrics files="37" loc="2963" ncloc="2727" classes="35" methods="205" coveredmethods="89" conditionals="0" coveredconditionals="0" statements="976" coveredstatements="305" elements="1181" coveredelements="394"/>
+    <metrics files="37" loc="2963" ncloc="2727" classes="35" methods="205" coveredmethods="95" conditionals="0" coveredconditionals="0" statements="976" coveredstatements="315" elements="1181" coveredelements="410"/>
   </project>
 </coverage>
