@@ -277,21 +277,31 @@ class Game
                 {
                     $cards = $currentPlayer->decideCardsToSwap();
                     $this->addEvent("Datorn byter " . count($cards) . " kort");
-                    $currentPlayer->discardAndDraw($cards, $this->deck);
+
+                    $this->playerManager->discardAndDraw($this->currentPlayer
+                        , $cards
+                        , $this->deck
+                    );
                     break;
                 }
             case "stand_pat":
                 {
                     // happy with current cards
                     $this->addEvent("Spelaren byter inga kort");
-                    $currentPlayer->discardAndDraw([], $this->deck);
+                    $this->playerManager->discardAndDraw($this->currentPlayer
+                        , []
+                        , $this->deck
+                    );
                     break;
                 }
             case "swap":
                 {
                     $cards = explode(",", $postData["selectedCards"]);
                     $this->addEvent("Spelaren byter " . count($cards) . " kort");
-                    $currentPlayer->discardAndDraw($cards, $this->deck);
+                    $this->playerManager->discardAndDraw($this->currentPlayer
+                        , $cards
+                        , $this->deck
+                    );
                     break;
                 }
         }
@@ -343,7 +353,7 @@ class Game
                             $this->addEvent("Datorn synar");
                         } elseif ($bet < $lastBet) {
                             $this->addEvent("Datorn lägger sig");
-                            $currentPlayer->fold();
+                            $this->playerManager->fold($this->currentPlayer);
                         }
                     }
                     $this->nextPlayer();
@@ -381,7 +391,7 @@ class Game
             case "fold":
                 {
                     $this->addEvent("Spelaren lägger sig");
-                    $currentPlayer->fold();
+                    $this->playerManager->fold($this->currentPlayer);
                     $this->showdown();
                     break;
                 }

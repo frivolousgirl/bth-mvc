@@ -2,17 +2,17 @@
 
 namespace App\Card5;
 
-use App\Card5\Player;
-use App\Card5\HandEvaluator;
+use App\Card5\PlayerFactory;
 use App\Card5\DeckOfCards;
 
 class PlayerManager
 {
     private array $players;
 
-    public function __construct(array $playerNames, HandEvaluator $handEvaluator)
+    public function __construct(array $playerNames, PlayerFactory $playerFactory)
     {
-        $this->players = array_map(fn ($name) => new Player($name, $handEvaluator), $playerNames);
+        $this->players = array_map(fn ($name) =>
+            $playerFactory->create($name), $playerNames);
     }
 
     public function getPlayers(): array

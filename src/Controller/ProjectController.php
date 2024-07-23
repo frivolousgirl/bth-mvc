@@ -16,6 +16,7 @@ use App\Card5\DeckOfCards;
 use App\Card5\GameState;
 use App\Card5\BettingRound;
 use App\Card5\PlayerManager;
+use App\Card5\PlayerFactory;
 
 class ProjectController extends AbstractController
 {
@@ -27,8 +28,9 @@ class ProjectController extends AbstractController
 
         if (!$this->get("game")) {
             $handEvaluator = new HandEvaluator();
+            $playerFactory = new PlayerFactory($handEvaluator);
             $playerManager = new PlayerManager(["Jag", "Datorn"]
-                , $handEvaluator
+                , $playerFactory
             );
 
             $game = new Game($playerManager
