@@ -29,18 +29,26 @@ class ProjectController extends AbstractController
 
         if (!$this->get("game")) {
             $handEvaluator = new HandEvaluator();
+            $pot = new Pot();
             $playerFactory = new PlayerFactory($handEvaluator);
             $playerManager = new PlayerManager(["Jag", "Datorn"]
                 , $playerFactory
+            );
+            $eventLogger = new EventLogger();
+            $bettingRound = new BettingRound($playerManager
+                , $pot
+                , $eventLogger
+                , $handEvaluator
+                , Game::ANTE
             );
 
             $game = new Game($playerManager
                 , $handEvaluator
                 , new DeckOfCards()
-                , new Pot()
+                , $pot
                 , new GameState()
-                , new BettingRound()
-                , new EventLogger()
+                , $bettingRound
+                , $eventLogger
             );
 
             $this->save("game", $game);

@@ -20,10 +20,11 @@ class Game
     private GameState $gameState;
     private HandEvaluator $handEvaluator;
     private BettingRound $bettingRound;
-    private int $ante = 10;
     private int $currentPlayer = 0;
     private int $startingPlayer = 0;
     private bool $gameOver = false;
+
+    const ANTE = 10;
 
     public function __construct(PlayerManager $playerManager
         , HandEvaluator $handEvaluator
@@ -116,7 +117,9 @@ class Game
 
         $this->gameOver = false;
 
-        $this->currentPlayer = rand(0, 1);
+        $numberOfPlayers = count($this->playerManager->getPlayers());
+
+        $this->currentPlayer = rand(0, $numberOfPlayers - 1);
         $this->startingPlayer = $this->currentPlayer;
     }
 
@@ -147,7 +150,7 @@ class Game
 
     private function ante(): void
     {
-        $this->pot->add(count($this->getPlayers()) * $this->ante);
+        $this->pot->add(count($this->getPlayers()) * self::ANTE);
     }
 
     public function action(array $postData): void
@@ -187,7 +190,25 @@ class Game
 
     private function handleBettingRound(string $action): void
     {
-        $this->bettingRound($action);
+        switch ($action) {
+            case "computer_turn":
+                $this->bettingRound->computerTurn($this->currentPlayer);
+                break;
+            case "check":
+                $this->bettingRound->playerCheck();
+                break;
+            case "bet":
+                $this->bettingRound->playerBet($this->currentPlayer);
+                break;
+            case "call":
+                $this->bettingRound->playerCall();
+                break;
+            case "fold":
+                $this->bettingRound->playerFold($this->currentPlayer);
+                break;
+        }
+        $this->nextPlayer();
+
         $numberOfPlayers = count($this->getPlayers());
         if ($this->bettingRound->isBettingRoundOver($numberOfPlayers)) {
             $this->bettingRound->reset();
@@ -325,87 +346,6 @@ class Game
         }
 
         return end($array);
-    }
-
-    private function bettingRound(string $action): void
-    {
-        $currentPlayer = $this->getCurrentPlayer();
-
-        switch ($action) {
-            case "computer_turn":
-                {
-                    $this->eventLogger->log("Datorns tur att betta");
-                    $handStrength = $this->handEvaluator->evaluateHand($currentPlayer->hand);
-                    $bet = $this->getBet($handStrength);
-                    $lastBet = $this->bettingRound->getLastBet();
-                    if ($lastBet === -1) {
-                        if ($bet === 0) {
-                            $this->bettingRound->addBet(0);
-                            $this->eventLogger->log("Datorn checkar");
-                        } else {
-                            $this->pot->add($bet);
-                            $this->bettingRound->addBet($bet);
-                            $this->eventLogger->log("Datorn bettar " . $bet . " kr");
-                        }
-                    } elseif ($lastBet === 0) {
-                        if ($bet === 0) {
-                            $this->bettingRound->addBet($bet);
-                            $this->eventLogger->log("Datorn synar");
-                        } else {
-                            $this->pot->add($bet);
-                            $this->bettingRound->addBet($bet);
-                            $this->eventLogger->log("Datorn bettar " . $bet . " kr");
-                        }
-                    } else {
-                        if ($bet >= $lastBet) {
-                            $this->pot->add($lastBet);
-                            $this->bettingRound->addBet($lastBet);
-                            $this->eventLogger->log("Datorn synar");
-                        } elseif ($bet < $lastBet) {
-                            $this->eventLogger->log("Datorn lägger sig");
-                            $this->playerManager->fold($this->currentPlayer);
-                        }
-                    }
-                    $this->nextPlayer();
-                    break;
-                }
-            case "check":
-                {
-                    $this->eventLogger->log("Spelaren checkar");
-                    $this->bettingRound->addBet(0);
-                    $this->nextPlayer();
-                    break;
-                }
-            case "bet":
-                {
-                    $handStrength = $this->handEvaluator->evaluateHand($currentPlayer->hand);
-                    $lastBet = $this->bettingRound->getLastBet();
-                    $bet = $this->getBet($handStrength);
-                    $bet = $bet === 0 ? $this->ante : $bet;
-                    $bet = $lastBet === -1 ? $bet : ($bet > $lastBet ? $bet : $lastBet + $this->ante);
-                    $this->pot->add($bet);
-                    $this->eventLogger->log("Spelaren bettar " . $bet . " kr");
-                    $this->bettingRound->addBet($bet);
-                    $this->nextPlayer();
-                    break;
-                }
-            case "call":
-                {
-                    $this->eventLogger->log("Spelaren synar");
-                    $lastBet = $this->bettingRound->getLastBet();
-                    $this->pot->add($lastBet);
-                    $this->bettingRound->addBet($lastBet);
-                    $this->nextPlayer();
-                    break;
-                }
-            case "fold":
-                {
-                    $this->eventLogger->log("Spelaren lägger sig");
-                    $this->playerManager->fold($this->currentPlayer);
-                    $this->showdown();
-                    break;
-                }
-        }
     }
 
     private function nextPlayer(): void

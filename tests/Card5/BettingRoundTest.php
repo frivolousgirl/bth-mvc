@@ -1,82 +1,145 @@
 <?php
 
+namespace App\Tests\Card5;
+
 use PHPUnit\Framework\TestCase;
+use App\Card5\Player;
+use App\Card5\PlayerManager;
+use App\Card5\Pot;
+use App\Card5\EventLogger;
+use App\Card5\HandEvaluator;
 use App\Card5\BettingRound;
 
 class BettingRoundTest extends TestCase
 {
-    private BettingRound $bettingRound;
+    private $playerManager;
+    private $pot;
+    private $eventLogger;
+    private $handEvaluator;
+    private $bettingRound;
 
     protected function setUp(): void
     {
-        $this->bettingRound = new BettingRound();
+        $this->playerManager = $this->createMock(PlayerManager::class);
+        $this->pot = $this->createMock(Pot::class);
+        $this->eventLogger = $this->createMock(EventLogger::class);
+        $this->handEvaluator = $this->createMock(HandEvaluator::class);
+
+        $this->bettingRound = new BettingRound($this->playerManager, $this->pot, $this->eventLogger, $this->handEvaluator, 5);
+
+        $player1 = $this->createMock(Player::class);
+        $player2 = $this->createMock(Player::class);
+
+        $player1->hand = [];
+        $player2->hand = [];
+
+        $this->playerManager->method('getPlayers')->willReturn([$player1, $player2]);
     }
 
-    public function testAddBetUpdatesBetsAndLastBet(): void
+    public function testComputerTurnNoPreviousBetsCheck()
     {
-        $this->bettingRound->addBet(10);
-        $this->assertSame([10], $this->bettingRound->getBets());
-        $this->assertSame(10, $this->bettingRound->getLastBet());
+        $this->handEvaluator->method('evaluateHand')->willReturn('High Card');
 
-        $this->bettingRound->addBet(20);
-        $this->assertSame([10, 20], $this->bettingRound->getBets());
-        $this->assertSame(20, $this->bettingRound->getLastBet());
+        $this->eventLogger->expects($this->exactly(2))
+            ->method('log')
+            ->withConsecutive(
+                ['Datorns tur att betta'],
+                ['Datorn checkar']
+            );
+
+        $this->bettingRound->computerTurn(1);
+        $this->assertSame([0], $this->bettingRound->getBets());
     }
 
-    public function testIsBettingRoundOverReturnsTrueWhenAllPlayersBetSame(): void
+    public function testComputerTurnNoPreviousBetsBetNonZero()
     {
-        $numberOfPlayers = 3;
+        $this->handEvaluator->method('evaluateHand')->willReturn('Three of a Kind');
 
-        $this->bettingRound->addBet(10);
-        $this->bettingRound->addBet(10);
-        $this->bettingRound->addBet(10);
+        $this->eventLogger->expects($this->exactly(2))
+            ->method('log')
+            ->withConsecutive(
+                ['Datorns tur att betta'],
+                ['Datorn bettar 20 kr']
+            );
 
-        $this->assertTrue($this->bettingRound->isBettingRoundOver($numberOfPlayers));
+        $this->pot->expects($this->once())->method('add')->with(20);
+
+        $this->bettingRound->computerTurn(1);
+        $this->assertSame([20], $this->bettingRound->getBets());
     }
 
-    public function testIsBettingRoundOverReturnsFalseWhenBetsAreNotEqual(): void
+    public function testComputerTurnPreviousBetIsZeroBetNonZero()
     {
-        $numberOfPlayers = 3;
+        $this->handEvaluator->method('evaluateHand')->willReturn('Flush');
 
-        $this->bettingRound->addBet(10);
-        $this->bettingRound->addBet(20);
-        $this->bettingRound->addBet(10);
+        $this->eventLogger->expects($this->exactly(3))
+            ->method('log')
+            ->withConsecutive(
+                ['Spelaren checkar'],
+                ['Datorns tur att betta'],
+                ['Datorn bettar 20 kr']
+            );
 
-        $this->assertFalse($this->bettingRound->isBettingRoundOver($numberOfPlayers));
+        $this->pot->expects($this->once())->method('add')->with(20);
+
+        $this->bettingRound->playerCheck();
+        $this->bettingRound->computerTurn(1);
+
+        $this->assertSame([0, 20], $this->bettingRound->getBets());
     }
 
-    public function testIsBettingRoundOverReturnsFalseWhenNotAllPlayersHaveBet(): void
+    public function testComputerTurnWhenComputerHasWeakerHand()
     {
-        $numberOfPlayers = 3;
+        $this->handEvaluator->method('evaluateHand')
+            ->willReturnOnConsecutiveCalls(
+                'Full House',
+                'One Pair'
+            );
 
-        $this->bettingRound->addBet(10);
-        $this->bettingRound->addBet(10);
+        $this->eventLogger->expects($this->exactly(3))
+            ->method('log')
+            ->withConsecutive(
+                ['Spelaren bettar 30 kr'],
+                ['Datorns tur att betta'],
+                ['Datorn lägger sig']
+            );
 
-        $this->assertFalse($this->bettingRound->isBettingRoundOver($numberOfPlayers));
+        $this->pot->expects($this->exactly(1))
+            ->method('add')
+            ->with($this->equalTo(30));
+
+        $this->bettingRound->playerBet(0);
+        $this->bettingRound->computerTurn(1);
+
+        $this->assertSame([30], $this->bettingRound->getBets());
     }
 
-    public function testGetLastBetReturnsMinusOneWhenNoBets(): void
+    public function testComputerCallsMatchingPlayerBetWhenHandIsStronger()
     {
-        $this->assertSame(-1, $this->bettingRound->getLastBet());
-    }
+        $this->handEvaluator->method('evaluateHand')
+            ->willReturnOnConsecutiveCalls(
+                'Two Pair',
+                'Full House'
+            );
 
-    public function testHasBetsReturnsTrueWhenBetsExist(): void
-    {
-        $this->assertFalse($this->bettingRound->hasBets());
+        $this->eventLogger->expects($this->exactly(3))
+            ->method('log')
+            ->withConsecutive(
+                ['Spelaren bettar 15 kr'],
+                ['Datorns tur att betta'],
+                ['Datorn synar']
+            );
 
-        $this->bettingRound->addBet(10);
+        $this->pot->expects($this->exactly(2))
+            ->method('add')
+            ->withConsecutive(
+                [15],
+                [15]
+            );
 
-        $this->assertTrue($this->bettingRound->hasBets());
-    }
+        $this->bettingRound->playerBet(0);
+        $this->bettingRound->computerTurn(1);
 
-    public function testResetClearsBetsAndLastBet(): void
-    {
-        $this->bettingRound->addBet(10);
-        $this->bettingRound->addBet(20);
-
-        $this->bettingRound->reset();
-
-        $this->assertSame([], $this->bettingRound->getBets());
-        $this->assertSame(-1, $this->bettingRound->getLastBet());
+        $this->assertSame([15, 15], $this->bettingRound->getBets());
     }
 }
