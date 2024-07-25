@@ -10,6 +10,7 @@ use App\Card5\GameState;
 use App\Card5\BettingRound;
 use App\Card5\PlayerManager;
 use App\Card5\EventLogger;
+use App\Card5\GameActionChecker;
 
 class Game
 {
@@ -20,6 +21,7 @@ class Game
     private GameState $gameState;
     private HandEvaluator $handEvaluator;
     private BettingRound $bettingRound;
+    private GameActionChecker $gameActionChecker;
     private int $currentPlayer = 0;
     private int $startingPlayer = 0;
     private bool $gameOver = false;
@@ -33,6 +35,7 @@ class Game
         , GameState $gameState
         , BettingRound $bettingRound
         , EventLogger $eventLogger
+        , GameActionChecker $gameActionChecker
         )
     {
         $this->playerManager = $playerManager;
@@ -42,6 +45,7 @@ class Game
         $this->gameState = $gameState;
         $this->bettingRound = $bettingRound;
         $this->eventLogger = $eventLogger;
+        $this->gameActionChecker = $gameActionChecker;
 
         $this->reset();
     }
@@ -51,18 +55,9 @@ class Game
         return $this->pot->getAmount();
     }
 
-    private function isPlayersTurn(): bool
-    {
-        return $this->getCurrentPlayer()->name === "Jag";
-    }
-
     public function canCheck(): bool
     {
-        $state = $this->getState();
-
-        return $this->isPlayersTurn()
-            && ($state === "FIRST_BETTING_ROUND" || $state === "SECOND_BETTING_ROUND")
-            && !$this->bettingRound->hasBets();
+        return $this->gameActionChecker->canCheck($this->currentPlayer);
     }
 
     private static function all(array $array, int $value): bool
@@ -72,37 +67,22 @@ class Game
 
     public function canBet(): bool
     {
-        $state = $this->getState();
-
-        return $this->isPlayersTurn()
-            && ($state === "FIRST_BETTING_ROUND" || $state === "SECOND_BETTING_ROUND")
-            && count($this->bettingRound->getBets()) < count($this->getPlayers());
+        return $this->gameActionChecker->canBet($this->currentPlayer);
     }
 
     public function canCall(): bool
     {
-        $state = $this->getState();
-
-        return $this->isPlayersTurn()
-            && ($state === "FIRST_BETTING_ROUND" || $state === "SECOND_BETTING_ROUND")
-            && $this->bettingRound->hasBets();
+        return $this->gameActionChecker->canCall($this->currentPlayer);
     }
 
     public function canFold(): bool
     {
-        $state = $this->getState();
-
-        return $this->isPlayersTurn()
-            && ($state === "FIRST_BETTING_ROUND" || $state === "SECOND_BETTING_ROUND")
-            && $this->bettingRound->hasBets();
+        return $this->gameActionChecker->canFold($this->currentPlayer);
     }
 
     public function canDraw(): bool
     {
-        $state = $this->getState();
-
-        return $this->isPlayersTurn()
-            && $state === "DRAW";
+        return $this->gameActionChecker->canDraw($this->currentPlayer);
     }
 
     public function reset(): void
@@ -319,7 +299,7 @@ class Game
         $currentPlayer = $this->getCurrentPlayer();
 
         $cardsToDiscard = $this->getCardsToDiscard($postData, $currentPlayer);
-        $this->playerManager->discardAndDraw($currentPlayer, $cardsToDiscard, $this->deck);
+        $this->playerManager->discardAndDraw($this->currentPlayer, $cardsToDiscard, $this->deck);
 
         $this->nextPlayer();
     }

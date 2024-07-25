@@ -18,6 +18,7 @@ use App\Card5\BettingRound;
 use App\Card5\PlayerManager;
 use App\Card5\PlayerFactory;
 use App\Card5\EventLogger;
+use App\Card5\GameActionChecker;
 
 class ProjectController extends AbstractController
 {
@@ -41,14 +42,20 @@ class ProjectController extends AbstractController
                 , $handEvaluator
                 , Game::ANTE
             );
+            $gameState = new GameState();
+            $gameActionChecker = new GameActionChecker($gameState
+                , $bettingRound
+                , $playerManager
+            );
 
             $game = new Game($playerManager
                 , $handEvaluator
                 , new DeckOfCards()
                 , $pot
-                , new GameState()
+                , $gameState
                 , $bettingRound
                 , $eventLogger
+                , $gameActionChecker
             );
 
             $this->save("game", $game);
