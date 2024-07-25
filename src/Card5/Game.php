@@ -209,22 +209,27 @@ class Game
         }
         $this->nextPlayer();
 
-        $numberOfPlayers = count($this->getPlayers());
-        if ($this->bettingRound->isBettingRoundOver($numberOfPlayers)) {
-            $this->bettingRound->reset();
-            if ($this->nextRound() === "SHOWDOWN") {
-                $this->decideWinner();
-                $this->showdown();
-            }
-        } else {
-            $folds = array_filter($this->getPlayers(), function (Player $player) {
-                return $player->hasFolded();
-            });
+        if ($this->allButOneFolded()) {
+            $this->decideWinner(true);
+            $this->showdown();
+        }
+        elseif ($this->isBettingRoundOver()) {
+            $this->endBettingRound();
+        }
+    }
 
-            if (count($folds) > 0) {
-                $this->decideWinner();
-                $this->showdown();
-            }
+    private function isBettingRoundOver(): bool
+    {
+        $numberOfPlayers = count($this->getPlayers());
+        return $this->bettingRound->isBettingRoundOver($numberOfPlayers);
+    }
+
+    private function endBettingRound(): void
+    {
+        $this->bettingRound->reset();
+        if ($this->nextRound() === "SHOWDOWN") {
+            $this->decideWinner(false);
+            $this->showdown();
         }
     }
 
@@ -238,6 +243,25 @@ class Game
     }
 
     private function allButOneFolded(): bool
+    {
+        $players = $this->getPlayers();
+
+        return count(array_filter($players, fn ($player) => $player->hasFolded()))
+            === count($players) - 1;
+    }
+
+    private function decideWinner(bool $byFolding): void
+    {
+        if ($byFolding) {
+            $this->handleWinnerByFolding();
+            return;
+        }
+
+        $winners = $this->handEvaluator->evaluateBestHand($this->getPlayers());
+        $this->handleWinners($winners);
+    }
+
+    private function handleWinnerByFolding(): void
     {
         $winner = null;
         $folds = 0;
@@ -256,19 +280,11 @@ class Game
             $this->eventLogger->log("Spelet är slut");
             $this->eventLogger->log("Alla spelare utom en lade sig");
             $this->eventLogger->log($winner->name . " tar hem potten på " . $this->pot->getAmount() . " kr");
-            return true;
         }
-
-        return false;
     }
 
-    private function decideWinner(): void
+    private function handleWinners(array $winners): void
     {
-        if ($this->allButOneFolded()) {
-            return;
-        }
-
-        $winners = $this->handEvaluator->evaluateBestHand($this->getPlayers());
         $winnerCount = count($winners);
 
         if ($winnerCount === 0) {
@@ -300,43 +316,34 @@ class Game
 
     private function draw(array $postData): void
     {
-        $action = $postData["action"];
         $currentPlayer = $this->getCurrentPlayer();
+
+        $cardsToDiscard = $this->getCardsToDiscard($postData, $currentPlayer);
+        $this->playerManager->discardAndDraw($currentPlayer, $cardsToDiscard, $this->deck);
+
+        $this->nextPlayer();
+    }
+
+    private function getCardsToDiscard(array $postData, Player $currentPlayer): array
+    {
+        $action = $postData["action"] ?? "";
 
         switch ($action) {
             case "computer_turn":
-                {
-                    $cards = $currentPlayer->decideCardsToSwap();
-                    $this->eventLogger->log("Datorn byter " . count($cards) . " kort");
-
-                    $this->playerManager->discardAndDraw($this->currentPlayer
-                        , $cards
-                        , $this->deck
-                    );
-                    break;
-                }
+                $cardsToDiscard = $currentPlayer->decideCardsToSwap();
+                $this->eventLogger->log("Datorn byter " . count($cardsToDiscard) . " kort");
+                break;
             case "stand_pat":
-                {
-                    // happy with current cards
-                    $this->eventLogger->log("Spelaren byter inga kort");
-                    $this->playerManager->discardAndDraw($this->currentPlayer
-                        , []
-                        , $this->deck
-                    );
-                    break;
-                }
+                $cardsToDiscard = [];
+                $this->eventLogger->log("Spelaren byter inga kort");
+                break;
             case "swap":
-                {
-                    $cards = explode(",", $postData["selectedCards"]);
-                    $this->eventLogger->log("Spelaren byter " . count($cards) . " kort");
-                    $this->playerManager->discardAndDraw($this->currentPlayer
-                        , $cards
-                        , $this->deck
-                    );
-                    break;
-                }
+                $cardsToDiscard = explode(",", $postData["selectedCards"]);
+                $this->eventLogger->log("Spelaren byter " . count($cardsToDiscard) . " kort");
+                break;
         }
-        $this->nextPlayer();
+
+        return $cardsToDiscard;
     }
 
     private function lastBet(array $array): int
