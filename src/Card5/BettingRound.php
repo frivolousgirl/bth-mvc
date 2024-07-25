@@ -39,9 +39,22 @@ class BettingRound
 
     public function isBettingRoundOver(int $numberOfPlayers): bool
     {
-        return count($this->bets) === $numberOfPlayers &&
-            count(array_unique($this->bets)) === 1 &&
-            $this->lastBet !== -1;
+        if ($this->lastBet === -1) {
+            return false;
+        }
+        if (count($this->bets) !== $numberOfPlayers) {
+            $players = $this->playerManager->getPlayers();
+            // has the rest folded?
+            $count = $numberOfPlayers - count($this->bets);
+            if (count(array_filter($players, fn ($player) => $player->hasFolded())) === $count) {
+                return true;
+            }
+            return false;
+        }
+        if (count(array_unique($this->bets)) !== 1) {
+            return false;
+        }
+        return true;
     }
 
     public function getBets(): array
@@ -89,7 +102,7 @@ class BettingRound
                 $this->pot->add($this->lastBet);
                 $this->addBet($this->lastBet);
                 $this->eventLogger->log("Datorn synar");
-            } elseif ($bet < $this->lastBet) {
+            } else {
                 $this->eventLogger->log("Datorn lägger sig");
                 $this->playerManager->fold($playerId);
             }
