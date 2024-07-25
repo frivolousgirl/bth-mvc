@@ -188,4 +188,58 @@ class GameTest extends TestCase
 
         $this->game->action(['action' => 'fold']);
     }
+
+    public function testGetPot()
+    {
+        $this->pot->expects($this->once())->method('getAmount')->willReturn(100);
+
+        $potAmount = $this->game->getPot();
+
+        $this->assertEquals(100, $potAmount);
+    }
+
+    public function testCanCheck()
+    {
+        $this->gameActionChecker->expects($this->once())->method('canCheck')->with(0)->willReturn(true);
+
+        $canCheck = $this->game->canCheck();
+
+        $this->assertTrue($canCheck);
+    }
+
+    public function testCanFold()
+    {
+        $this->gameActionChecker->expects($this->once())->method('canFold')->with(0)->willReturn(true);
+
+        $canFold = $this->game->canFold();
+
+        $this->assertTrue($canFold);
+    }
+
+    public function testCanBet()
+    {
+        $this->gameActionChecker->expects($this->once())->method('canBet')->with(0)->willReturn(true);
+
+        $canBet = $this->game->canBet();
+
+        $this->assertTrue($canBet);
+    }
+
+    public function testCanCall()
+    {
+        $this->gameActionChecker->expects($this->once())->method('canCall')->with(0)->willReturn(true);
+
+        $canCall = $this->game->canCall();
+
+        $this->assertTrue($canCall);
+    }
+
+    public function testCanDraw()
+    {
+        $this->gameActionChecker->expects($this->once())->method('canDraw')->with(0)->willReturn(true);
+
+        $canDraw = $this->game->canDraw();
+
+        $this->assertTrue($canDraw);
+    }
 }
