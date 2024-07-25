@@ -26,7 +26,6 @@ class Game
     private RandomNumberGenerator $randomNumberGenerator;
     private int $currentPlayer = 0;
     private int $startingPlayer = 0;
-    private bool $gameOver = false;
 
     const ANTE = 10;
 
@@ -94,8 +93,6 @@ class Game
 
         $this->eventLogger->clear();
 
-        $this->gameOver = false;
-
         $numberOfPlayers = count($this->playerManager->getPlayers());
 
         $this->currentPlayer = $this->randomNumberGenerator->generate(0, $numberOfPlayers - 1);
@@ -105,11 +102,6 @@ class Game
     public function getEvents(): array
     {
         return $this->eventLogger->getEvents();
-    }
-
-    public function isGameOver(): bool
-    {
-        return $this->gameOver;
     }
 
     public function getCurrentPlayer(): Player

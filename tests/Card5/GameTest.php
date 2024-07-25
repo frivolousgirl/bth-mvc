@@ -242,4 +242,21 @@ class GameTest extends TestCase
 
         $this->assertTrue($canDraw);
     }
+
+    public function testGetEvents()
+    {
+        $expectedEvents = ['event1', 'event2'];
+        $this->eventLogger->expects($this->once())->method('getEvents')->willReturn($expectedEvents);
+
+        $events = $this->game->getEvents();
+
+        $this->assertEquals($expectedEvents, $events);
+    }
+
+    public function testGetCurrentPlayer()
+    {
+        $currentPlayer = $this->game->getCurrentPlayer();
+
+        $this->assertEquals($this->player1, $currentPlayer);
+    }
 }
