@@ -259,4 +259,30 @@ class GameTest extends TestCase
 
         $this->assertEquals($this->player1, $currentPlayer);
     }
+
+    public function testActionSecondBettingRoundCheck()
+    {
+        $this->gameState->expects($this->once())->method('getState')->willReturn('SECOND_BETTING_ROUND');
+
+        $this->bettingRound->expects($this->once())->method('playerCheck')->with();
+
+        $this->game->action(['action' => 'check']);
+    }
+
+    public function testHandleDraw()
+    {
+        $this->gameState->expects($this->any())->method('getState')->willReturn('DRAW');
+
+        $this->player1->expects($this->once())->method('decideCardsToSwap')->willReturn([]);
+        $this->player2->expects($this->once())->method('decideCardsToSwap')->willReturn([]);
+
+        $this->playerManager->expects($this->exactly(2))->method('discardAndDraw')
+            ->withConsecutive(
+                [0, [], $this->deck],
+                [1, [], $this->deck]
+            );
+
+        $this->game->action(['action' => 'computer_turn']);
+        $this->game->action(['action' => 'computer_turn']);
+    }
 }
