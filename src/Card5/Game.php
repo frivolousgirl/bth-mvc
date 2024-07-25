@@ -11,6 +11,7 @@ use App\Card5\BettingRound;
 use App\Card5\PlayerManager;
 use App\Card5\EventLogger;
 use App\Card5\GameActionChecker;
+use App\Card5\RandomNumberGenerator;
 
 class Game
 {
@@ -22,6 +23,7 @@ class Game
     private HandEvaluator $handEvaluator;
     private BettingRound $bettingRound;
     private GameActionChecker $gameActionChecker;
+    private RandomNumberGenerator $randomNumberGenerator;
     private int $currentPlayer = 0;
     private int $startingPlayer = 0;
     private bool $gameOver = false;
@@ -36,6 +38,7 @@ class Game
         , BettingRound $bettingRound
         , EventLogger $eventLogger
         , GameActionChecker $gameActionChecker
+        , RandomNumberGenerator $randomNumberGenerator
         )
     {
         $this->playerManager = $playerManager;
@@ -46,6 +49,7 @@ class Game
         $this->bettingRound = $bettingRound;
         $this->eventLogger = $eventLogger;
         $this->gameActionChecker = $gameActionChecker;
+        $this->randomNumberGenerator = $randomNumberGenerator;
 
         $this->reset();
     }
@@ -99,7 +103,7 @@ class Game
 
         $numberOfPlayers = count($this->playerManager->getPlayers());
 
-        $this->currentPlayer = rand(0, $numberOfPlayers - 1);
+        $this->currentPlayer = $this->randomNumberGenerator->generate(0, $numberOfPlayers - 1);
         $this->startingPlayer = $this->currentPlayer;
     }
 

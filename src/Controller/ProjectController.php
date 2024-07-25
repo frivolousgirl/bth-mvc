@@ -19,6 +19,7 @@ use App\Card5\PlayerManager;
 use App\Card5\PlayerFactory;
 use App\Card5\EventLogger;
 use App\Card5\GameActionChecker;
+use App\Card5\RandomNumberGenerator;
 
 class ProjectController extends AbstractController
 {
@@ -56,6 +57,7 @@ class ProjectController extends AbstractController
                 , $bettingRound
                 , $eventLogger
                 , $gameActionChecker
+                , new RandomNumberGenerator()
             );
 
             $this->save("game", $game);
