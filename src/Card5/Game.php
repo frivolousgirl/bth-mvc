@@ -64,11 +64,6 @@ class Game
         return $this->gameActionChecker->canCheck($this->currentPlayer);
     }
 
-    private static function all(array $array, int $value): bool
-    {
-        return array_unique($array) === array($value);
-    }
-
     public function canBet(): bool
     {
         return $this->gameActionChecker->canBet($this->currentPlayer);
