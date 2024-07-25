@@ -43,8 +43,8 @@ class GameTest extends TestCase
         
         $this->randomNumberGenerator->expects($this->any())->method('generate')->willReturn(0);
 
-        $this->player1 = new Player('Jag', $this->handEvaluator);
-        $this->player2 = new Player('Datorn', $this->handEvaluator);
+        $this->player1 = $this->createMock(Player::class);
+        $this->player2 = $this->createMock(Player::class);
 
         $this->playerManager->expects($this->any())->method('getPlayers')->willReturn([$this->player1, $this->player2]);
 
@@ -141,6 +141,50 @@ class GameTest extends TestCase
         $this->gameState->expects($this->once())->method('getState')->willReturn('FIRST_BETTING_ROUND');
 
         $this->bettingRound->expects($this->once())->method('playerFold')->with(0);
+
+        $this->game->action(['action' => 'fold']);
+    }
+
+    public function testNextRound()
+    {
+        $this->gameState->expects($this->once())->method('nextState')->willReturn('DEALING');
+
+        $this->game->nextRound();
+    }
+
+    public function testDealCards()
+    {
+        $this->playerManager->expects($this->once())->method('dealCards')->with($this->deck);
+
+        $this->game->dealCards();
+    }
+
+    public function testShowdown()
+    {
+        $this->gameState->expects($this->once())->method('setState')->with('SHOWDOWN');
+
+        $this->game->showdown();
+    }
+
+    public function testDecideWinnerByFolding()
+    {
+        $this->gameState->expects($this->once())->method('getState')->willReturn('FIRST_BETTING_ROUND');
+
+        $this->pot->expects($this->once())->method('getAmount')->willReturn(100);
+
+        $this->player1->expects($this->any())->method('hasFolded')->willReturn(true);
+        $this->player2->expects($this->any())->method('hasFolded')->willReturn(false);
+        $this->player2->name = "Datorn";
+
+        $this->bettingRound->expects($this->once())->method('playerFold')->with(0);
+
+        $this->gameState->expects($this->once())->method('setState')->with('SHOWDOWN');
+
+        $this->eventLogger->expects($this->exactly(3))->method('log')->withConsecutive(
+            ['Spelet är slut'],
+            ['Alla spelare utom en lade sig'],
+            ['Datorn tar hem potten på 100 kr']
+        );
 
         $this->game->action(['action' => 'fold']);
     }
