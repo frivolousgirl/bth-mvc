@@ -35,6 +35,11 @@ class BettingRound
     private function addBet(int $bet): void
     {
         $this->bets[] = $bet;
+        
+        if (count($this->bets) > 2) {
+            array_shift($this->bets);
+        }
+
         $this->lastBet = $bet;
     }
 

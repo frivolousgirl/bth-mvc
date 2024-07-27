@@ -12,10 +12,10 @@
         {% endblock %}
         {% block javascripts %}
         {{
-            encore_entry_script_tags("app")
+            encore_entry_script_tags("project")
         }}
         {% block importmap %}{{
-            importmap("app")
+            importmap("project")
         }}{% endblock %} {% endblock %}
         <script src="script.js"></script>
     </head>
