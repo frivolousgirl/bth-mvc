@@ -27,19 +27,19 @@ class Game
     private int $currentPlayer = 0;
     private int $startingPlayer = 0;
 
-    const ANTE = 10;
+    public const ANTE = 10;
 
-    public function __construct(PlayerManager $playerManager
-        , HandEvaluator $handEvaluator
-        , DeckOfCards $deck
-        , Pot $pot
-        , GameState $gameState
-        , BettingRound $bettingRound
-        , EventLogger $eventLogger
-        , GameActionChecker $gameActionChecker
-        , RandomNumberGenerator $randomNumberGenerator
-        )
-    {
+    public function __construct(
+        PlayerManager $playerManager,
+        HandEvaluator $handEvaluator,
+        DeckOfCards $deck,
+        Pot $pot,
+        GameState $gameState,
+        BettingRound $bettingRound,
+        EventLogger $eventLogger,
+        GameActionChecker $gameActionChecker,
+        RandomNumberGenerator $randomNumberGenerator
+    ) {
         $this->playerManager = $playerManager;
         $this->handEvaluator = $handEvaluator;
         $this->deck = $deck;
@@ -183,8 +183,7 @@ class Game
         if ($this->allButOneFolded()) {
             $this->decideWinner(true);
             $this->showdown();
-        }
-        elseif ($this->isBettingRoundOver()) {
+        } elseif ($this->isBettingRoundOver()) {
             $this->endBettingRound();
         }
     }

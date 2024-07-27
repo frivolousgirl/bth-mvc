@@ -18,11 +18,12 @@ class BettingRound
     private HandEvaluator $handEvaluator;
     private int $ante;
 
-    public function __construct(PlayerManager $playerManager
-        , Pot $pot
-        , EventLogger $eventLogger
-        , HandEvaluator $handEvaluator
-        , int $ante
+    public function __construct(
+        PlayerManager $playerManager,
+        Pot $pot,
+        EventLogger $eventLogger,
+        HandEvaluator $handEvaluator,
+        int $ante
     ) {
         $this->playerManager = $playerManager;
         $this->pot = $pot;

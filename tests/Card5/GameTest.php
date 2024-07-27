@@ -40,7 +40,7 @@ class GameTest extends TestCase
         $this->eventLogger = $this->createMock(EventLogger::class);
         $this->gameActionChecker = $this->createMock(GameActionChecker::class);
         $this->randomNumberGenerator = $this->createMock(RandomNumberGenerator::class);
-        
+
         $this->randomNumberGenerator->expects($this->any())->method('generate')->willReturn(0);
 
         $this->player1 = $this->createMock(Player::class);
@@ -48,7 +48,8 @@ class GameTest extends TestCase
 
         $this->playerManager->expects($this->any())->method('getPlayers')->willReturn([$this->player1, $this->player2]);
 
-        $this->game = new Game($this->playerManager,
+        $this->game = new Game(
+            $this->playerManager,
             $this->handEvaluator,
             $this->deck,
             $this->pot,

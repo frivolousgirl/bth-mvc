@@ -12,11 +12,11 @@ class GameActionChecker
     private BettingRound $bettingRound;
     private PlayerManager $playerManager;
 
-    public function __construct(GameState $gameState
-        , BettingRound $bettingRound
-        , PlayerManager $playerManager
-        )
-    {
+    public function __construct(
+        GameState $gameState,
+        BettingRound $bettingRound,
+        PlayerManager $playerManager
+    ) {
         $this->gameState = $gameState;
         $this->bettingRound = $bettingRound;
         $this->playerManager = $playerManager;
@@ -64,7 +64,7 @@ class GameActionChecker
         return $this->isPlayersTurn($playerId)
             && ($state === "FIRST_BETTING_ROUND" || $state === "SECOND_BETTING_ROUND")
             && $this->bettingRound->hasBets();
-    }    
+    }
 
     private function isPlayersTurn(int $playerId): bool
     {

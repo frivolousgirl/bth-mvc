@@ -21,7 +21,7 @@ class PotTest extends TestCase
     {
         $this->pot->add(100);
         $this->assertEquals(100, $this->pot->getAmount());
-        
+
         $this->pot->add(50);
         $this->assertEquals(150, $this->pot->getAmount());
     }
@@ -30,7 +30,7 @@ class PotTest extends TestCase
     {
         $this->pot->add(100);
         $this->assertEquals(100, $this->pot->getAmount());
-        
+
         $this->pot->reset();
         $this->assertEquals(0, $this->pot->getAmount());
     }

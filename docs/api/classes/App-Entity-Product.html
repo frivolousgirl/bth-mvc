@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/app.html" class="">App</a>
@@ -62,6 +62,10 @@
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="namespaces/app-card.html" class="">Card</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-card5.html" class="">Card5</a>
                 
             </li>
                     <li>
@@ -87,7 +91,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Application.html" class="">Application</a>
@@ -95,14 +99,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -148,6 +152,23 @@
 
 
 
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/App-Entity-Product.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Entity">Entity</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $repositoryClass: \App\Repository\ProductRepository::class
+    </dd>
+    </dl>
+            </section>
+
+
+
 <h3 id="toc">
     Table of Contents
     <a href="classes/App-Entity-Product.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
@@ -169,19 +190,19 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/App-Entity-Product.html#property_id">$id</a>
+    <a class="" href="classes/App-Entity-Product.html#property_id">$id</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/App-Entity-Product.html#property_name">$name</a>
+    <a class="" href="classes/App-Entity-Product.html#property_name">$name</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/App-Entity-Product.html#property_value">$value</a>
+    <a class="" href="classes/App-Entity-Product.html#property_value">$value</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
@@ -195,37 +216,36 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Entity-Product.html#method_getId">getId()</a>
+    <a class="" href="classes/App-Entity-Product.html#method_getId">getId()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Entity-Product.html#method_getName">getName()</a>
+    <a class="" href="classes/App-Entity-Product.html#method_getName">getName()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Entity-Product.html#method_getValue">getValue()</a>
+    <a class="" href="classes/App-Entity-Product.html#method_getValue">getValue()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Entity-Product.html#method_setName">setName()</a>
+    <a class="" href="classes/App-Entity-Product.html#method_setName">setName()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/App-Entity-Product.html#method_setValue">setValue()</a>
+    <a class="" href="classes/App-Entity-Product.html#method_setValue">setValue()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
 
     </dl>
-
 
 
 
@@ -260,6 +280,7 @@
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">int|null</span>
@@ -269,6 +290,29 @@
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/App-Entity-Product.html#property_id#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\GeneratedValue">GeneratedValue</abbr>]
+    </dt>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
+    </dt>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -293,6 +337,7 @@
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">string|null</span>
@@ -302,6 +347,22 @@
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/App-Entity-Product.html#property_name#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $length: 255
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -326,6 +387,7 @@
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">int|null</span>
@@ -335,6 +397,19 @@
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/App-Entity-Product.html#property_value#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+    </dl>
+            </section>
 
 </article>
             </section>
@@ -373,6 +448,9 @@
     
     
     
+    
+
+    
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -407,6 +485,9 @@
         </div>
     
     
+    
+    
+
     
 
             <section>
@@ -443,6 +524,9 @@
     
     
     
+    
+
+    
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -476,6 +560,7 @@
     <div class="phpdocumentor-label-line">
         </div>
     
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -486,6 +571,8 @@
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -521,6 +608,7 @@
     <div class="phpdocumentor-label-line">
         </div>
     
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -531,6 +619,8 @@
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -653,20 +743,20 @@
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/App-Entity-Product.html#property_id">$id<a href="classes/App-Entity-Product.html"></li>
-                                                    <li><a href="classes/App-Entity-Product.html#property_name">$name<a href="classes/App-Entity-Product.html"></li>
-                                                    <li><a href="classes/App-Entity-Product.html#property_value">$value<a href="classes/App-Entity-Product.html"></li>
+                                                    <li class=""><a href="classes/App-Entity-Product.html#property_id">$id</a></li>
+                                                    <li class=""><a href="classes/App-Entity-Product.html#property_name">$name</a></li>
+                                                    <li class=""><a href="classes/App-Entity-Product.html#property_value">$value</a></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/App-Entity-Product.html#method_getId">getId()</a></li>
-                                            <li><a href="classes/App-Entity-Product.html#method_getName">getName()</a></li>
-                                            <li><a href="classes/App-Entity-Product.html#method_getValue">getValue()</a></li>
-                                            <li><a href="classes/App-Entity-Product.html#method_setName">setName()</a></li>
-                                            <li><a href="classes/App-Entity-Product.html#method_setValue">setValue()</a></li>
+                                            <li class=""><a href="classes/App-Entity-Product.html#method_getId">getId()</a></li>
+                                            <li class=""><a href="classes/App-Entity-Product.html#method_getName">getName()</a></li>
+                                            <li class=""><a href="classes/App-Entity-Product.html#method_getValue">getValue()</a></li>
+                                            <li class=""><a href="classes/App-Entity-Product.html#method_setName">setName()</a></li>
+                                            <li class=""><a href="classes/App-Entity-Product.html#method_setValue">setValue()</a></li>
                                     </ul>
             </li>
                     </ul>

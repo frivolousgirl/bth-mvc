@@ -20,7 +20,7 @@ class GameStateTest extends TestCase
     public function testNextStateCyclesThroughStates(): void
     {
         $this->assertEquals("ANTE", $this->gameState->getState());
-        
+
         $this->gameState->nextState();
         $this->assertEquals("DEALING", $this->gameState->getState());
 

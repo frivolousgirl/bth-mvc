@@ -33,31 +33,35 @@ class ProjectController extends AbstractController
             $handEvaluator = new HandEvaluator();
             $pot = new Pot();
             $playerFactory = new PlayerFactory($handEvaluator);
-            $playerManager = new PlayerManager(["Jag", "Datorn"]
-                , $playerFactory
+            $playerManager = new PlayerManager(
+                ["Jag", "Datorn"],
+                $playerFactory
             );
             $eventLogger = new EventLogger();
-            $bettingRound = new BettingRound($playerManager
-                , $pot
-                , $eventLogger
-                , $handEvaluator
-                , Game::ANTE
+            $bettingRound = new BettingRound(
+                $playerManager,
+                $pot,
+                $eventLogger,
+                $handEvaluator,
+                Game::ANTE
             );
             $gameState = new GameState();
-            $gameActionChecker = new GameActionChecker($gameState
-                , $bettingRound
-                , $playerManager
+            $gameActionChecker = new GameActionChecker(
+                $gameState,
+                $bettingRound,
+                $playerManager
             );
 
-            $game = new Game($playerManager
-                , $handEvaluator
-                , new DeckOfCards()
-                , $pot
-                , $gameState
-                , $bettingRound
-                , $eventLogger
-                , $gameActionChecker
-                , new RandomNumberGenerator()
+            $game = new Game(
+                $playerManager,
+                $handEvaluator,
+                new DeckOfCards(),
+                $pot,
+                $gameState,
+                $bettingRound,
+                $eventLogger,
+                $gameActionChecker,
+                new RandomNumberGenerator()
             );
 
             $this->save("game", $game);

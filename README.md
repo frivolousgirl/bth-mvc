@@ -8,7 +8,7 @@
 
 ## Description
 
-This is my awesome project description...
+The repository for the MVC course at Blekinge Institute of Technology contains learning materials, assignments, and projects completed during the course. It includes examples and exercises focused on Symfony Encore, PHP unit testing, PHP documentation, and ORM. The purpose of the repository is to collect all course materials in a structured way, facilitating learning and future reference.
 
 ## Installation
 
