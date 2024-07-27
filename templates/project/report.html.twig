@@ -6,8 +6,56 @@
 
 <div class="example-wrapper">
     <h1>Redovisning</h1>
-    <p>Välkommen till mitt femkortspokerprojekt! 
-    Detta projekt är en del av min kurs i webbutveckling där vi byggt vidare på de kunskaper vi lärt oss med PHP-ramverket Symfony. 
-    Syftet med detta projekt är att skapa en interaktiv och användarvänlig pokerspelssida där användare kan spela femkortspoker mot en dator.</p>
+    <h2>Krav 1-3</h2>
+
+        <h3>Innehåll & Utseende</h3>
+        <p>
+            Jag följde kraven genom att skapa en ny landningssida på <code>/proj</code> enligt instruktionerna och de tillvägagångssätt som tidigare, genom att skapa ny controller med routes för projektets alla sidor och hantering. Jag valde att bygga vidare på tidigare koncept och utvecklade det till ett femkortspoker-spel.
+        </p>
+        <p>
+            För att ge projektsidan ett nytt utseende skapade jag en separat mapp under Styles och länkade till denna i mitt projekt. Även om det kanske finns andra metoder för att hantera detta, kände jag att denna lösning ändå blev tydlig och organiserad.
+        </p>
+        <p>
+            Jag valde att fokusera på att hantera två spelare i stället för att kunna välja antal, även om jag emellanåt försökt skriva koden så generell som möjligt för att inte göra för många antaganden. Med knappar turas spelarna om och när det är datorns tur så trycker “spelaren” helt enkelt på knappen “Datorns tur”. Jag är inte helt säker på att jag förstått reglerna för femkortspoker helt rätt, men det verkar ändå fungera hyfsat bra tycker jag.
+        </p>
+
+        <h3>Repo & Dokumentation</h3>
+        <p>
+            De badges som finns i readme gäller hela projektet, och för test coverage är då siffran 54 %. Men det som är aktuellt att titta på för det här projektet är det som finns i foldern <code>Card5</code>: <a href="https://scrutinizer-ci.com/g/frivolousgirl/bth-mvc/code-structure/main/code-coverage/src/" target="_blank">Scrutinizer Code Coverage</a>
+        </p>
+        <p>
+            I den är coverage ca 86 %. Inte riktigt de 90 % som vi skulle sträva efter men ganska nära.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Krav 4</h2>
+        <p>
+            Då jag inte alls är van vid poker och var ganska osäker på ifall jag förstått reglerna, så väntade jag rätt länge med att skriva tester. Jag kodade på, i en <code>Game</code>-klass, ganska länge innan jag gjorde refaktoriseringar för att enklare kunna skriva tester. Det här gjorde också att jag inte började med api:et förrän ganska sent. Min generella uppfattning är att denna del hade kunnat bli betydligt svårare ifall jag implementerat routes för att faktiskt kunna spela ett helt pokerspel. Nu valde jag i stället att skapa routes för att hämta “enklare” typ av information om hur ett pågående spel går. På så vis blev denna del ändå ganska enkel. Min POST-route resettar bara det pågående spelet.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Projektet</h2>
+        <p>
+            Jag valde att fokusera på femkortspoker eftersom det kändes som ett bra alternativ att bygga vidare på de koncept och tekniker vi redan arbetat med. Som jag skrivit innan så är jag osäker på ifall jag förstått vad fold, call, bet, m.m. är och när en spelare får utnyttja dem. Implementeringen av spelets regler och dynamik var en utmaning, då jag behövde utveckla nya algoritmer och hantera olika spelsteg såsom kortbyte, satsningsrundor och showdown. Det blev inte mycket tid eller lust till att göra sidan fin med en snygg interaktiv spelmiljö som jag hade velat. Utan lät det vara så basic som möjligt.
+        </p>
+        <p>
+            Logiken för spelets flöde och användarinteraktioner kändes som väldigt stora och jobbiga moment. För mig som komplett nybörjare tog det mycket tid och hjälp.
+        </p>
+        <p>
+            Jag jobbade länge i en <code>Game</code>-klass som initialt därför också var rätt stor. Mot slutet, när jag kände att jag faktiskt hade något som verkade funka, så började jag att refaktorisera <code>Game</code> genom att bryta ut logik till nya klasser. Detta steg var nödvändigt för att kunna skriva någorlunda vettiga tester. Jag nådde inte 90 % test coverage men var nära på ca 85 %.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Kursen</h2>
+        <p>
+            Jag upplever att denna kurs har varit lika utmanande som kursen i Databaser och OoP, särskilt för en nybörjare. Vissa moment var mycket tidskrävande och när det borde ha varit ett kort kursmoment, som exempelvis Scrutinizer-delen, tog det mycket längre tid än förväntat. Jag kämpade i en vecka innan jag lyckades få Scrutinizer att fungera. Det fanns även andra delar som jag fastnade på, men som jag nu i efterhand inte minns exakt vilka. Jag har varit mån om att inte halka efter i tidigare kurser, men med de två sista stora kurserna så blev det för mycket för mig.
+        </p>
+        <p>
+            Finns inget mer att tillägga som jag inte framfört i tidigare kurser så jag lämnar det kortfattat här.
+        </p>
+    </div>
 </div>
 {% endblock %}
