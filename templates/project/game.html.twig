@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="left-column">
-        <h2>Current round</h2>
+        <h2>Aktuell omgång</h2>
         <p>{{ state }}</p>
         <h2>Pott</h2>
         <p>{{ pot }} kr</p>
@@ -50,16 +50,16 @@
             <input type="submit" value="Dela ut kort">
         {% elseif state == "FIRST_BETTING_ROUND" or state == "SECOND_BETTING_ROUND" %}
         {% if canCheck %}
-            <button type="submit" value="check" name="action">Check</button>
+            <button type="submit" value="check" name="action">Checka</button>
         {% endif %}
         {% if canBet %}
-            <button type="submit" value="bet" name="action">Bet</button>
+            <button type="submit" value="bet" name="action">Betta</button>
         {% endif %}
         {% if canCall %}
-            <button type="submit" value="call" name="action">Call</button>
+            <button type="submit" value="call" name="action">Syna</button>
         {% endif %}
         {% if canFold %}
-            <button type="submit" value="fold" name="action">Fold</button>
+            <button type="submit" value="fold" name="action">Lägga sig</button>
         {% endif %}
         {% if currentPlayer.name != "Jag" %}
             <button type="submit" name="action" value="computer_turn">Datorns tur</button>
@@ -67,8 +67,8 @@
         {% elseif state == "DRAW" %}
         {% if canDraw %}
             <input type="hidden" name="selectedCards" id="selectedCards">
-            <button type="submit" value="stand_pat" name="action">Stand pat</button>
-            <button type="submit" value="swap" name="action">Swap</button>
+            <button type="submit" value="stand_pat" name="action">Stå kvar</button>
+            <button type="submit" value="swap" name="action">Byt kort</button>
         {% endif %}
         {% if currentPlayer.name != "Jag" %}
             <button type="submit" name="action" value="computer_turn">Datorns tur</button>
@@ -77,7 +77,7 @@
         </form>
         {% if state == "SHOWDOWN" %}
             <form action="{{ path('project_game') }}">
-                <input type="submit" value="New game">
+                <input type="submit" value="Nytt spel">
             </form>
         {% endif %}
     </div>
