@@ -1,5 +1,5 @@
 .hearts, .clubs, .spades, .diamonds, .card-back {
-    font-size: 72px;
+    font-size: 95px;
 }
 
 .hearts, .diamonds {
@@ -27,7 +27,7 @@
     transform: translateY(-8px)
 }
 
-button[value="check"], button[value="bet"], button[value="call"], button[value="stand_pat"] {
+button[value="check"], button[value="bet"], button[value="call"], button[value="stand_pat"], button[value="swap"] {
     background-color: var(--primary-color);
     color: white;
     font-size: 1em;
@@ -37,7 +37,7 @@ button[value="check"], button[value="bet"], button[value="call"], button[value="
 }
 
 
-button[value="fold"], button[value="swap"] {
+button[value="fold"] {
     background-color: var(--danger-color);
     color: white;
     font-size: 1em;
